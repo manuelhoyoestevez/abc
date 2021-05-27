@@ -1,0 +1,76 @@
+version: '3.1'
+
+services:
+  scaar-postgres:
+    container_name: scaar-postgres
+    hostname: scaar-postgres
+    image: postgres:9.6.2
+    restart: always
+    environment:
+      POSTGRES_USER: scaaruser
+      POSTGRES_PASSWORD: scaaruser
+      POSTGRES_DB: scaarDB
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+
+  abc-mysql:
+    image: "mysql:5.7.22"
+    hostname: "abc-mysql"
+    container_name: "abc-mysql"
+    environment:
+      - SERVICE_NAME=abc-mysql
+      - MYSQL_DATABASE=abc1
+      - MYSQL_USER=abc1
+      - MYSQL_PASSWORD=abc1
+      - MYSQL_ROOT_PASSWORD=6aEGPf%2@4saAe*4h++94
+#    volumes:
+#      - ./symfony/current.sql:/docker-entrypoint-initdb.d/model.sql:ro
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    command: ['--lower_case_table_names=1']
+
+  phppgadmin-loc:
+    container_name: "phppgadmin-loc"
+    hostname: "phppgadmin-loc"
+    image: dockage/phppgadmin:latest
+    ports:
+      - 8071:80
+    links:
+      - scaar-postgres:scaar-postgres
+    environment:
+      PHP_PG_ADMIN_SERVER_DESC: "Postgres SQL"
+      PHP_PG_ADMIN_SERVER_HOST: "scaar-postgres"
+      PHP_PG_ADMIN_SERVER_PORT: 5432
+      PHP_PG_ADMIN_SERVER_SSL_MODE: "allow"
+      PHP_PG_ADMIN_SERVER_DEFAULT_DB: "scaarDB"
+
+  abc-phpmyadmin-loc:
+    image: "phpmyadmin/phpmyadmin:4.7"
+    hostname: "abc-phpmyadmin-loc"
+    container_name: "abc-phpmyadmin-loc"
+    environment:
+      - SERVICE_NAME=abc-phpmyadmin-loc
+      - PMA_HOST=abc-mysql
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=6aEGPf%2@4saAe*4h++94
+    ports:
+      - "8081:80"
+    depends_on:
+      - abc-mysql
+
+  mhedev-php-7.2.34:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile-php-7.2.34
+    image: "mhedev/php:7.2.34"
+    container_name: "mhedev-php-7.2.34"
+    hostname: "mhedev-php-7.2.34"
+    environment:
+      - SERVICE_NAME=mhedev-php-7.2.34
+    command: "php -S 0.0.0.0:8080"
+    ports:
+      - "89:8080"

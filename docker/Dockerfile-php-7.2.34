@@ -1,0 +1,61 @@
+FROM php:7.2.34-fpm-stretch
+# php:7.1.33-fpm-stretch
+# php:7.2.35-fpm-stretch
+# php:7.3.24-fpm-stretch
+
+MAINTAINER MANUELHOYOESTEVEZ
+
+RUN echo "alias egrep='egrep --color=auto'" >> /root/.bashrc
+RUN echo "alias fgrep='fgrep --color=auto'" >> /root/.bashrc
+RUN echo "alias grep='grep --color=auto'" >> /root/.bashrc
+RUN echo "alias l='ls -CF'" >> /root/.bashrc
+RUN echo "alias la='ls -A'" >> /root/.bashrc
+RUN echo "alias ll='ls -alF'" >> /root/.bashrc
+RUN echo "alias ls='ls --color=auto'" >> /root/.bashrc
+
+RUN rm -rf ./vendor/ ./var/ .env ./composer.phar
+
+# Código de la aplicación
+RUN echo "<?php phpinfo();" > /var/www/html/index.php
+
+# Instalación de módulos
+RUN apt-get update && apt-get install -y git zip curl wget cron vim gnupg mysql-client zlib1g-dev libssl-dev libxml2-dev apt-transport-https lsb-release
+
+# Instlación de extesiones PHP
+RUN docker-php-ext-install -j$(nproc) bcmath mbstring pdo pdo_mysql soap zip pcntl
+
+# Instalación de Xdebug
+RUN pecl install xdebug-2.6.0
+RUN docker-php-ext-enable xdebug
+
+RUN echo "xdebug.idekey=PHPSTORM"       >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_enable=1"       >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_autostart=0"    >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9000"      >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_handler=dbgp"   >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Instalación de composer (comando)
+RUN curl --silent --show-error https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+
+# Instalación de CodeSniffer (comandos)
+RUN wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+RUN wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+RUN mv phpcs.phar /usr/local/bin/phpcs
+RUN mv phpcbf.phar /usr/local/bin/phpcbf
+RUN chmod +x /usr/local/bin/phpcs
+RUN chmod +x /usr/local/bin/phpcbf
+
+# Instalación de symfony (comando)
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+# Instalación de NodeJS LTS
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
+RUN apt-get install -y nodejs
+
+# Instalación de yarn (comando)
+RUN npm install -g yarn
+
+CMD bash -c "php -v && composer -V"

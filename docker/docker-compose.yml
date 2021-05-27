@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  mhedev-php-7.2.34:
+    build: .
+    image: "mhedev/php:7.2.34"
+    container_name: "mhedev-php-7.2.34"
+    hostname: "mhedev-php-7.2.34"
+    environment:
+      - SERVICE_NAME=mhedev-php-7.2.34
+    command: "php -S 0.0.0.0:8080"
+    ports:
+      - "8080:8080"
