@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysActions">
+
+
+	<typeAlias alias="SysActions" type="com.inetum.abc.server.model.abc.crud.SysActionsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysActionsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysActions.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_actions
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+		ORDER BY
+			sys_actions.ID_ACTION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_actions.ID_ACTION
+		FROM
+			sys_actions
+		ORDER BY
+			sys_actions.ID_ACTION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysActions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_actions.ID_ACTION
+        FROM
+            sys_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysActions.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysActions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_actions.ID_ACTION
+        FROM
+            sys_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysActions.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_actions.ID_ACTION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysActions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysActions" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysActions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysActions" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysActions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysActions.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+		WHERE
+			ID_ACTION = #idAction:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_actions
+        WHERE
+            ID_ACTION = #idAction:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+		WHERE
+			ID_ACTION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysActions" resultMap="Abc.Mapping.SysActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysActions.Fields" />
+		FROM
+			sys_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysActions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysActions.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysActions">
+	
+		INSERT INTO sys_actions
+			(
+				ID_ACTION,
+				CODE,
+				NAME,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idAction:BIGINT#,
+				#code:VARCHAR#,
+				#name:VARCHAR#,
+				#description:VARCHAR#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysActions">
+	
+		UPDATE sys_actions
+		SET
+			ID_ACTION = #idAction:BIGINT#,
+			CODE = #code:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_ACTION = #idAction:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysActions">
+	
+		UPDATE sys_actions
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idAction">
+				ID_ACTION = #idAction:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code">
+				CODE = #code:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_ACTION = #idAction:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_actions
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idAction">
+                ID_ACTION = #idAction:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code">
+                CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idAction">
+                sys_actions.ID_ACTION = #idAction:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code">
+                sys_actions.CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                sys_actions.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                sys_actions.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_actions
+		WHERE
+			ID_ACTION = #idAction:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_actions
+		WHERE
+			ID_ACTION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysActions">
+	
+		DELETE FROM sys_actions
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysActions.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_actions
+		
+	</delete>
+	
+	
+</sqlMap>
+

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<validations name="Manager">
+
+
+	<validation name="validateInstallation">
+
+		<field name="name">
+			<field-validator type="required" />
+		</field>
+
+		<field name="active">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+		<field name="airport">
+			<field-validator type="required" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationConfiguration">
+
+		<field name="paramName">
+			<field-validator type="required" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationKiosk">
+
+		<field name="code">
+			<field-validator type="required" />
+		</field>
+
+		<field name="name">
+			<field-validator type="required" />
+		</field>
+
+		<field name="idState">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationGate">
+
+		<field name="code">
+			<field-validator type="required" />
+		</field>
+
+		<field name="name">
+			<field-validator type="required" />
+		</field>
+
+		<field name="idState">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationStep">
+
+		<field name="idSystem">
+			<field-validator type="required" />
+		</field>
+
+		<field name="idStepType">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="active">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+		<field name="blocking">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+		<field name="orderNumber">
+			<field-validator type="required" />
+			<field-validator type="unsigned" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationUser">
+
+		<field name="account">
+			<field-validator type="required" />
+		</field>
+
+		<field name="password">
+			<field-validator type="required" />
+		</field>
+
+		<field name="active">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+		<field name="name">
+			<field-validator type="required" />
+		</field>
+
+		<field name="idRole">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="sex">
+			<field-validator type="sex" />
+		</field>
+
+		<field name="language">
+			<field-validator type="language" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationCountryRestriction">
+
+		<field name="idCountry">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="allowed">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateConfiguration">
+
+		<field name="idConfiguration">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="idOwner">
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="encrypted">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+		<field name="paramName">
+			<field-validator type="required" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateInstallationVerification">
+
+		<field name="idVerificationType">
+			<field-validator type="required" />
+			<field-validator type="ulong" />
+		</field>
+
+		<field name="active">
+			<field-validator type="required" />
+			<field-validator type="boolean" />
+		</field>
+
+	</validation>
+
+
+</validations>
+

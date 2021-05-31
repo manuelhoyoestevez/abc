@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.InstallationsVerificationTypes">
+
+
+	<typeAlias alias="InstallationsVerificationTypes" type="com.inetum.abc.server.model.abc.crud.InstallationsVerificationTypesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="InstallationsVerificationTypesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.create"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.update"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.modify"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsVerificationTypes.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_verification_types
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+		ORDER BY
+			installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE
+		FROM
+			installations_verification_types
+		ORDER BY
+			installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="InstallationsVerificationTypes" resultClass="java.lang.Long">
+
+        SELECT
+            installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE
+        FROM
+            installations_verification_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="InstallationsVerificationTypes" resultClass="java.lang.Long">
+
+        SELECT
+            installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE
+        FROM
+            installations_verification_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="InstallationsVerificationTypes" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_verification_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="InstallationsVerificationTypes" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="InstallationsVerificationTypes" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_verification_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="InstallationsVerificationTypes" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="InstallationsVerificationTypes" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_verification_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            installations_verification_types
+        WHERE
+            ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="InstallationsVerificationTypes" resultMap="Abc.Mapping.InstallationsVerificationTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.Fields" />
+		FROM
+			installations_verification_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="InstallationsVerificationTypes" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_verification_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="InstallationsVerificationTypes">
+	
+		INSERT INTO installations_verification_types
+			(
+				ID_INSTALLATION,
+				ID_PARENT_VERIFICATION_TYPE,
+				ID_VERIFICATION_TYPE,
+				ACTIVE,
+				VERIFICATION_CODE,
+				ID_VERIFICATION_TYPE_GROUP,
+				GROUP_CODE
+			)
+		VALUES
+			(
+				#idInstallation:BIGINT#,
+				#idParentVerificationType:BIGINT#,
+				#idVerificationType:BIGINT#,
+				#active:BIT#,
+				#verificationCode:VARCHAR#,
+				#idVerificationTypeGroup:BIGINT#,
+				#groupCode:VARCHAR#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idInstallationVerificationType">
+			SELECT last_insert_id() AS ID_INSTALLATION_VERIFICATION_TYPE FROM installations_verification_types LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="InstallationsVerificationTypes">
+	
+		UPDATE installations_verification_types
+		SET
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#,
+			ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#,
+			ACTIVE = #active:BIT#,
+			VERIFICATION_CODE = #verificationCode:VARCHAR#,
+			ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#,
+			GROUP_CODE = #groupCode:VARCHAR#
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="InstallationsVerificationTypes">
+	
+		UPDATE installations_verification_types
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idParentVerificationType">
+				ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idVerificationType">
+				ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="active">
+				ACTIVE = #active:BIT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="verificationCode">
+				VERIFICATION_CODE = #verificationCode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idVerificationTypeGroup">
+				ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="groupCode">
+				GROUP_CODE = #groupCode:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE installations_verification_types
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idParentVerificationType">
+                ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idVerificationType">
+                ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="active">
+                ACTIVE = #active:BIT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="verificationCode">
+                VERIFICATION_CODE = #verificationCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idVerificationTypeGroup">
+                ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="groupCode">
+                GROUP_CODE = #groupCode:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idInstallationVerificationType">
+                installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                installations_verification_types.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idParentVerificationType">
+                installations_verification_types.ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idVerificationType">
+                installations_verification_types.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="active">
+                installations_verification_types.ACTIVE = #active:BIT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="verificationCode">
+                installations_verification_types.VERIFICATION_CODE = #verificationCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idVerificationTypeGroup">
+                installations_verification_types.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="groupCode">
+                installations_verification_types.GROUP_CODE = #groupCode:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM installations_verification_types
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM installations_verification_types
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="InstallationsVerificationTypes">
+	
+		DELETE FROM installations_verification_types
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsVerificationTypes.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM installations_verification_types
+		
+	</delete>
+	
+	
+</sqlMap>
+

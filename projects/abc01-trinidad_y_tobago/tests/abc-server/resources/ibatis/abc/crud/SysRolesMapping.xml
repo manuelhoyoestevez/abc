@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysRoles">
+
+
+	<typeAlias alias="SysRoles" type="com.inetum.abc.server.model.abc.crud.SysRolesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysRoles">
+	
+		<result property="idRole"       column="ID_ROLE"      jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="internal"     column="INTERNAL"     jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="role"         column="ROLE"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="name"         column="NAME"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"  column="DESCRIPTION"  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_roles.ID_ROLE,
+		sys_roles.INTERNAL,
+		sys_roles.ROLE,
+		sys_roles.NAME,
+		sys_roles.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_ROLE,
+		INTERNAL,
+		ROLE,
+		NAME,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idRole">
+			sys_roles.ID_ROLE = #idRole:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="internal">
+			sys_roles.INTERNAL = #internal:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="role">
+			sys_roles.ROLE LIKE concat('%',#role:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_roles.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_roles.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idRole">
+			sys_roles.ID_ROLE = #idRole:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="internal">
+			sys_roles.INTERNAL = #internal:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="role">
+			sys_roles.ROLE = #role:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_roles.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_roles.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

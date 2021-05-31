@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Abc.InstallationUserParams">
+
+    <typeAlias alias="AliasInstallationUserParams"
+               type="com.inetum.abc.server.rest.manager.installations.InstallationUserParams"/>
+
+    <!-- ===== TableMapping ===== -->
+
+    <resultMap id="UsersRoles" class="com.inetum.abc.server.rest.manager.installations.InstallationUserParams">
+
+        <result property="account" column="ACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="idRole" column="ID_ROLE" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="idUser" column="ID_USER" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="active" column="ACTIVE" jdbcType="BIT" javaType="java.lang.Boolean"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="surname" column="SURNAME" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="sex" column="SEX" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="language" column="LANGUAGE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="timezone" column="TIMEZONE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="email" column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="creationDate" column="CREATION_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="deletionDate" column="DELETION_DATE" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+
+    </resultMap>
+
+    <!-- ===== Columns ===== -->
+
+    <sql id="Columns">
+
+        installation_user_params.ID_USER,
+        installation_user_params.ACTIVE,
+        installation_user_params.NAME,
+        installation_user_params.SURNAME,
+        installation_user_params.SEX,
+        installation_user_params.LANGUAGE,
+        installation_user_params.TIMEZONE,
+        installation_user_params.EMAIL,
+        installation_user_params.PHONE,
+        installation_user_params.CREATION_DATE,
+        installation_user_params.DELETION_DATE,
+        installation_user_params.ACCOUNT,
+        installation_user_params.ID_ROLE
+
+    </sql>
+
+    <!-- ===== Fields ===== -->
+
+    <sql id="Fields">
+
+        users.ID_USER,
+        users.ACTIVE,
+        users.NAME,
+        users.SURNAME,
+        users.SEX,
+        users.LANGUAGE,
+        users.TIMEZONE,
+        users.EMAIL,
+        users.PHONE,
+        users.CREATION_DATE,
+        users.DELETION_DATE,
+        users_credentials.ACCOUNT,
+        users_roles.ID_ROLE
+
+    </sql>
+
+    <!-- getUsersListByInstallationId -->
+
+    <select id="getUsersListByInstallationId" parameterClass="java.lang.Long" resultMap="UsersRoles">
+
+        SELECT
+        <include refid="Abc.InstallationUserParams.Fields"/>
+
+        FROM
+        users, installations_users, users_roles, users_credentials
+        WHERE
+        users.ID_USER = installations_users.ID_USER and
+        users_roles.ID_USER = users.ID_USER and
+        users_credentials.ID_USER = users.ID_USER
+        AND
+        installations_users.ID_INSTALLATION = #installationId:BIGINT#
+
+    </select>
+
+    <!-- getUserById -->
+
+    <select id="getUserById" parameterClass="java.lang.Long" resultMap="UsersRoles">
+
+        SELECT
+        <include refid="Abc.InstallationUserParams.Fields"/>
+
+        FROM
+        users, installations_users, users_roles, users_credentials
+        WHERE
+        users.ID_USER = installations_users.ID_USER and
+        users_roles.ID_USER = users.ID_USER and
+        users_credentials.ID_USER = users.ID_USER
+        AND
+        users.ID_USER = #userId:BIGINT#
+
+    </select>
+
+</sqlMap>

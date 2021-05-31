@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.InstallationsUsers">
+
+
+	<typeAlias alias="InstallationsUsers" type="com.inetum.abc.server.model.abc.crud.InstallationsUsersDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="InstallationsUsersCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.create"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.update"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.modify"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsUsers.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_users
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+		ORDER BY
+			installations_users.ID_INSTALLATION_USER	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			installations_users.ID_INSTALLATION_USER
+		FROM
+			installations_users
+		ORDER BY
+			installations_users.ID_INSTALLATION_USER
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="InstallationsUsers" resultClass="java.lang.Long">
+
+        SELECT
+            installations_users.ID_INSTALLATION_USER
+        FROM
+            installations_users
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="InstallationsUsers" resultClass="java.lang.Long">
+
+        SELECT
+            installations_users.ID_INSTALLATION_USER
+        FROM
+            installations_users
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            installations_users.ID_INSTALLATION_USER
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="InstallationsUsers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_users
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="InstallationsUsers" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="InstallationsUsers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_users
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="InstallationsUsers" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="InstallationsUsers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_users
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+		WHERE
+			ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            installations_users
+        WHERE
+            ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+		WHERE
+			ID_INSTALLATION_USER IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="InstallationsUsers" resultMap="Abc.Mapping.InstallationsUsers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsUsers.Fields" />
+		FROM
+			installations_users
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="InstallationsUsers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_users
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="InstallationsUsers">
+	
+		INSERT INTO installations_users
+			(
+				ID_INSTALLATION,
+				ID_USER,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idInstallation:BIGINT#,
+				#idUser:BIGINT#,
+				#description:VARCHAR#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idInstallationUser">
+			SELECT last_insert_id() AS ID_INSTALLATION_USER FROM installations_users LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="InstallationsUsers">
+	
+		UPDATE installations_users
+		SET
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			ID_USER = #idUser:BIGINT#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="InstallationsUsers">
+	
+		UPDATE installations_users
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idUser">
+				ID_USER = #idUser:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE installations_users
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idUser">
+                ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idInstallationUser">
+                installations_users.ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                installations_users.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idUser">
+                installations_users.ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                installations_users.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM installations_users
+		WHERE
+			ID_INSTALLATION_USER = #idInstallationUser:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM installations_users
+		WHERE
+			ID_INSTALLATION_USER IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="InstallationsUsers">
+	
+		DELETE FROM installations_users
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsUsers.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM installations_users
+		
+	</delete>
+	
+	
+</sqlMap>
+

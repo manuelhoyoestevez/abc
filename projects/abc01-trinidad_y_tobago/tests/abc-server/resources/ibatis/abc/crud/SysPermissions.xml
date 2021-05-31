@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysPermissions">
+
+
+	<typeAlias alias="SysPermissions" type="com.inetum.abc.server.model.abc.crud.SysPermissionsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysPermissionsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysPermissions.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_permissions
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+		ORDER BY
+			sys_permissions.ID_PERMISSION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_permissions.ID_PERMISSION
+		FROM
+			sys_permissions
+		ORDER BY
+			sys_permissions.ID_PERMISSION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysPermissions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_permissions.ID_PERMISSION
+        FROM
+            sys_permissions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysPermissions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_permissions.ID_PERMISSION
+        FROM
+            sys_permissions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_permissions.ID_PERMISSION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysPermissions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_permissions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysPermissions" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysPermissions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_permissions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysPermissions" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysPermissions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_permissions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+		WHERE
+			ID_PERMISSION = #idPermission:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_permissions
+        WHERE
+            ID_PERMISSION = #idPermission:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+		WHERE
+			ID_PERMISSION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysPermissions" resultMap="Abc.Mapping.SysPermissions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysPermissions.Fields" />
+		FROM
+			sys_permissions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysPermissions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_permissions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysPermissions">
+	
+		INSERT INTO sys_permissions
+			(
+				ID_PERMISSION,
+				PERMISSION,
+				NAME,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idPermission:BIGINT#,
+				#permission:VARCHAR#,
+				#name:VARCHAR#,
+				#description:VARCHAR#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysPermissions">
+	
+		UPDATE sys_permissions
+		SET
+			ID_PERMISSION = #idPermission:BIGINT#,
+			PERMISSION = #permission:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_PERMISSION = #idPermission:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysPermissions">
+	
+		UPDATE sys_permissions
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idPermission">
+				ID_PERMISSION = #idPermission:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="permission">
+				PERMISSION = #permission:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_PERMISSION = #idPermission:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_permissions
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idPermission">
+                ID_PERMISSION = #idPermission:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="permission">
+                PERMISSION = #permission:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idPermission">
+                sys_permissions.ID_PERMISSION = #idPermission:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="permission">
+                sys_permissions.PERMISSION = #permission:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                sys_permissions.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                sys_permissions.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_permissions
+		WHERE
+			ID_PERMISSION = #idPermission:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_permissions
+		WHERE
+			ID_PERMISSION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysPermissions">
+	
+		DELETE FROM sys_permissions
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysPermissions.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_permissions
+		
+	</delete>
+
+	<update id="updateSysPermission" parameterClass="com.inetum.abc.server.rest.manager.catalogs.CatalogParams" >
+
+		UPDATE sys_permissions
+		SET
+		NAME$language$ = #traduction:VARCHAR#
+		WHERE
+		ID_PERMISSION = #code:VARCHAR#
+
+
+	</update>
+	
+	
+</sqlMap>
+

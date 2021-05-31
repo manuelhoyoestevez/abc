@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.InstallationsConfigurations">
+
+
+	<typeAlias alias="InstallationsConfigurations" type="com.inetum.abc.server.model.abc.crud.InstallationsConfigurationsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="InstallationsConfigurationsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.create"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.update"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.modify"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.InstallationsConfigurations.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_configurations
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+		ORDER BY
+			installations_configurations.ID_INSTALLATION_CONFIGURATION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			installations_configurations.ID_INSTALLATION_CONFIGURATION
+		FROM
+			installations_configurations
+		ORDER BY
+			installations_configurations.ID_INSTALLATION_CONFIGURATION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="InstallationsConfigurations" resultClass="java.lang.Long">
+
+        SELECT
+            installations_configurations.ID_INSTALLATION_CONFIGURATION
+        FROM
+            installations_configurations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="InstallationsConfigurations" resultClass="java.lang.Long">
+
+        SELECT
+            installations_configurations.ID_INSTALLATION_CONFIGURATION
+        FROM
+            installations_configurations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            installations_configurations.ID_INSTALLATION_CONFIGURATION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="InstallationsConfigurations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_configurations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="InstallationsConfigurations" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="InstallationsConfigurations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			installations_configurations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="InstallationsConfigurations" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="InstallationsConfigurations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_configurations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+		WHERE
+			ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            installations_configurations
+        WHERE
+            ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+		WHERE
+			ID_INSTALLATION_CONFIGURATION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="InstallationsConfigurations" resultMap="Abc.Mapping.InstallationsConfigurations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.InstallationsConfigurations.Fields" />
+		FROM
+			installations_configurations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="InstallationsConfigurations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            installations_configurations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="InstallationsConfigurations">
+	
+		INSERT INTO installations_configurations
+			(
+				ID_INSTALLATION,
+				PARAM_NAME,
+				PARAM_VALUE,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idInstallation:BIGINT#,
+				#paramName:VARCHAR#,
+				#paramValue:VARCHAR#,
+				#description:VARCHAR#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idInstallationConfiguration">
+			SELECT last_insert_id() AS ID_INSTALLATION_CONFIGURATION FROM installations_configurations LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="InstallationsConfigurations">
+	
+		UPDATE installations_configurations
+		SET
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			PARAM_NAME = #paramName:VARCHAR#,
+			PARAM_VALUE = #paramValue:VARCHAR#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="InstallationsConfigurations">
+	
+		UPDATE installations_configurations
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="paramName">
+				PARAM_NAME = #paramName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="paramValue">
+				PARAM_VALUE = #paramValue:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE installations_configurations
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="paramName">
+                PARAM_NAME = #paramName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="paramValue">
+                PARAM_VALUE = #paramValue:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idInstallationConfiguration">
+                installations_configurations.ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                installations_configurations.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="paramName">
+                installations_configurations.PARAM_NAME = #paramName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="paramValue">
+                installations_configurations.PARAM_VALUE = #paramValue:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                installations_configurations.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM installations_configurations
+		WHERE
+			ID_INSTALLATION_CONFIGURATION = #idInstallationConfiguration:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM installations_configurations
+		WHERE
+			ID_INSTALLATION_CONFIGURATION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="InstallationsConfigurations">
+	
+		DELETE FROM installations_configurations
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.InstallationsConfigurations.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM installations_configurations
+		
+	</delete>
+	
+	
+</sqlMap>
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.InstallationsVerificationTypes">
+
+
+	<typeAlias alias="InstallationsVerificationTypes" type="com.inetum.abc.server.model.abc.crud.InstallationsVerificationTypesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="InstallationsVerificationTypes">
+	
+		<result property="idInstallationVerificationType"  column="ID_INSTALLATION_VERIFICATION_TYPE"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idInstallation"                  column="ID_INSTALLATION"                    jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idParentVerificationType"        column="ID_PARENT_VERIFICATION_TYPE"        jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idVerificationType"              column="ID_VERIFICATION_TYPE"               jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="active"                          column="ACTIVE"                             jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="verificationCode"                column="VERIFICATION_CODE"                  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="idVerificationTypeGroup"         column="ID_VERIFICATION_TYPE_GROUP"         jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="groupCode"                       column="GROUP_CODE"                         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE,
+		installations_verification_types.ID_INSTALLATION,
+		installations_verification_types.ID_PARENT_VERIFICATION_TYPE,
+		installations_verification_types.ID_VERIFICATION_TYPE,
+		installations_verification_types.ACTIVE,
+		installations_verification_types.VERIFICATION_CODE,
+		installations_verification_types.ID_VERIFICATION_TYPE_GROUP,
+		installations_verification_types.GROUP_CODE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_INSTALLATION_VERIFICATION_TYPE,
+		ID_INSTALLATION,
+		ID_PARENT_VERIFICATION_TYPE,
+		ID_VERIFICATION_TYPE,
+		ACTIVE,
+		VERIFICATION_CODE,
+		ID_VERIFICATION_TYPE_GROUP,
+		GROUP_CODE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idInstallationVerificationType">
+			installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idInstallation">
+			installations_verification_types.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idParentVerificationType">
+			installations_verification_types.ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idVerificationType">
+			installations_verification_types.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="active">
+			installations_verification_types.ACTIVE = #active:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="verificationCode">
+			installations_verification_types.VERIFICATION_CODE LIKE concat('%',#verificationCode:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idVerificationTypeGroup">
+			installations_verification_types.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="groupCode">
+			installations_verification_types.GROUP_CODE LIKE concat('%',#groupCode:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idInstallationVerificationType">
+			installations_verification_types.ID_INSTALLATION_VERIFICATION_TYPE = #idInstallationVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idInstallation">
+			installations_verification_types.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idParentVerificationType">
+			installations_verification_types.ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idVerificationType">
+			installations_verification_types.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="active">
+			installations_verification_types.ACTIVE = #active:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="verificationCode">
+			installations_verification_types.VERIFICATION_CODE = #verificationCode:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idVerificationTypeGroup">
+			installations_verification_types.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="groupCode">
+			installations_verification_types.GROUP_CODE = #groupCode:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

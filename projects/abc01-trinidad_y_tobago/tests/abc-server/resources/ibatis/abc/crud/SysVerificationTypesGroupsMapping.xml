@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysVerificationTypesGroups">
+
+
+	<typeAlias alias="SysVerificationTypesGroups" type="com.inetum.abc.server.model.abc.crud.SysVerificationTypesGroupsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysVerificationTypesGroups">
+	
+		<result property="idVerificationTypeGroup"  column="ID_VERIFICATION_TYPE_GROUP"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="code"                     column="CODE"                        jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="name"                     column="NAME"                        jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"              column="DESCRIPTION"                 jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_verification_types_groups.ID_VERIFICATION_TYPE_GROUP,
+		sys_verification_types_groups.CODE,
+		sys_verification_types_groups.NAME,
+		sys_verification_types_groups.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_VERIFICATION_TYPE_GROUP,
+		CODE,
+		NAME,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idVerificationTypeGroup">
+			sys_verification_types_groups.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code">
+			sys_verification_types_groups.CODE LIKE concat('%',#code:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_verification_types_groups.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_verification_types_groups.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idVerificationTypeGroup">
+			sys_verification_types_groups.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code">
+			sys_verification_types_groups.CODE = #code:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_verification_types_groups.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_verification_types_groups.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

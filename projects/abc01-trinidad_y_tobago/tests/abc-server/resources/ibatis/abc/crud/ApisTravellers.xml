@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.ApisTravellers">
+
+
+	<typeAlias alias="ApisTravellers" type="com.inetum.abc.server.model.abc.crud.ApisTravellersDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="ApisTravellersCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.create"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.update"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.modify"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.ApisTravellers.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			apis_travellers
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+		ORDER BY
+			apis_travellers.ID_APIS_TRAVELLER	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			apis_travellers.ID_APIS_TRAVELLER
+		FROM
+			apis_travellers
+		ORDER BY
+			apis_travellers.ID_APIS_TRAVELLER
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="ApisTravellers" resultClass="java.lang.Long">
+
+        SELECT
+            apis_travellers.ID_APIS_TRAVELLER
+        FROM
+            apis_travellers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="ApisTravellers" resultClass="java.lang.Long">
+
+        SELECT
+            apis_travellers.ID_APIS_TRAVELLER
+        FROM
+            apis_travellers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            apis_travellers.ID_APIS_TRAVELLER
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="ApisTravellers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			apis_travellers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="ApisTravellers" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="ApisTravellers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			apis_travellers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="ApisTravellers" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="ApisTravellers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            apis_travellers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+		WHERE
+			ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            apis_travellers
+        WHERE
+            ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+		WHERE
+			ID_APIS_TRAVELLER IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="ApisTravellers" resultMap="Abc.Mapping.ApisTravellers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.ApisTravellers.Fields" />
+		FROM
+			apis_travellers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="ApisTravellers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            apis_travellers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="ApisTravellers">
+	
+		INSERT INTO apis_travellers
+			(
+				ID_APIS_FLIGHT,
+				SR_NO,
+				LAST_NAME,
+				FIRST_NAME,
+				MIDDLE_NAME,
+				NATIONALITY,
+				SEX,
+				TYPE,
+				PASSPORT_NUMBER,
+				DOC_TYPE,
+				COUNTRY_OF_ISSUE,
+				DATE_OF_BIRTH,
+				DATE_OF_EXPIRY,
+				PORT_OF_EMBARKATION,
+				PORT_OF_DEBARKATION,
+				PORT_OF_CLEARANCE,
+				POST_CODE,
+				ADDRESS,
+				CITY,
+				STATE,
+				COUNTRY,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idApisFlight:BIGINT#,
+				#srNo:SMALLINT#,
+				#lastName:VARCHAR#,
+				#firstName:VARCHAR#,
+				#middleName:VARCHAR#,
+				#nationality:VARCHAR#,
+				#sex:VARCHAR#,
+				#type:VARCHAR#,
+				#passportNumber:VARCHAR#,
+				#docType:VARCHAR#,
+				#countryOfIssue:VARCHAR#,
+				#dateOfBirth:TIMESTAMP#,
+				#dateOfExpiry:TIMESTAMP#,
+				#portOfEmbarkation:VARCHAR#,
+				#portOfDebarkation:VARCHAR#,
+				#portOfClearance:VARCHAR#,
+				#postCode:VARCHAR#,
+				#address:VARCHAR#,
+				#city:VARCHAR#,
+				#state:VARCHAR#,
+				#country:VARCHAR#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idApisTraveller">
+			SELECT last_insert_id() AS ID_APIS_TRAVELLER FROM apis_travellers LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="ApisTravellers">
+	
+		UPDATE apis_travellers
+		SET
+			ID_APIS_FLIGHT = #idApisFlight:BIGINT#,
+			SR_NO = #srNo:SMALLINT#,
+			LAST_NAME = #lastName:VARCHAR#,
+			FIRST_NAME = #firstName:VARCHAR#,
+			MIDDLE_NAME = #middleName:VARCHAR#,
+			NATIONALITY = #nationality:VARCHAR#,
+			SEX = #sex:VARCHAR#,
+			TYPE = #type:VARCHAR#,
+			PASSPORT_NUMBER = #passportNumber:VARCHAR#,
+			DOC_TYPE = #docType:VARCHAR#,
+			COUNTRY_OF_ISSUE = #countryOfIssue:VARCHAR#,
+			DATE_OF_BIRTH = #dateOfBirth:TIMESTAMP#,
+			DATE_OF_EXPIRY = #dateOfExpiry:TIMESTAMP#,
+			PORT_OF_EMBARKATION = #portOfEmbarkation:VARCHAR#,
+			PORT_OF_DEBARKATION = #portOfDebarkation:VARCHAR#,
+			PORT_OF_CLEARANCE = #portOfClearance:VARCHAR#,
+			POST_CODE = #postCode:VARCHAR#,
+			ADDRESS = #address:VARCHAR#,
+			CITY = #city:VARCHAR#,
+			STATE = #state:VARCHAR#,
+			COUNTRY = #country:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="ApisTravellers">
+	
+		UPDATE apis_travellers
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idApisFlight">
+				ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="srNo">
+				SR_NO = #srNo:SMALLINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="lastName">
+				LAST_NAME = #lastName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="firstName">
+				FIRST_NAME = #firstName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="middleName">
+				MIDDLE_NAME = #middleName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nationality">
+				NATIONALITY = #nationality:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="sex">
+				SEX = #sex:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="type">
+				TYPE = #type:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="passportNumber">
+				PASSPORT_NUMBER = #passportNumber:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="docType">
+				DOC_TYPE = #docType:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="countryOfIssue">
+				COUNTRY_OF_ISSUE = #countryOfIssue:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="dateOfBirth">
+				DATE_OF_BIRTH = #dateOfBirth:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="dateOfExpiry">
+				DATE_OF_EXPIRY = #dateOfExpiry:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="portOfEmbarkation">
+				PORT_OF_EMBARKATION = #portOfEmbarkation:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="portOfDebarkation">
+				PORT_OF_DEBARKATION = #portOfDebarkation:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="portOfClearance">
+				PORT_OF_CLEARANCE = #portOfClearance:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="postCode">
+				POST_CODE = #postCode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="address">
+				ADDRESS = #address:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="city">
+				CITY = #city:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="state">
+				STATE = #state:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="country">
+				COUNTRY = #country:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE apis_travellers
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idApisFlight">
+                ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="srNo">
+                SR_NO = #srNo:SMALLINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="lastName">
+                LAST_NAME = #lastName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="firstName">
+                FIRST_NAME = #firstName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="middleName">
+                MIDDLE_NAME = #middleName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nationality">
+                NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="sex">
+                SEX = #sex:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="type">
+                TYPE = #type:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="passportNumber">
+                PASSPORT_NUMBER = #passportNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="docType">
+                DOC_TYPE = #docType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="countryOfIssue">
+                COUNTRY_OF_ISSUE = #countryOfIssue:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="dateOfBirth">
+                DATE_OF_BIRTH = #dateOfBirth:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="dateOfExpiry">
+                DATE_OF_EXPIRY = #dateOfExpiry:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="portOfEmbarkation">
+                PORT_OF_EMBARKATION = #portOfEmbarkation:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="portOfDebarkation">
+                PORT_OF_DEBARKATION = #portOfDebarkation:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="portOfClearance">
+                PORT_OF_CLEARANCE = #portOfClearance:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="postCode">
+                POST_CODE = #postCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="address">
+                ADDRESS = #address:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="city">
+                CITY = #city:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="state">
+                STATE = #state:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="country">
+                COUNTRY = #country:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idApisTraveller">
+                apis_travellers.ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idApisFlight">
+                apis_travellers.ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="srNo">
+                apis_travellers.SR_NO = #srNo:SMALLINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="lastName">
+                apis_travellers.LAST_NAME = #lastName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="firstName">
+                apis_travellers.FIRST_NAME = #firstName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="middleName">
+                apis_travellers.MIDDLE_NAME = #middleName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nationality">
+                apis_travellers.NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="sex">
+                apis_travellers.SEX = #sex:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="type">
+                apis_travellers.TYPE = #type:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="passportNumber">
+                apis_travellers.PASSPORT_NUMBER = #passportNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="docType">
+                apis_travellers.DOC_TYPE = #docType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="countryOfIssue">
+                apis_travellers.COUNTRY_OF_ISSUE = #countryOfIssue:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="dateOfBirth">
+                DATE(apis_travellers.DATE_OF_BIRTH) = DATE(#dateOfBirth:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="dateOfExpiry">
+                DATE(apis_travellers.DATE_OF_EXPIRY) = DATE(#dateOfExpiry:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="portOfEmbarkation">
+                apis_travellers.PORT_OF_EMBARKATION = #portOfEmbarkation:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="portOfDebarkation">
+                apis_travellers.PORT_OF_DEBARKATION = #portOfDebarkation:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="portOfClearance">
+                apis_travellers.PORT_OF_CLEARANCE = #portOfClearance:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="postCode">
+                apis_travellers.POST_CODE = #postCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="address">
+                apis_travellers.ADDRESS = #address:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="city">
+                apis_travellers.CITY = #city:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="state">
+                apis_travellers.STATE = #state:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="country">
+                apis_travellers.COUNTRY = #country:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(apis_travellers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM apis_travellers
+		WHERE
+			ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM apis_travellers
+		WHERE
+			ID_APIS_TRAVELLER IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="ApisTravellers">
+	
+		DELETE FROM apis_travellers
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.ApisTravellers.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM apis_travellers
+		
+	</delete>
+	
+	
+</sqlMap>
+

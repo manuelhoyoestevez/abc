@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Includes">
+
+
+	<sql id="ORDER_BY">
+		<isNotNull prepend="ORDER BY" property="sortProperty">
+			$sortProperty$ 
+			<isNotNull prepend=" " property="sortDir">
+				$sortDir$
+			</isNotNull>
+			
+			<isNotNull prepend="," property="sortDir2">
+				$sortProperty2$
+				<isNotNull prepend=" " property="sortDir2">
+					$sortDir2$
+				</isNotNull>
+			</isNotNull>
+		</isNotNull>
+	</sql>
+	
+	
+	<sql id="PAGINATE">
+		<isNotNull prepend="LIMIT" property="rowsMax">
+			$rowsMax$
+			<isNotNull prepend="OFFSET" property="rowIndex">
+				$rowIndex$
+			</isNotNull>	
+		</isNotNull>
+	</sql>
+	
+	
+</sqlMap>
+

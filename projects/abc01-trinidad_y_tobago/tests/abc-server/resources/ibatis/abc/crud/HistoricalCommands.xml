@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.HistoricalCommands">
+
+
+	<typeAlias alias="HistoricalCommands" type="com.inetum.abc.server.model.abc.crud.HistoricalCommandsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="HistoricalCommandsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.create"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.update"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.modify"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalCommands.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_commands
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+		ORDER BY
+			historical_commands.ID_HISTORICAL_COMMAND	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			historical_commands.ID_HISTORICAL_COMMAND
+		FROM
+			historical_commands
+		ORDER BY
+			historical_commands.ID_HISTORICAL_COMMAND
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="HistoricalCommands" resultClass="java.lang.Long">
+
+        SELECT
+            historical_commands.ID_HISTORICAL_COMMAND
+        FROM
+            historical_commands
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="HistoricalCommands" resultClass="java.lang.Long">
+
+        SELECT
+            historical_commands.ID_HISTORICAL_COMMAND
+        FROM
+            historical_commands
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            historical_commands.ID_HISTORICAL_COMMAND
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="HistoricalCommands" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_commands
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="HistoricalCommands" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="HistoricalCommands" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_commands
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="HistoricalCommands" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="HistoricalCommands" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            historical_commands
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+		WHERE
+			ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            historical_commands
+        WHERE
+            ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+		WHERE
+			ID_HISTORICAL_COMMAND IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="HistoricalCommands" resultMap="Abc.Mapping.HistoricalCommands.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalCommands.Fields" />
+		FROM
+			historical_commands
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="HistoricalCommands" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            historical_commands
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="HistoricalCommands">
+	
+		INSERT INTO historical_commands
+			(
+				ID_COMMAND,
+				COMMAND,
+				ID_USER,
+				ID_INSTALLATION,
+				ID_KIOSK,
+				ID_GATE,
+				ID_OPERATION,
+				CREATION_DATE,
+				OBSERVATIONS
+			)
+		VALUES
+			(
+				#idCommand:BIGINT#,
+				#command:VARCHAR#,
+				#idUser:BIGINT#,
+				#idInstallation:BIGINT#,
+				#idKiosk:BIGINT#,
+				#idGate:BIGINT#,
+				#idOperation:BIGINT#,
+				#creationDate:TIMESTAMP#,
+				#observations:LONGVARCHAR#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idHistoricalCommand">
+			SELECT last_insert_id() AS ID_HISTORICAL_COMMAND FROM historical_commands LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="HistoricalCommands">
+	
+		UPDATE historical_commands
+		SET
+			ID_COMMAND = #idCommand:BIGINT#,
+			COMMAND = #command:VARCHAR#,
+			ID_USER = #idUser:BIGINT#,
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			ID_KIOSK = #idKiosk:BIGINT#,
+			ID_GATE = #idGate:BIGINT#,
+			ID_OPERATION = #idOperation:BIGINT#,
+			CREATION_DATE = #creationDate:TIMESTAMP#,
+			OBSERVATIONS = #observations:LONGVARCHAR#
+		WHERE
+			ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="HistoricalCommands">
+	
+		UPDATE historical_commands
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idCommand">
+				ID_COMMAND = #idCommand:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="command">
+				COMMAND = #command:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idUser">
+				ID_USER = #idUser:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idKiosk">
+				ID_KIOSK = #idKiosk:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idGate">
+				ID_GATE = #idGate:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="observations">
+				OBSERVATIONS = #observations:LONGVARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE historical_commands
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idCommand">
+                ID_COMMAND = #idCommand:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="command">
+                COMMAND = #command:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idUser">
+                ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idKiosk">
+                ID_KIOSK = #idKiosk:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idGate">
+                ID_GATE = #idGate:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="observations">
+                OBSERVATIONS = #observations:LONGVARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idHistoricalCommand">
+                historical_commands.ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idCommand">
+                historical_commands.ID_COMMAND = #idCommand:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="command">
+                historical_commands.COMMAND = #command:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idUser">
+                historical_commands.ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                historical_commands.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idKiosk">
+                historical_commands.ID_KIOSK = #idKiosk:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idGate">
+                historical_commands.ID_GATE = #idGate:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                historical_commands.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(historical_commands.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="observations">
+                historical_commands.OBSERVATIONS = #observations:LONGVARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM historical_commands
+		WHERE
+			ID_HISTORICAL_COMMAND = #idHistoricalCommand:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM historical_commands
+		WHERE
+			ID_HISTORICAL_COMMAND IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="HistoricalCommands">
+	
+		DELETE FROM historical_commands
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalCommands.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM historical_commands
+		
+	</delete>
+	
+	
+</sqlMap>
+

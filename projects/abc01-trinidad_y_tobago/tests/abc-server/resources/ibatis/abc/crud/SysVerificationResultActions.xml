@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysVerificationResultActions">
+
+
+	<typeAlias alias="SysVerificationResultActions" type="com.inetum.abc.server.model.abc.crud.SysVerificationResultActionsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysVerificationResultActionsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysVerificationResultActions.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_verification_result_actions
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+		ORDER BY
+			sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION
+		FROM
+			sys_verification_result_actions
+		ORDER BY
+			sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysVerificationResultActions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION
+        FROM
+            sys_verification_result_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysVerificationResultActions" resultClass="java.lang.Long">
+
+        SELECT
+            sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION
+        FROM
+            sys_verification_result_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysVerificationResultActions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_verification_result_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysVerificationResultActions" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysVerificationResultActions" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_verification_result_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysVerificationResultActions" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysVerificationResultActions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_verification_result_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_verification_result_actions
+        WHERE
+            ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysVerificationResultActions" resultMap="Abc.Mapping.SysVerificationResultActions.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysVerificationResultActions.Fields" />
+		FROM
+			sys_verification_result_actions
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysVerificationResultActions" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_verification_result_actions
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysVerificationResultActions">
+	
+		INSERT INTO sys_verification_result_actions
+			(
+				ID_VERIFICATION_RESULT_ACTION,
+				ID_VERIFICATION_TYPE,
+				ID_VERIFICATION_RESULT,
+				ID_ACTION
+			)
+		VALUES
+			(
+				#idVerificationResultAction:BIGINT#,
+				#idVerificationType:BIGINT#,
+				#idVerificationResult:BIGINT#,
+				#idAction:BIGINT#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysVerificationResultActions">
+	
+		UPDATE sys_verification_result_actions
+		SET
+			ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#,
+			ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#,
+			ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#,
+			ID_ACTION = #idAction:BIGINT#
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysVerificationResultActions">
+	
+		UPDATE sys_verification_result_actions
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idVerificationResultAction">
+				ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idVerificationType">
+				ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idVerificationResult">
+				ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idAction">
+				ID_ACTION = #idAction:BIGINT#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_verification_result_actions
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idVerificationResultAction">
+                ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idVerificationType">
+                ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idVerificationResult">
+                ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idAction">
+                ID_ACTION = #idAction:BIGINT#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idVerificationResultAction">
+                sys_verification_result_actions.ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idVerificationType">
+                sys_verification_result_actions.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idVerificationResult">
+                sys_verification_result_actions.ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idAction">
+                sys_verification_result_actions.ID_ACTION = #idAction:BIGINT#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_verification_result_actions
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION = #idVerificationResultAction:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_verification_result_actions
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysVerificationResultActions">
+	
+		DELETE FROM sys_verification_result_actions
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysVerificationResultActions.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_verification_result_actions
+		
+	</delete>
+	
+	
+</sqlMap>
+

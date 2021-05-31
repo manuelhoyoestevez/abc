@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.Gates">
+
+
+	<typeAlias alias="Gates" type="com.inetum.abc.server.model.abc.crud.GatesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="Gates">
+	
+		<result property="idGate"      column="ID_GATE"      jdbcType="BIGINT"    javaType="java.lang.Long" />
+		<result property="idSystem"    column="ID_SYSTEM"    jdbcType="BIGINT"    javaType="java.lang.Long" />
+		<result property="code"        column="CODE"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="name"        column="NAME"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="idState"     column="ID_STATE"     jdbcType="BIGINT"    javaType="java.lang.Long" />
+		<result property="ipAddress"   column="IP_ADDRESS"   jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="eventsPort"  column="EVENTS_PORT"  jdbcType="SMALLINT"  javaType="java.lang.Integer" />
+		<result property="macAddress"  column="MAC_ADDRESS"  jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="wolPort"     column="WOL_PORT"     jdbcType="SMALLINT"  javaType="java.lang.Integer" />
+		<result property="videoPort"   column="VIDEO_PORT"   jdbcType="SMALLINT"  javaType="java.lang.Integer" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		gates.ID_GATE,
+		gates.ID_SYSTEM,
+		gates.CODE,
+		gates.NAME,
+		gates.ID_STATE,
+		gates.IP_ADDRESS,
+		gates.EVENTS_PORT,
+		gates.MAC_ADDRESS,
+		gates.WOL_PORT,
+		gates.VIDEO_PORT
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_GATE,
+		ID_SYSTEM,
+		CODE,
+		NAME,
+		ID_STATE,
+		IP_ADDRESS,
+		EVENTS_PORT,
+		MAC_ADDRESS,
+		WOL_PORT,
+		VIDEO_PORT
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idGate">
+			gates.ID_GATE = #idGate:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idSystem">
+			gates.ID_SYSTEM = #idSystem:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code">
+			gates.CODE LIKE concat('%',#code:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			gates.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idState">
+			gates.ID_STATE = #idState:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="ipAddress">
+			gates.IP_ADDRESS LIKE concat('%',#ipAddress:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="eventsPort">
+			gates.EVENTS_PORT = #eventsPort:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="macAddress">
+			gates.MAC_ADDRESS LIKE concat('%',#macAddress:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="wolPort">
+			gates.WOL_PORT = #wolPort:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="videoPort">
+			gates.VIDEO_PORT = #videoPort:SMALLINT#
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idGate">
+			gates.ID_GATE = #idGate:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idSystem">
+			gates.ID_SYSTEM = #idSystem:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code">
+			gates.CODE = #code:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			gates.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idState">
+			gates.ID_STATE = #idState:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="ipAddress">
+			gates.IP_ADDRESS = #ipAddress:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="eventsPort">
+			gates.EVENTS_PORT = #eventsPort:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="macAddress">
+			gates.MAC_ADDRESS = #macAddress:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="wolPort">
+			gates.WOL_PORT = #wolPort:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="videoPort">
+			gates.VIDEO_PORT = #videoPort:SMALLINT#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

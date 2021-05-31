@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.Operations">
+
+
+	<typeAlias alias="Operations" type="com.inetum.abc.server.model.abc.crud.OperationsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="OperationsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.create"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.update"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.modify"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.Operations.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operations
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+		ORDER BY
+			operations.ID_OPERATION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			operations.ID_OPERATION
+		FROM
+			operations
+		ORDER BY
+			operations.ID_OPERATION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="Operations" resultClass="java.lang.Long">
+
+        SELECT
+            operations.ID_OPERATION
+        FROM
+            operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Operations.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="Operations" resultClass="java.lang.Long">
+
+        SELECT
+            operations.ID_OPERATION
+        FROM
+            operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Operations.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            operations.ID_OPERATION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="Operations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="Operations" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="Operations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="Operations" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="Operations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Operations.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+		WHERE
+			ID_OPERATION = #idOperation:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            operations
+        WHERE
+            ID_OPERATION = #idOperation:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+		WHERE
+			ID_OPERATION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="Operations" resultMap="Abc.Mapping.Operations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="Operations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Operations.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="Operations">
+	
+		INSERT INTO operations
+			(
+				OPERATION_CODE,
+				ID_INSTALLATION,
+				ID_KIOSK,
+				ID_GATE,
+				ID_USER,
+				ID_OPERATION_STATE,
+				ID_OPERATION_RESULT,
+				OPERATION_BEGIN_DATE,
+				OPERATION_END_DATE,
+				OPERATION_REGISTER_DATE
+			)
+		VALUES
+			(
+				#operationCode:VARCHAR#,
+				#idInstallation:BIGINT#,
+				#idKiosk:BIGINT#,
+				#idGate:BIGINT#,
+				#idUser:BIGINT#,
+				#idOperationState:BIGINT#,
+				#idOperationResult:BIGINT#,
+				#operationBeginDate:TIMESTAMP#,
+				#operationEndDate:TIMESTAMP#,
+				#operationRegisterDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idOperation">
+			SELECT last_insert_id() AS ID_OPERATION FROM operations LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="Operations">
+	
+		UPDATE operations
+		SET
+			OPERATION_CODE = #operationCode:VARCHAR#,
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			ID_KIOSK = #idKiosk:BIGINT#,
+			ID_GATE = #idGate:BIGINT#,
+			ID_USER = #idUser:BIGINT#,
+			ID_OPERATION_STATE = #idOperationState:BIGINT#,
+			ID_OPERATION_RESULT = #idOperationResult:BIGINT#,
+			OPERATION_BEGIN_DATE = #operationBeginDate:TIMESTAMP#,
+			OPERATION_END_DATE = #operationEndDate:TIMESTAMP#,
+			OPERATION_REGISTER_DATE = #operationRegisterDate:TIMESTAMP#
+		WHERE
+			ID_OPERATION = #idOperation:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="Operations">
+	
+		UPDATE operations
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="operationCode">
+				OPERATION_CODE = #operationCode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idKiosk">
+				ID_KIOSK = #idKiosk:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idGate">
+				ID_GATE = #idGate:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idUser">
+				ID_USER = #idUser:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOperationState">
+				ID_OPERATION_STATE = #idOperationState:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOperationResult">
+				ID_OPERATION_RESULT = #idOperationResult:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="operationBeginDate">
+				OPERATION_BEGIN_DATE = #operationBeginDate:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="operationEndDate">
+				OPERATION_END_DATE = #operationEndDate:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="operationRegisterDate">
+				OPERATION_REGISTER_DATE = #operationRegisterDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_OPERATION = #idOperation:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE operations
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="operationCode">
+                OPERATION_CODE = #operationCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idKiosk">
+                ID_KIOSK = #idKiosk:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idGate">
+                ID_GATE = #idGate:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idUser">
+                ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idOperationState">
+                ID_OPERATION_STATE = #idOperationState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idOperationResult">
+                ID_OPERATION_RESULT = #idOperationResult:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="operationBeginDate">
+                OPERATION_BEGIN_DATE = #operationBeginDate:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="operationEndDate">
+                OPERATION_END_DATE = #operationEndDate:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="operationRegisterDate">
+                OPERATION_REGISTER_DATE = #operationRegisterDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idOperation">
+                operations.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="operationCode">
+                operations.OPERATION_CODE = #operationCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                operations.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idKiosk">
+                operations.ID_KIOSK = #idKiosk:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idGate">
+                operations.ID_GATE = #idGate:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idUser">
+                operations.ID_USER = #idUser:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperationState">
+                operations.ID_OPERATION_STATE = #idOperationState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperationResult">
+                operations.ID_OPERATION_RESULT = #idOperationResult:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="operationBeginDate">
+                DATE(operations.OPERATION_BEGIN_DATE) = DATE(#operationBeginDate:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="operationEndDate">
+                DATE(operations.OPERATION_END_DATE) = DATE(#operationEndDate:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="operationRegisterDate">
+                DATE(operations.OPERATION_REGISTER_DATE) = DATE(#operationRegisterDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM operations
+		WHERE
+			ID_OPERATION = #idOperation:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM operations
+		WHERE
+			ID_OPERATION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="Operations">
+	
+		DELETE FROM operations
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Operations.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM operations
+		
+	</delete>
+
+	<select id="getOperationsBetweenDatesNoInstallation" parameterClass="Operations" resultMap="Abc.Mapping.Operations.TableMapping">
+
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+
+		WHERE
+			DATE(OPERATION_BEGIN_DATE) BETWEEN DATE(#operationBeginDate:TIMESTAMP#) AND DATE(#operationEndDate:TIMESTAMP#)
+		AND
+			(OPERATION_END_DATE is NULL
+			OR
+			DATE(OPERATION_END_DATE) BETWEEN DATE(#operationBeginDate:TIMESTAMP#) AND DATE(#operationEndDate:TIMESTAMP#))
+
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+	<select id="getOperationsBetweenDatesWithInstallation" parameterClass="Operations" resultMap="Abc.Mapping.Operations.TableMapping">
+
+		SELECT
+			<include refid="Abc.Mapping.Operations.Fields" />
+		FROM
+			operations
+
+		WHERE
+			ID_INSTALLATION = #idInstallation:BIGINT#
+		AND
+			DATE(OPERATION_BEGIN_DATE) BETWEEN DATE(#operationBeginDate:TIMESTAMP#) AND DATE(#operationEndDate:TIMESTAMP#)
+		AND
+			(OPERATION_END_DATE is NULL
+			OR
+			DATE(OPERATION_END_DATE) BETWEEN DATE(#operationBeginDate:TIMESTAMP#) AND DATE(#operationEndDate:TIMESTAMP#))
+
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+</sqlMap>
+

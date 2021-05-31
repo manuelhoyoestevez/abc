@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.WorkflowTransitions">
+
+
+	<typeAlias alias="WorkflowTransitions" type="com.inetum.abc.server.model.abc.crud.WorkflowTransitionsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="WorkflowTransitions">
+	
+		<result property="idWorkflowTransition"  column="ID_WORKFLOW_TRANSITION"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idWorkflow"            column="ID_WORKFLOW"             jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idInitialState"        column="ID_INITIAL_STATE"        jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="initialState"          column="INITIAL_STATE"           jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="event"                 column="EVENT"                   jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="guard"                 column="GUARD"                   jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="idFinalState"          column="ID_FINAL_STATE"          jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="finalState"            column="FINAL_STATE"             jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		workflow_transitions.ID_WORKFLOW_TRANSITION,
+		workflow_transitions.ID_WORKFLOW,
+		workflow_transitions.ID_INITIAL_STATE,
+		workflow_transitions.INITIAL_STATE,
+		workflow_transitions.EVENT,
+		workflow_transitions.GUARD,
+		workflow_transitions.ID_FINAL_STATE,
+		workflow_transitions.FINAL_STATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_WORKFLOW_TRANSITION,
+		ID_WORKFLOW,
+		ID_INITIAL_STATE,
+		INITIAL_STATE,
+		EVENT,
+		GUARD,
+		ID_FINAL_STATE,
+		FINAL_STATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idWorkflowTransition">
+			workflow_transitions.ID_WORKFLOW_TRANSITION = #idWorkflowTransition:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idWorkflow">
+			workflow_transitions.ID_WORKFLOW = #idWorkflow:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idInitialState">
+			workflow_transitions.ID_INITIAL_STATE = #idInitialState:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="initialState">
+			workflow_transitions.INITIAL_STATE LIKE concat('%',#initialState:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="event">
+			workflow_transitions.EVENT LIKE concat('%',#event:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="guard">
+			workflow_transitions.GUARD LIKE concat('%',#guard:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idFinalState">
+			workflow_transitions.ID_FINAL_STATE = #idFinalState:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="finalState">
+			workflow_transitions.FINAL_STATE LIKE concat('%',#finalState:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idWorkflowTransition">
+			workflow_transitions.ID_WORKFLOW_TRANSITION = #idWorkflowTransition:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idWorkflow">
+			workflow_transitions.ID_WORKFLOW = #idWorkflow:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idInitialState">
+			workflow_transitions.ID_INITIAL_STATE = #idInitialState:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="initialState">
+			workflow_transitions.INITIAL_STATE = #initialState:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="event">
+			workflow_transitions.EVENT = #event:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="guard">
+			workflow_transitions.GUARD = #guard:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idFinalState">
+			workflow_transitions.ID_FINAL_STATE = #idFinalState:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="finalState">
+			workflow_transitions.FINAL_STATE = #finalState:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

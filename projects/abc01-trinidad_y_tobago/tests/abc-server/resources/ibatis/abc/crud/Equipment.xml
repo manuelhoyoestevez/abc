@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.Equipment">
+
+
+	<typeAlias alias="Equipment" type="com.inetum.abc.server.model.abc.crud.EquipmentDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="EquipmentCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.create"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.update"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.modify"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.Equipment.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			equipment
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+		ORDER BY
+			equipment.ID_EQUIPMENT	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			equipment.ID_EQUIPMENT
+		FROM
+			equipment
+		ORDER BY
+			equipment.ID_EQUIPMENT
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="Equipment" resultClass="java.lang.Long">
+
+        SELECT
+            equipment.ID_EQUIPMENT
+        FROM
+            equipment
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Equipment.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="Equipment" resultClass="java.lang.Long">
+
+        SELECT
+            equipment.ID_EQUIPMENT
+        FROM
+            equipment
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Equipment.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            equipment.ID_EQUIPMENT
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="Equipment" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			equipment
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="Equipment" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="Equipment" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			equipment
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="Equipment" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="Equipment" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            equipment
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Equipment.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+		WHERE
+			ID_EQUIPMENT = #idEquipment:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            equipment
+        WHERE
+            ID_EQUIPMENT = #idEquipment:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+		WHERE
+			ID_EQUIPMENT IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="Equipment" resultMap="Abc.Mapping.Equipment.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Equipment.Fields" />
+		FROM
+			equipment
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="Equipment" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            equipment
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Equipment.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="Equipment">
+	
+		INSERT INTO equipment
+			(
+				ID_SYSTEM,
+				ID_INSTALLATION,
+				CODE,
+				NAME,
+				ID_STATE
+			)
+		VALUES
+			(
+				#idSystem:BIGINT#,
+				#idInstallation:BIGINT#,
+				#code:VARCHAR#,
+				#name:VARCHAR#,
+				#idState:BIGINT#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idEquipment">
+			SELECT last_insert_id() AS ID_EQUIPMENT FROM equipment LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="Equipment">
+	
+		UPDATE equipment
+		SET
+			ID_SYSTEM = #idSystem:BIGINT#,
+			ID_INSTALLATION = #idInstallation:BIGINT#,
+			CODE = #code:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			ID_STATE = #idState:BIGINT#
+		WHERE
+			ID_EQUIPMENT = #idEquipment:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="Equipment">
+	
+		UPDATE equipment
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idSystem">
+				ID_SYSTEM = #idSystem:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idInstallation">
+				ID_INSTALLATION = #idInstallation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code">
+				CODE = #code:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idState">
+				ID_STATE = #idState:BIGINT#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_EQUIPMENT = #idEquipment:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE equipment
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idSystem">
+                ID_SYSTEM = #idSystem:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code">
+                CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idState">
+                ID_STATE = #idState:BIGINT#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idEquipment">
+                equipment.ID_EQUIPMENT = #idEquipment:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idSystem">
+                equipment.ID_SYSTEM = #idSystem:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInstallation">
+                equipment.ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code">
+                equipment.CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                equipment.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idState">
+                equipment.ID_STATE = #idState:BIGINT#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM equipment
+		WHERE
+			ID_EQUIPMENT = #idEquipment:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM equipment
+		WHERE
+			ID_EQUIPMENT IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="Equipment">
+	
+		DELETE FROM equipment
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Equipment.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM equipment
+		
+	</delete>
+	
+	
+</sqlMap>
+

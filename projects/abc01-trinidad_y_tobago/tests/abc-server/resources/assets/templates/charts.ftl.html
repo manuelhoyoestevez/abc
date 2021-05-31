@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<#if false>
+    <!--
+    https://www.highcharts.com/demo
+    -->
+</#if>
+
+<head>
+    <#include "/headers.ftl.html">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>${title}</title>
+
+    <link type="text/css" media="screen" rel="stylesheet" href="${url}/css/charts-1.0.0.css">
+
+    <script type="text/javascript" src="${url}/js/utils/jquery.min-1.9.1.js"></script>
+    <script type="text/javascript" src="${url}/js/utils/ajax-1.0.0.js"></script>
+    <script type="text/javascript" src="${url}/js/utils/utils-1.0.0.js"></script>
+
+    <script type="text/javascript" src="${url}/js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="${url}/js/highcharts/highcharts-3d.js"></script>
+    <script type="text/javascript" src="${url}/js/highcharts/highcharts-more.js"></script>
+    <#if export>
+    <script type="text/javascript" src="${url}/js/highcharts/modules/exporting.js"></script>
+    <script type="text/javascript" src="${url}/js/highcharts/modules/export-data.js"></script>
+    </#if>
+
+    <script type="text/javascript" src="${url}/js/charts-1.0.0.js"></script>
+
+
+    <script type="text/javascript">
+
+        function drawCharts()
+        {
+            Charts.drawCharts();
+        }
+
+        $(document).ready(function()
+        {
+            drawCharts();
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <br>
+
+    <!-- filters -->
+
+    <div id="filter" class="charts-filters">
+        <table width="${filterWidth}" border="0" cellpadding="5" style="font-size: 13px;">
+            <tr valign="baseline">
+                <td>
+                    <label>Begin Date</label>
+                </td>
+                <td>
+                    <input id="beginDate" type="date" maxlength="10" style="width: 130px;">
+                </td>
+
+                <td>
+                    <label>End Date</label>
+                </td>
+                <td>
+                    <input id="endDate" type="date" maxlength="10" style="width: 130px;">
+                </td>
+
+                <td>
+                    <button onclick="javascript:drawCharts();">Filter</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <br><br>
+
+    <div id="pie-chart" style="min-width: 300px; height: 400px; max-width: 500px; margin: 0 left"></div>
+
+
+    <br><br>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<validations name="Administration">
+
+
+	<validation name="validateForCreateUser">
+
+		<field name="idIdioma">
+			<field-validator type="required" />
+			<field-validator type="language" />
+		</field>
+
+		<field name="idSexo">
+			<field-validator type="required" />
+			<field-validator type="sex" />
+		</field>
+
+		<field name="nombre">
+			<field-validator type="required" />
+		</field>
+
+		<field name="email">
+			<field-validator type="email" />
+		</field>
+
+		<field name="account">
+			<field-validator type="required" />
+		</field>
+
+		<field name="idRoles">
+			<field-validator type="required" />
+		</field>
+
+	</validation>
+
+
+	<validation name="validateUpdateProperty">
+
+		<field name="propertyName">
+			<field-validator type="required" />
+		</field>
+
+		<field name="propertyValue">
+			<field-validator type="required" />
+		</field>
+
+	</validation>
+
+
+</validations>
+

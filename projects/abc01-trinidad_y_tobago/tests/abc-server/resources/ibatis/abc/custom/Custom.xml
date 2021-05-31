@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Custom">
+
+    <!--         -->
+    <!-- Systems -->
+    <!--         -->
+
+    <!-- getSystemId -->
+
+    <select id="getSystemId" parameterClass="java.util.Map" resultClass="java.lang.Long">
+
+        SELECT
+            sys_systems.ID_SYSTEM
+        FROM
+            sys_systems, sys_projects
+        WHERE
+            sys_systems.ID_PROJECT = sys_projects.ID_PROJECT
+        AND
+            sys_projects.CODE = #projectCode:VARCHAR#
+        AND
+            sys_systems.CODE = #systemCode:VARCHAR#
+
+    </select>
+
+
+    <!-- getInstallationByUserId -->
+
+    <select id="getInstallationByUserId" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Installations.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Installations.Columns" />
+        FROM
+            installations, installations_users
+        WHERE
+            installations.ID_INSTALLATION = installations_users.ID_INSTALLATION
+        AND
+            installations_users.ID_USER = #userId:BIGINT#
+
+    </select>
+
+
+    <!-- getKioskCommandsList -->
+    <select id="getKioskCommandsList" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+
+        SELECT
+            CODE
+        FROM
+            sys_commands
+        WHERE
+            kiosk = #active:SMALLINT#
+
+    </select>
+
+    <!-- getSimpleGateCommandsList -->
+    <select id="getSimpleGateCommandsList" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+
+        SELECT
+            CODE
+        FROM
+            sys_commands
+        WHERE
+            simple_gate = #active:SMALLINT#
+
+    </select>
+
+    <!-- getLockGateCommandsList -->
+    <select id="getLockGateCommandsList" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+
+        SELECT
+            CODE
+        FROM
+            sys_commands
+        WHERE
+            lock_gate = #active:SMALLINT#
+
+    </select>
+
+
+    <!-- getActiveInstallationListByUserId -->
+
+    <select id="getActiveInstallationListByUserId" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Installations.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Installations.Columns" />
+        FROM
+            installations, installations_users
+        WHERE
+            installations.ID_INSTALLATION = installations_users.ID_INSTALLATION
+        AND
+            installations.ACTIVE = 1
+        AND
+            installations_users.ID_USER = #userId:BIGINT#
+
+    </select>
+
+
+    <!-- createInstallationVerificationTypes -->
+
+    <insert id="createInstallationVerificationTypes" parameterClass="java.lang.Long">
+
+        INSERT INTO
+            installations_verification_types (ID_INSTALLATION,
+                                              ID_VERIFICATION_TYPE,
+                                              ID_PARENT_VERIFICATION_TYPE,
+                                              ACTIVE,
+                                              VERIFICATION_CODE,
+                                              ID_VERIFICATION_TYPE_GROUP,
+                                              GROUP_CODE)
+            SELECT
+                #installationId:BIGINT#,
+                sys_verification_types.ID_VERIFICATION_TYPE,
+                sys_verification_types.ID_PARENT_VERIFICATION_TYPE,
+                if (ID_VERIFICATION_TYPE_GROUP=0,0,1) as ACTIVE, <!-- padres desactivados -->
+                sys_verification_types.CODE,
+                sys_verification_types.ID_VERIFICATION_TYPE_GROUP,
+                sys_verification_types.GROUP_CODE
+            FROM
+                sys_verification_types
+
+    </insert>
+
+
+    <!-- getKiosksListByInstallationId -->
+
+    <select id="getKiosksListByInstallationId" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Kiosks.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Kiosks.Columns" />
+        FROM
+            kiosks, kiosks_gates_configuration
+        WHERE
+            kiosks.ID_KIOSK = kiosks_gates_configuration.ID_KIOSK
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+
+    </select>
+
+
+    <!-- countKiosksListByInstallationId -->
+
+    <select id="countKiosksListByInstallationId" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            kiosks, kiosks_gates_configuration
+        WHERE
+            kiosks.ID_KIOSK = kiosks_gates_configuration.ID_KIOSK
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+
+    </select>
+
+
+    <!-- getSimpleGatesListByInstallationId -->
+
+    <select id="getSimpleGatesListByInstallationId" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Gates.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Gates.Columns" />
+        FROM
+            gates, kiosks_gates_configuration
+        WHERE
+            gates.ID_GATE = kiosks_gates_configuration.ID_GATE_1
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+        ORDER BY
+            gates.ID_GATE ASC
+
+    </select>
+
+
+    <!-- countSimpleGatesListByInstallationId -->
+
+    <select id="countSimpleGatesListByInstallationId" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            gates, kiosks_gates_configuration
+        WHERE
+            gates.ID_GATE = kiosks_gates_configuration.ID_GATE_1
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+        ORDER BY
+            gates.ID_GATE ASC
+
+    </select>
+
+
+    <!-- getLockGatesListByInstallationId -->
+
+    <select id="getLockGatesListByInstallationId" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Gates.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Gates.Columns" />
+        FROM
+            gates, kiosks_gates_configuration
+        WHERE
+            gates.ID_GATE = kiosks_gates_configuration.ID_GATE_2
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+        ORDER BY
+            gates.ID_GATE ASC
+
+    </select>
+
+
+    <!-- countLockGatesListByInstallationId -->
+
+    <select id="countLockGatesListByInstallationId" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            gates, kiosks_gates_configuration
+        WHERE
+            gates.ID_GATE = kiosks_gates_configuration.ID_GATE_2
+        AND
+            kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+        ORDER BY
+            gates.ID_GATE ASC
+
+    </select>
+
+
+    <!-- getUsersListByInstallationId
+
+    <select id="getUsersListByInstallationId" parameterClass="java.lang.Long" resultMap="TestInstallationUserParams">
+
+        SELECT
+        users.ID_USER
+        users.ACTIVE,
+        users.NAME,
+        users.SURNAME,
+        users.SEX
+        users.LANGUAGE,
+        users.TIMEZONE,
+        users.EMAIL,
+        users.PHONE
+        users.CREATION_DATE,
+        users.DELETION_DATE,
+        users_credentials.ACCOUNT,
+        users_roles.ID_ROLE
+        FROM
+        users, installations_users, users_roles, users_credentials
+        WHERE
+        users.ID_USER = installations_users.ID_USER and
+        users_roles.ID_USER = users.ID_USER and
+        users_credentials.ID_USER = users.ID_USER
+        AND
+        installations_users.ID_INSTALLATION = #installationId:BIGINT#
+
+    </select>
+        -->
+
+    <!-- countUsersListByInstallationId -->
+
+    <select id="countUsersListByInstallationId" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            users, installations_users
+        WHERE
+            users.ID_USER = installations_users.ID_USER
+        AND
+            installations_users.ID_INSTALLATION = #installationId:BIGINT#
+
+    </select>
+
+
+    <!-- getKioskState -->
+
+    <select id="getKioskState" parameterClass="java.lang.Long" resultClass="java.lang.String">
+
+        SELECT
+            sys_states.CODE
+        FROM
+            kiosks, sys_states
+        WHERE
+            kiosks.ID_STATE = sys_states.ID_STATE
+        AND
+            kiosks.ID_KIOSK = #kioskId:BIGINT#
+
+    </select>
+
+
+    <!-- getGateState -->
+
+    <select id="getGateState" parameterClass="java.lang.Long" resultClass="java.lang.String">
+
+        SELECT
+            sys_states.CODE
+        FROM
+            gates, sys_states
+        WHERE
+            gates.ID_STATE = sys_states.ID_STATE
+        AND
+            gates.ID_GATE = #gateId:BIGINT#
+
+    </select>
+
+
+    <!--  getAccessTypeId -->
+
+    <select id="getAccessTypeId" parameterClass="java.lang.String" resultClass="java.lang.Long">
+
+        SELECT
+            IF (ID_GATE_1 IS NOT NULL, ID_GATE_1_ACCESS_TYPE, ID_GATE_2_ACCESS_TYPE) as ACCESS_TYPE
+        FROM
+            gates, kiosks_gates_configuration
+        WHERE
+            gates.CODE = #code:VARCHAR#
+        AND
+        (
+            ID_GATE_1 = gates.ID_GATE
+        OR
+            ID_GATE_2 = gates.ID_GATE
+        )
+
+    </select>
+
+
+    <!--            -->
+    <!-- Operations -->
+    <!--            -->
+
+
+    <!-- getOperationPersonalData -->
+
+    <select id="getOperationPersonalData" parameterClass="java.lang.Long" resultMap="Abc.Mapping.PersonalData.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.PersonalData.Columns" />
+        FROM
+            personal_data, documents
+        WHERE
+            personal_data.ID_DOCUMENT = documents.ID_DOCUMENT
+        AND
+            documents.ID_OPERATION = #operationId:BIGINT#
+    </select>
+
+
+    <!-- getOperationsPendingRegistration -->
+
+    <select id="getOperationsPendingRegistration" parameterClass="java.util.Map" resultMap="Abc.Mapping.Operations.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Operations.Columns" />
+        FROM
+            installations, operations
+        WHERE
+            operations.ID_INSTALLATION = #installationId:BIGINT#
+        AND
+            installations.REGISTER_URL IS NOT NULL
+        AND
+            <!-- operacion con mas de 1 dia que se empezo
+            (DATEDIFF(DATE(SYSDATE()), DATE(operations.OPERATION_BEGIN_DATE)) > 1)
+            -->
+            <!-- operacion que se empezo hace mas de 12 horas -->
+            (TIMESTAMPDIFF(HOUR, operations.OPERATION_BEGIN_DATE, SYSDATE()) >= 12)
+        AND
+            operations.OPERATION_REGISTER_DATE IS NULL
+        ORDER BY
+            operations.ID_OPERATION DESC
+        LIMIT
+            #rowsMax:INTEGER#
+
+    </select>
+
+
+    <!-- clearOperationImages -->
+
+    <update id="clearOperationImages" parameterClass="java.lang.Long">
+
+        UPDATE
+            operation_images
+        SET
+            IMAGE = NULL
+        WHERE
+            ID_OPERATION = #operationId:BIGINT#
+
+    </update>
+
+
+    <!-- clearOperationTickets -->
+
+    <update id="clearOperationTickets" parameterClass="java.lang.Long">
+
+        UPDATE
+            operation_tickets
+        SET
+            TICKET = NULL
+        WHERE
+            ID_OPERATION = #operationId:BIGINT#
+
+    </update>
+
+
+    <!-- clearDocumentData -->
+
+    <update id="clearDocumentData" parameterClass="java.lang.Long">
+
+        UPDATE
+            document_data
+        SET
+            DOCUMENT_NUMBER = '',
+            PERSONAL_NUMBER = '',
+            GIVEN_NAME = '',
+            LAST_NAME = '',
+            AUTHORITHY = '',
+            SUPPORT_NUMBER = '',
+            ADDRESS = '',
+            PARENTS_NAMES = '',
+            ADDITIONAL_DATA = '',
+            MRZ = '',
+            MRZ_LINE_1 = '',
+            MRZ_LINE_2 = '',
+            MRZ_LINE_3 = '',
+            OPTIONAL_DATA = ''
+        WHERE
+            ID_DOCUMENT = #documentId:BIGINT#
+
+    </update>
+
+
+    <!-- clearPersonalData -->
+
+    <update id="clearPersonalData" parameterClass="java.lang.Long">
+
+        UPDATE
+            personal_data
+        SET
+            GIVEN_NAME = '',
+            LAST_NAME = ''
+        WHERE
+            ID_DOCUMENT = #documentId:BIGINT#
+
+    </update>
+
+
+    <!-- clearBoardingPassData -->
+
+    <update id="clearBoardingPassData" parameterClass="java.lang.Long">
+
+        UPDATE
+            boarding_passes
+        SET
+            RAW_BARCODE = '',
+            PASSENGER_NAME = ''
+        WHERE
+            ID_OPERATION = #operationId:BIGINT#
+
+    </update>
+
+
+    <!-- clearOperationBarcodes -->
+
+    <update id="clearOperationBarcodes" parameterClass="java.lang.Long">
+
+        UPDATE
+        operation_barcodes
+        SET
+        RAW_BARCODE = NULL,
+        IMAGE_BARCODE = NULL
+        WHERE
+        ID_OPERATION = #operationId:BIGINT#
+
+    </update>
+
+    <!--      -->
+    <!-- APIS -->
+    <!--      -->
+
+    <!-- getFlight -->
+
+    <select id="getFlight" parameterClass="java.lang.String" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+            apis_flights.DEPARTURE_PORT,
+            apis_flights.CARRIER_NAME,
+            apis_flights.FLIGHT_ID
+        FROM
+            apis_flights,
+            apis_travellers
+        WHERE
+            apis_flights.ID_APIS_FLIGHT = apis_travellers.ID_APIS_FLIGHT
+        AND
+            apis_travellers.PASSPORT_NUMBER = #passportNumber:VARCHAR#
+
+        <!-- fecha de salida en las ultimas 24 horas -->
+        AND
+            apis_flights.DEPARTURE_DATE >= DATE_SUB(SYSDATE(), INTERVAL 1 DAY)
+
+        ORDER BY
+            apis_flights.ARRIVAL_DATE DESC
+        LIMIT 1
+
+    </select>
+
+
+    <!--              -->
+    <!-- BoardingPass -->
+    <!--              -->
+
+    <!-- getBoardingPassLegsList -->
+
+    <select id="getBoardingPassLegsList" parameterClass="java.lang.Long" resultMap="Abc.Mapping.BoardingPassLegs.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.BoardingPassLegs.Columns" />
+        FROM
+            boarding_pass_legs, boarding_passes
+        WHERE
+            boarding_pass_legs.ID_BOARDING_PASS = boarding_passes.ID_BOARDING_PASS
+        AND
+            boarding_passes.ID_OPERATION = #operationId:BIGINT#
+
+    </select>
+
+
+    <!--           -->
+    <!-- Incidents -->
+    <!--           -->
+
+    <!-- deleteOperationsIncidents -->
+
+    <delete id="deleteOperationsIncidents" parameterClass="java.lang.Long">
+
+        DELETE
+            FROM incidents
+        WHERE
+            incidents.ID_INCIDENT IN
+        (
+            SELECT * FROM
+            (
+                SELECT
+                    incidents.ID_INCIDENT
+                FROM
+                    incidents, operations, kiosks_gates_configuration
+                WHERE
+                    incidents.ID_OPERATION IS NOT NULL
+                AND
+                    incidents.ID_OPERATION = operations.ID_OPERATION
+                AND
+                    (
+                        operations.ID_KIOSK = kiosks_gates_configuration.ID_KIOSK
+                    OR
+                        operations.ID_GATE = kiosks_gates_configuration.ID_GATE_1
+                    OR
+                        operations.ID_GATE = kiosks_gates_configuration.ID_GATE_2
+                    )
+                AND
+                    kiosks_gates_configuration.ID_INSTALLATION = #installationId:BIGINT#
+            ) AS IDS
+        )
+
+    </delete>
+
+
+</sqlMap>
+

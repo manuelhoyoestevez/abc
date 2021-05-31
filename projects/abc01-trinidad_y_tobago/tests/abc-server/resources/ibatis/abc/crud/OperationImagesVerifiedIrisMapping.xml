@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+		"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.OperationImagesVerifiedIris">
+
+
+	<typeAlias alias="OperationImagesVerifiedIris" type="com.inetum.abc.server.model.abc.crud.OperationImagesIrisVerifiedDto"/>
+
+
+	<!-- ===== TableMapping ===== -->
+
+	<resultMap id="TableMapping" class="OperationImagesVerifiedIris">
+
+		<result property="idOperationImageVerifiedIris" column="ID_OPERATION_IMAGE_VERIFIED_IRIS"	jdbcType="BIGINT"         		javaType="java.lang.Long" />
+		<result property="idOperation"       			column="ID_OPERATION"         				jdbcType="BIGINT"         		javaType="java.lang.Long" />
+		<result property="dataReference"   				column="DATA_REFERENCE_IRIS"        		jdbcType="LONGVARBINARY"        javaType="[B" />
+		<result property="templateReference"   			column="TEMPLATE_REFERENCE_IRIS"    	 	jdbcType="LONGVARBINARY"        javaType="[B" />
+		<result property="positionReference"   			column="POSITION_REFERENCE"    	 			jdbcType="INTEGER"        		javaType="[B" />
+		<result property="dataVerified"   				column="DATA_VERIFIED_IRIS"        			jdbcType="LONGVARBINARY"        javaType="[B" />
+		<result property="templateVerified"   			column="TEMPLATE_VERIFIED_IRIS"    	 		jdbcType="LONGVARBINARY"        javaType="[B" />
+		<result property="positionVerified"   			column="POSITION_VERIFIED"    	 			jdbcType="INTEGER"        		javaType="[B" />
+		<result property="capturedElapsedTime"   		column="CAPTURED_ELAPSED_TIME"				jdbcType="DOUBLE"         		javaType="java.lang.Double" />
+		<result property="spoofStatus"   				column="SPOOF_STATUS"         				jdbcType="INTEGER"         		javaType="java.lang.Integer" />
+		<result property="score"   						column="SCORE"         						jdbcType="VARCHAR"         		javaType="java.lang.String" />
+		<result property="threshold"   					column="THRESHOLD"         					jdbcType="DOUBLE"         		javaType="java.lang.Double" />
+		<result property="matchResult"   				column="MATCH_RESULT"         				jdbcType="INTEGER"         		javaType="java.lang.Integer" />
+		<result property="verifyingTime"      			column="VERIFYING_TIME"        				jdbcType="DOUBLE"      			javaType="java.lang.Double" />
+		<result property="processingTime"      			column="PROCESSING_TIME"        			jdbcType="DOUBLE"      			javaType="java.lang.Double" />
+		<result property="capturingTime"      			column="CAPTURING_TIME"        				jdbcType="DOUBLE"      			javaType="java.lang.Double" />
+		<result property="creationDate"      			column="CREATION_DATE"        				jdbcType="TIMESTAMP"      		javaType="java.util.Date" />
+
+	</resultMap>
+
+
+	<!-- ===== Columns ===== -->
+
+	<sql id="Columns">
+
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS,
+		operation_images_verified_iris.ID_OPERATION,
+		operation_images_verified_iris.DATA_REFERENCE,
+		operation_images_verified_iris.TEMPLATE_REFERENCE,
+		operation_images_verified_iris.POSITION_REFERENCE,
+		operation_images_verified_iris.DATA_VERIFIED,
+		operation_images_verified_iris.TEMPLATE_VERIFIED,
+		operation_images_verified_iris.POSITION_VERIFIED,
+		operation_images_verified_iris.CAPTURED_ELAPSED_TIME,
+		operation_images_verified_iris.SPOOF_STATUS,
+		operation_images_verified_iris.SCORE,
+		operation_images_verified_iris.THRESHOLD,
+		operation_images_verified_iris.MATCH_RESULT,
+		operation_images_verified_iris.VERIFYING_TIME,
+		operation_images_verified_iris.PROCESSING_TIME,
+		operation_images_verified_iris.CAPTURING_TIME,
+		operation_images_verified_iris.CREATION_DATE
+
+	</sql>
+
+
+	<!-- ===== Fields ===== -->
+
+	<sql id="Fields">
+		ID_OPERATION_IMAGE_VERIFIED_IRIS,
+		ID_OPERATION,
+		DATA_REFERENCE,
+		TEMPLATE_REFERENCE,
+		POSITION_REFERENCE,
+		DATA_VERIFIED,
+		TEMPLATE_VERIFIED,
+		POSITION_VERIFIED,
+		CAPTURED_ELAPSED_TIME,
+		SPOOF_STATUS,
+		SCORE,
+		THRESHOLD,
+		MATCH_RESULT,
+		VERIFYING_TIME,
+		PROCESSING_TIME,
+		CAPTURING_TIME,
+		CREATION_DATE
+
+	</sql>
+
+
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+
+		<isNotEmpty prepend="AND" property="idOperationImageIris">
+			operation_images_verified_iris.ID_OPERATION_IMAGE_CAPTURED_IRIS = #idOperationImageCapturedIris:BIGINT#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="idOperation">
+			operation_images_verified_iris.ID_OPERATION = #idOperation:BIGINT#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="dataReference">
+			operation_images_verified_iris.DATA_REFERENCE = #dataReference:LONGVARBINARY#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="templateReference">
+			operation_images_verified_iris.TEMPLATE_REFERENCE = #templateReference:LONGVARBINARY#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="positionReference">
+			operation_images_verified_iris.POSITION_REFERENCE = #positionReference:BIGINT#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="dataVerified">
+			operation_images_verified_iris.DATA_VERIFIED = #dataVerified:LONGVARBINARY#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="templateVerified">
+			operation_images_verified_iris.TEMPLATE_VERIFIED = #templateVerified:LONGVARBINARY#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="positionVerified">
+			operation_images_verified_iris.POSITION_VERIFIED = #positionVerified:BIGINT#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="capturedElapsedTime">
+			operation_images_verified_iris.CAPTURED_ELAPSED_TIME = #capturedElapsedTime:DOUBLE#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="spoofStatus">
+			operation_images_verified_iris.SPOOF_STATUS = #spoofStatus:INTEGER#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="score">
+			operation_images_verified_iris.SPOOF_STATUS = #score:VARCHAR#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="threshold">
+			operation_images_verified_iris.SPOOF_STATUS = #threshold:DOUBLE#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="matchResult">
+			operation_images_verified_iris.MATCH_RESULT = #matchResult:INTEGER#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="verifyingTime">
+			operation_images_verified_iris.VERIFYING_TIME = #verifyingTime:DOUBLE#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="processingTime">
+			operation_images_verified_iris.PROCESSING_TIME = #processingTime:DOUBLE#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="capturingTime">
+			operation_images_verified_iris.CAPTURING_TIME = #capturingTime:DOUBLE#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(operation_images_verified_iris.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+
+	</sql>
+
+
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+
+		<isNotNull prepend="AND" property="idOperationImageCapturedIris">
+			operation_images_verified_iris.ID_OPERATION_IMAGE_CAPTURED_IRIS = #idOperationImageCapturedIris:BIGINT#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="idOperation">
+			operation_images_verified_iris.ID_OPERATION = #idOperation:BIGINT#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="dataReference">
+			operation_images_verified_iris.DATA_REFERENCE = #dataReference:LONGVARBINARY#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="templateReference">
+			operation_images_verified_iris.TEMPLATE_REFERENCE = #templateReference:LONGVARBINARY#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="positionReference">
+			operation_images_verified_iris.POSITION_REFERENCE = #positionReference:BIGINT#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="dataVerified">
+			operation_images_verified_iris.DATA_VERIFIED = #dataVerified:LONGVARBINARY#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="templateVerified">
+			operation_images_verified_iris.TEMPLATE_VERIFIED = #templateVerified:LONGVARBINARY#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="positionVerified">
+			operation_images_verified_iris.POSITION_VERIFIED = #positionVerified:BIGINT#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="capturedElapsedTime">
+			operation_images_verified_iris.CAPTURED_ELAPSED_TIME = #capturedElapsedTime:DOUBLE#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="spoofStatus">
+			operation_images_verified_iris.SPOOF_STATUS = #spoofStatus:INTEGER#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="score">
+			operation_images_verified_iris.SPOOF_STATUS = #score:VARCHAR#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="threshold">
+			operation_images_verified_iris.SPOOF_STATUS = #threshold:DOUBLE#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="matchResult">
+			operation_images_verified_iris.MATCH_RESULT = #matchResult:INTEGER#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="verifyingTime">
+			operation_images_verified_iris.VERIFYING_TIME = #verifyingTime:DOUBLE#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="processingTime">
+			operation_images_verified_iris.PROCESSING_TIME = #processingTime:DOUBLE#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="capturingTime">
+			operation_images_verified_iris.CAPTURING_TIME = #capturingTime:DOUBLE#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(operation_images_verified_iris.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+
+
+	</sql>
+
+</sqlMap>
+

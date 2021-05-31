@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Reports">
+
+    <typeAlias alias="ReportCountByOperationResultDto"
+               type="com.inetum.abc.server.model.abc.custom.ReportCountByOperationResultDto" />
+
+    <typeAlias alias="ReportCountByDayDto"
+               type="com.inetum.abc.server.model.abc.custom.ReportCountByDayDto" />
+
+    <typeAlias alias="DetailReportDataDto"
+               type="com.inetum.abc.server.model.abc.custom.DetailReportDataDto" />
+
+    <typeAlias alias="ReportDashboardDto"
+               type="com.inetum.abc.server.model.abc.custom.ReportDashboardDto" />
+
+
+    <resultMap id="ReportCountByOperationResultDtoMapping" class="ReportCountByOperationResultDto">
+        <result property="installationId"   column="ID_INSTALLATION"    jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="totalCount"		column="totalCount"         jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="successfulCount"	column="SuccessfulCount"    jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="failCount"		column="FailCount"          jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="undefinedCount"   column="UndefinedCount"     jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="warningCount"     column="WarningCount"       jdbcType="BIGINT"       javaType="java.lang.Long" />
+    </resultMap>
+
+
+    <resultMap id="ReportCountByDayDtoMapping" class="ReportCountByDayDto">
+        <result property="installationId"   column="ID_INSTALLATION"    jdbcType="BIGINT"   javaType="java.lang.Long" />
+        <result property="year"             column="Year"               jdbcType="INTEGER"  javaType="java.lang.Integer" />
+        <result property="month"            column="Month"	            jdbcType="INTEGER"  javaType="java.lang.Integer" />
+        <result property="day"              column="Day"	            jdbcType="INTEGER"  javaType="java.lang.Integer" />
+        <result property="operationsCount"  column="Operations"         jdbcType="BIGINT"  javaType="java.lang.Long" />
+    </resultMap>
+
+    <resultMap id="DetailReportDataMapping" class="DetailReportDataDto">
+
+        <result property="operationId"		    column="ID_OPERATION"           jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="installationId"		column="ID_INSTALLATION"        jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="operationBeginDate"   column="OPERATION_BEGIN_DATE"   jdbcType="TIMESTAMP"    javaType="java.util.Date" />
+        <result property="operationEndDate"     column="OPERATION_END_DATE"     jdbcType="TIMESTAMP"    javaType="java.util.Date" />
+        <result property="gateId"		        column="ID_GATE"                jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="operationResultId"    column="ID_OPERATION_RESULT"    jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="stepTypeId"		    column="ID_STEP_TYPE"           jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="stepResultId"		    column="ID_STEP_RESULT"         jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="externalStepResultId" column="ID_EXTERNAL_RESULT"     jdbcType="BIGINT"       javaType="java.lang.Long" />
+        <result property="nationality"		    column="NATIONALITY"		    jdbcType="VARCHAR"	    javaType="java.lang.String" />
+        <result property="sex"		            column="SEX"		            jdbcType="VARCHAR"	    javaType="java.lang.String" />
+        <result property="age"		            column="AGE"		            jdbcType="INTEGER"	    javaType="java.lang.Integer" />
+
+    </resultMap>
+
+    <resultMap id="ReportDashboardDtoMapping" class="ReportDashboardDto">
+        <result property="firstDate"        column="firstDate"  jdbcType="TIMESTAMP"    javaType="java.util.Date" />
+        <result property="lastDate"         column="lastDate"   jdbcType="TIMESTAMP"    javaType="java.util.Date" />
+        <result property="avgOperationTime" column="avgTime"    jdbcType="FLOAT"        javaType="java.lang.Float" />
+    </resultMap>
+
+
+    <sql id="DatesFilter">
+
+        <isNotEmpty property="initialDate">
+            <![CDATA[
+            DATE(operations.OPERATION_BEGIN_DATE) >= DATE(#initialDate:TIMESTAMP#)
+        ]]>
+        </isNotEmpty>
+
+        <isNotEmpty prepend="AND" property="finalDate">
+            <![CDATA[
+            DATE(operations.OPERATION_BEGIN_DATE) <= DATE(#finalDate:TIMESTAMP#)
+        ]]>
+        </isNotEmpty>
+
+    </sql>
+
+    <sql id="InstallationFilter">
+
+        <isNotEmpty prepend="AND" property="installationId">
+            ID_INSTALLATION = #installationId:BIGINT#
+        </isNotEmpty>
+
+    </sql>
+
+
+    <!-- Count by Operation Result -->
+
+    <select id="countByOperationResult"
+            parameterClass="java.util.Map"
+            resultMap="ReportCountByOperationResultDtoMapping">
+
+        SELECT
+            ID_INSTALLATION,
+            COUNT(*) AS 'totalCount',
+            SUM(case when ID_OPERATION_RESULT = 0 or ID_OPERATION_RESULT is null then 1 else 0 end) AS 'UndefinedCount',
+            SUM(case when ID_OPERATION_RESULT = 1 then 1 else 0 end) AS 'SuccessfulCount',
+            SUM(case when ID_OPERATION_RESULT = 2 then 1 else 0 end) AS 'WarningCount',
+            SUM(case when ID_OPERATION_RESULT = 3 then 1 else 0 end) AS 'FailCount'
+        FROM
+            OPERATIONS
+        WHERE
+            <include refid="DatesFilter" />
+
+            <include refid="InstallationFilter" />
+        GROUP BY
+            ID_INSTALLATION;
+
+    </select>
+
+
+    <!-- Count by Day -->
+    <select id="countByDay" parameterClass="java.util.Map" resultMap="ReportCountByDayDtoMapping">
+
+        SELECT
+            ID_INSTALLATION,
+            YEAR(OPERATION_BEGIN_DATE) AS 'Year',
+            MONTH(OPERATION_BEGIN_DATE) AS 'Month',
+            DAY(OPERATION_BEGIN_DATE) AS 'Day',
+            COUNT(*) AS 'Operations'
+        FROM
+            OPERATIONS
+        WHERE
+            <include refid="DatesFilter" />
+
+            <include refid="InstallationFilter" />
+        GROUP BY
+            ID_INSTALLATION,
+            DAY(OPERATION_BEGIN_DATE),
+            MONTH(OPERATION_BEGIN_DATE),
+            YEAR(OPERATION_BEGIN_DATE)
+        ORDER BY
+            'Year',
+            'Month',
+            'Day'
+
+    </select>
+
+    <!-- getOperationsResultsFromGates -->
+
+    <select id="getOperationsResultsFromGates" parameterClass="java.util.Map" resultMap="DetailReportDataMapping">
+
+        SELECT
+        operations.ID_OPERATION,
+        operations.ID_INSTALLATION,
+        operations.OPERATION_BEGIN_DATE,
+        operations.OPERATION_END_DATE,
+        operations.ID_GATE,
+        operations.ID_OPERATION_RESULT,
+        operation_steps_results.ID_STEP_TYPE,
+        operation_steps_results.ID_STEP_RESULT,
+        operation_steps_results.ID_EXTERNAL_RESULT,
+        if (personal_data.NATIONALITY is null, '', personal_data.NATIONALITY) as NATIONALITY,
+        if (personal_data.SEX is null, '', personal_data.SEX) as SEX,
+        if (personal_data.AGE is null, '', personal_data.AGE) as AGE
+        <!--
+        ,operation_steps_results.DESCRIPTION
+        -->
+        FROM
+        operations,
+        operation_steps_results,
+        installation_steps,
+        documents,
+        personal_data
+        WHERE
+        <include refid="DatesFilter" />
+        AND
+        operation_steps_results.ID_OPERATION = operations.ID_OPERATION
+        AND
+        operation_steps_results.ID_STEP_TYPE = installation_steps.ID_STEP_TYPE
+        AND
+        installation_steps.ID_INSTALLATION = operations.ID_INSTALLATION
+        AND
+        documents.ID_OPERATION = operations.ID_OPERATION
+        AND
+        personal_data.ID_DOCUMENT = documents.ID_DOCUMENT
+        AND
+        operations.ID_GATE IS NOT NULL
+
+        ORDER BY
+        operations.ID_OPERATION ASC, installation_steps.ORDER_NUMBER ASC
+
+    </select>
+
+
+    <!-- Count by Month-->
+    <select id="countByMonth" parameterClass="java.util.Map" resultMap="ReportCountByDayDtoMapping">
+
+        SELECT
+            ID_INSTALLATION,
+            YEAR(OPERATION_BEGIN_DATE) AS 'Year',
+            MONTH(OPERATION_BEGIN_DATE) AS 'Month',
+            NULL as 'Day',
+            COUNT(*) AS 'Operations'
+        FROM
+            OPERATIONS
+        WHERE
+            <include refid="DatesFilter" />
+
+            <include refid="InstallationFilter" />
+        GROUP BY
+            ID_INSTALLATION,
+            MONTH(OPERATION_BEGIN_DATE),
+            YEAR(OPERATION_BEGIN_DATE)
+        ORDER BY
+            'Year',
+            'Month'
+
+    </select>
+
+
+    <!-- Report Dashboard Data -->
+    <select id="reportDashboard" parameterClass="java.util.Map" resultMap="ReportDashboardDtoMapping">
+        SELECT
+            MIN(OPERATION_BEGIN_DATE) as 'firstDate',
+            MAX(OPERATION_BEGIN_DATE) as 'lastDate',
+            AVG(TIME_TO_SEC(TIMEDIFF(OPERATION_END_DATE,OPERATION_BEGIN_DATE))) AS 'avgTime'
+        FROM
+            OPERATIONS
+    </select>
+
+
+    <!-- Averge successful operation time -->
+
+    <select id="avgSuccessfulOperationTime" parameterClass="java.util.Map" resultClass="java.lang.Float">
+        SELECT
+            AVG(TIME_TO_SEC(TIMEDIFF(OPERATION_END_DATE,OPERATION_BEGIN_DATE))) AS 'avgTime'
+        FROM
+            OPERATIONS
+        WHERE
+            ID_OPERATION_RESULT = 1 <!-- OK operations-->
+    </select>
+
+    <!--
+        <!- - Averge operation time (by day with GROUP BY)
+    <select id="avgOperationTime" parameterClass="java.util.Map" resultMap="ReportAvgOperationTimeDtoMapping">
+        SELECT
+            DATE(OPERATION_BEGIN_DATE) AS startdate,
+            AVG(TIME_TO_SEC(TIMEDIFF(OPERATION_END_DATE,OPERATION_BEGIN_DATE))) AS timediff
+        FROM
+            OPERATIONS
+
+        WHERE
+            OPERATION_BEGIN_DATE BETWEEN '20191023' AND '20191024'
+        GROUP BY
+            startdate;
+
+        SELECT  DATE(OPERATION_BEGIN_DATE) AS startdate, AVG(TIME_TO_SEC(TIMEDIFF(OPERATION_END_DATE,OPERATION_BEGIN_DATE))) AS timediff
+        FROM    operations
+        WHERE ID_OPERATION_RESULT = 1
+
+    </select>
+     -->
+
+
+</sqlMap>
+

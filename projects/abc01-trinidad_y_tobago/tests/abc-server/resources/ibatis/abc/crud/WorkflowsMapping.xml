@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.Workflows">
+
+
+	<typeAlias alias="Workflows" type="com.inetum.abc.server.model.abc.crud.WorkflowsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="Workflows">
+	
+		<result property="idWorkflow"  column="ID_WORKFLOW"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="name"        column="NAME"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="objectName"  column="OBJECT_NAME"  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		workflows.ID_WORKFLOW,
+		workflows.NAME,
+		workflows.OBJECT_NAME
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_WORKFLOW,
+		NAME,
+		OBJECT_NAME
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idWorkflow">
+			workflows.ID_WORKFLOW = #idWorkflow:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			workflows.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="objectName">
+			workflows.OBJECT_NAME LIKE concat('%',#objectName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idWorkflow">
+			workflows.ID_WORKFLOW = #idWorkflow:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			workflows.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="objectName">
+			workflows.OBJECT_NAME = #objectName:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

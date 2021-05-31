@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.OperationImages">
+
+
+	<typeAlias alias="OperationImages" type="com.inetum.abc.server.model.abc.crud.OperationImagesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="OperationImages">
+	
+		<result property="idOperationImage"  column="ID_OPERATION_IMAGE"   jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="idOperation"       column="ID_OPERATION"         jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="idDocument"        column="ID_DOCUMENT"          jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="idDataSourceType"  column="ID_DATA_SOURCE_TYPE"  jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="idImageType"       column="ID_IMAGE_TYPE"        jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="idLightType"       column="ID_LIGHT_TYPE"        jdbcType="BIGINT"         javaType="java.lang.Long" />
+		<result property="name"              column="NAME"                 jdbcType="VARCHAR"        javaType="java.lang.String" />
+		<result property="image"             column="IMAGE"                jdbcType="LONGVARBINARY"  javaType="[B" />
+		<result property="imageFormatType"   column="IMAGE_FORMAT_TYPE"    jdbcType="VARCHAR"		 javaType="java.lang.String" />
+		<result property="dpi"               column="DPI"                  jdbcType="INTEGER"        javaType="java.lang.Integer" />
+		<result property="spoofStatus"       column="SPOOF_STATUS"         jdbcType="INTEGER"        javaType="java.lang.Integer" />
+		<result property="pageNumber"        column="PAGE_NUMBER"          jdbcType="INTEGER"        javaType="java.lang.Integer" />
+		<result property="creationDate"      column="CREATION_DATE"        jdbcType="TIMESTAMP"      javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		operation_images.ID_OPERATION_IMAGE,
+		operation_images.ID_OPERATION,
+		operation_images.ID_DOCUMENT,
+		operation_images.ID_DATA_SOURCE_TYPE,
+		operation_images.ID_IMAGE_TYPE,
+		operation_images.ID_LIGHT_TYPE,
+		operation_images.NAME,
+		operation_images.IMAGE,
+		operation_images.IMAGE_FORMAT_TYPE,
+		operation_images.DPI,
+		operation_images.SPOOF_STATUS,
+		operation_images.PAGE_NUMBER,
+		operation_images.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_OPERATION_IMAGE,
+		ID_OPERATION,
+		ID_DOCUMENT,
+		ID_DATA_SOURCE_TYPE,
+		ID_IMAGE_TYPE,
+		ID_LIGHT_TYPE,
+		NAME,
+		IMAGE,
+		IMAGE_FORMAT_TYPE,
+		DPI,
+		SPOOF_STATUS,
+		PAGE_NUMBER,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idOperationImage">
+			operation_images.ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idOperation">
+			operation_images.ID_OPERATION = #idOperation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idDocument">
+			operation_images.ID_DOCUMENT = #idDocument:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idDataSourceType">
+			operation_images.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idImageType">
+			operation_images.ID_IMAGE_TYPE = #idImageType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idLightType">
+			operation_images.ID_LIGHT_TYPE = #idLightType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			operation_images.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="imageFormatType">
+			operation_images.IMAGE_FORMAT_TYPE LIKE concat('%',#imageFormatType:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="dpi">
+			operation_images.DPI = #dpi:INTEGER#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="AND" property="spoofStatus">
+			operation_images.SPOOF_STATUS = #spoofStatus:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="pageNumber">
+			operation_images.PAGE_NUMBER = #pageNumber:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(operation_images.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idOperationImage">
+			operation_images.ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idOperation">
+			operation_images.ID_OPERATION = #idOperation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idDocument">
+			operation_images.ID_DOCUMENT = #idDocument:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idDataSourceType">
+			operation_images.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idImageType">
+			operation_images.ID_IMAGE_TYPE = #idImageType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idLightType">
+			operation_images.ID_LIGHT_TYPE = #idLightType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			operation_images.NAME = #name:VARCHAR#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="imageFormatType">
+			operation_images.IMAGE_FORMAT_TYPE = #imageFormatType:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="dpi">
+			operation_images.DPI = #dpi:INTEGER#
+		</isNotNull>
+
+		<isNotNull prepend="AND" property="spoofStatus">
+			operation_images.SPOOF_STATUS = #spoofStatus:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="pageNumber">
+			operation_images.PAGE_NUMBER = #pageNumber:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(operation_images.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

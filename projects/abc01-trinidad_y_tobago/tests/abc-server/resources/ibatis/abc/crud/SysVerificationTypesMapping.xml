@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysVerificationTypes">
+
+
+	<typeAlias alias="SysVerificationTypes" type="com.inetum.abc.server.model.abc.crud.SysVerificationTypesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysVerificationTypes">
+	
+		<result property="idVerificationType"        column="ID_VERIFICATION_TYPE"         jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idParentVerificationType"  column="ID_PARENT_VERIFICATION_TYPE"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="active"                    column="ACTIVE"                       jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="code"                      column="CODE"                         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="idVerificationTypeGroup"   column="ID_VERIFICATION_TYPE_GROUP"   jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="groupCode"                 column="GROUP_CODE"                   jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="name"                      column="NAME"                         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="nameEs"                    column="NAME_ES"                      jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"               column="DESCRIPTION"                  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_verification_types.ID_VERIFICATION_TYPE,
+		sys_verification_types.ID_PARENT_VERIFICATION_TYPE,
+		sys_verification_types.ACTIVE,
+		sys_verification_types.CODE,
+		sys_verification_types.ID_VERIFICATION_TYPE_GROUP,
+		sys_verification_types.GROUP_CODE,
+		sys_verification_types.NAME,
+		sys_verification_types.NAME_ES,
+		sys_verification_types.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_VERIFICATION_TYPE,
+		ID_PARENT_VERIFICATION_TYPE,
+		ACTIVE,
+		CODE,
+		ID_VERIFICATION_TYPE_GROUP,
+		GROUP_CODE,
+		NAME,
+		NAME_ES,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idVerificationType">
+			sys_verification_types.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idParentVerificationType">
+			sys_verification_types.ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="active">
+			sys_verification_types.ACTIVE = #active:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code">
+			sys_verification_types.CODE LIKE concat('%',#code:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idVerificationTypeGroup">
+			sys_verification_types.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="groupCode">
+			sys_verification_types.GROUP_CODE LIKE concat('%',#groupCode:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_verification_types.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nameEs">
+			sys_verification_types.NAME_ES LIKE concat('%',#nameEs:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_verification_types.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idVerificationType">
+			sys_verification_types.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idParentVerificationType">
+			sys_verification_types.ID_PARENT_VERIFICATION_TYPE = #idParentVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="active">
+			sys_verification_types.ACTIVE = #active:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code">
+			sys_verification_types.CODE = #code:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idVerificationTypeGroup">
+			sys_verification_types.ID_VERIFICATION_TYPE_GROUP = #idVerificationTypeGroup:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="groupCode">
+			sys_verification_types.GROUP_CODE = #groupCode:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_verification_types.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nameEs">
+			sys_verification_types.NAME_ES = #nameEs:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_verification_types.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

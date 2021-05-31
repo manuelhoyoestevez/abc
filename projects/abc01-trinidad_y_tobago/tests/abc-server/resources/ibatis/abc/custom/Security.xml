@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Security">
+
+    <typeAlias alias="AuthorizedUser"
+               type="com.inetum.context.security.AuthorizedUser" />
+
+
+    <resultMap id="AuthorizedUserMapping" class="AuthorizedUser">
+
+        <result property="userId"		column="ID_USER"		jdbcType="VARCHAR"	javaType="java.lang.String" />
+        <result property="userLang"		column="LANGUAGE"		jdbcType="VARCHAR"	javaType="java.lang.String" />
+        <result property="userRoles"	column="ID_USER"		jdbcType="VARCHAR"	javaType="java.lang.String" select="Abc.Security.getUserRoles" />
+
+    </resultMap>
+
+
+
+    <!-- getAuthorizedUser -->
+
+    <select id="getAuthorizedUser" parameterClass="java.lang.Long" resultMap="AuthorizedUserMapping">
+        SELECT
+        users.ID_USER,
+        users.LANGUAGE
+        FROM
+        users
+        WHERE
+        users.ACTIVE = true
+        AND
+        users.ID_USER = #idUser:BIGINT#
+        <!-- Parche para Trinidad para que solo se puedan logar los usuarios de la instalacion 2
+        SELECT
+            users.ID_USER,
+            users.LANGUAGE
+        FROM
+            users, installations_users
+        WHERE
+            users.ACTIVE = true
+        AND
+            users.ID_USER = #idUser:BIGINT#
+        AND
+            users.ID_USER = installations_users.ID_USER
+        AND
+            installations_users.ID_INSTALLATION = 2
+        -->
+    </select>
+
+
+    <!-- getUserRoles -->
+
+    <select id="getUserRoles" parameterClass="java.lang.Long" resultClass="java.lang.String">
+
+        SELECT
+            sys_roles.ROLE
+        FROM
+            users_roles,
+            sys_roles
+        WHERE
+            users_roles.ID_ROLE = sys_roles.ID_ROLE
+        AND
+            users_roles.ID_USER = #idUser:BIGINT#
+
+    </select>
+
+
+    <!-- getActiveUserByRol -->
+
+    <select id="getActiveUserByRol" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Users.TableMapping">
+
+        SELECT
+            <include refid="Abc.Mapping.Users.Columns" />
+        FROM
+            users,
+            users_roles
+        WHERE
+            users.ID_USER = users_roles.ID_USER
+        AND
+            users.ACTIVE = true
+        AND
+            users_roles.ID_ROLE = #idRole:BIGINT#
+
+    </select>
+
+
+</sqlMap>
+

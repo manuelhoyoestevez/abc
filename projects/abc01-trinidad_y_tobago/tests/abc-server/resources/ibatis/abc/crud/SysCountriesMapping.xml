@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysCountries">
+
+
+	<typeAlias alias="SysCountries" type="com.inetum.abc.server.model.abc.crud.SysCountriesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysCountries">
+	
+		<result property="idCountry"      column="ID_COUNTRY"      jdbcType="BIGINT"    javaType="java.lang.Long" />
+		<result property="isoCode"        column="ISO_CODE"        jdbcType="SMALLINT"  javaType="java.lang.Integer" />
+		<result property="code3c"         column="CODE_3C"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="code2c"         column="CODE_2C"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="name"           column="NAME"            jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="nationality"    column="NATIONALITY"     jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="nameEs"         column="NAME_ES"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="nationalityEs"  column="NATIONALITY_ES"  jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="nameFr"         column="NAME_FR"         jdbcType="VARCHAR"   javaType="java.lang.String" />
+		<result property="nationalityFr"  column="NATIONALITY_FR"  jdbcType="VARCHAR"   javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_countries.ID_COUNTRY,
+		sys_countries.ISO_CODE,
+		sys_countries.CODE_3C,
+		sys_countries.CODE_2C,
+		sys_countries.NAME,
+		sys_countries.NATIONALITY,
+		sys_countries.NAME_ES,
+		sys_countries.NATIONALITY_ES,
+		sys_countries.NAME_FR,
+		sys_countries.NATIONALITY_FR
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_COUNTRY,
+		ISO_CODE,
+		CODE_3C,
+		CODE_2C,
+		NAME,
+		NATIONALITY,
+		NAME_ES,
+		NATIONALITY_ES,
+		NAME_FR,
+		NATIONALITY_FR
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idCountry">
+			sys_countries.ID_COUNTRY = #idCountry:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="isoCode">
+			sys_countries.ISO_CODE = #isoCode:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code3c">
+			sys_countries.CODE_3C LIKE concat('%',#code3c:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code2c">
+			sys_countries.CODE_2C LIKE concat('%',#code2c:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_countries.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nationality">
+			sys_countries.NATIONALITY LIKE concat('%',#nationality:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nameEs">
+			sys_countries.NAME_ES LIKE concat('%',#nameEs:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nationalityEs">
+			sys_countries.NATIONALITY_ES LIKE concat('%',#nationalityEs:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nameFr">
+			sys_countries.NAME_FR LIKE concat('%',#nameFr:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nationalityFr">
+			sys_countries.NATIONALITY_FR LIKE concat('%',#nationalityFr:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idCountry">
+			sys_countries.ID_COUNTRY = #idCountry:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="isoCode">
+			sys_countries.ISO_CODE = #isoCode:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code3c">
+			sys_countries.CODE_3C = #code3c:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code2c">
+			sys_countries.CODE_2C = #code2c:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_countries.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nationality">
+			sys_countries.NATIONALITY = #nationality:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nameEs">
+			sys_countries.NAME_ES = #nameEs:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nationalityEs">
+			sys_countries.NATIONALITY_ES = #nationalityEs:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nameFr">
+			sys_countries.NAME_FR = #nameFr:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nationalityFr">
+			sys_countries.NATIONALITY_FR = #nationalityFr:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

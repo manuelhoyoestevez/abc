@@ -1,0 +1,1641 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    
+<sqlMap namespace="Abc.LookUp">
+
+
+	<!-- ====== getApisFilesLookUp ====== -->
+	
+	<select id="getApisFilesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_APIS_FILE as VALUE,
+			ID_APIS_FILE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			apis_files
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getApisFilesLabel ====== -->
+	
+	<select id="getApisFilesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			apis_files
+		WHERE
+			ID_APIS_FILE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getApisFlightsLookUp ====== -->
+	
+	<select id="getApisFlightsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_APIS_FLIGHT as VALUE,
+			ID_APIS_FLIGHT as CODE,
+			RP_NAME$lang$ as LABEL
+		FROM
+			apis_flights
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getApisFlightsLabel ====== -->
+	
+	<select id="getApisFlightsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			RP_NAME$lang$ as LABEL
+		FROM
+			apis_flights
+		WHERE
+			ID_APIS_FLIGHT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getApisTravellersLookUp ====== -->
+	
+	<select id="getApisTravellersLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_APIS_TRAVELLER as VALUE,
+			ID_APIS_TRAVELLER as CODE,
+			LAST_NAME$lang$ as LABEL
+		FROM
+			apis_travellers
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getApisTravellersLabel ====== -->
+	
+	<select id="getApisTravellersLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			LAST_NAME$lang$ as LABEL
+		FROM
+			apis_travellers
+		WHERE
+			ID_APIS_TRAVELLER = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getAttendedOperationsLookUp ====== -->
+	
+	<select id="getAttendedOperationsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_ATTENDED_OPERATION as VALUE,
+			ID_ATTENDED_OPERATION as CODE,
+			ID_ATTENDED_OPERATION$lang$ as LABEL
+		FROM
+			attended_operations
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getAttendedOperationsLabel ====== -->
+	
+	<select id="getAttendedOperationsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_ATTENDED_OPERATION$lang$ as LABEL
+		FROM
+			attended_operations
+		WHERE
+			ID_ATTENDED_OPERATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getBoardingPassLegsLookUp ====== -->
+	
+	<select id="getBoardingPassLegsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_BOARDING_PASS_LEG as VALUE,
+			ID_BOARDING_PASS_LEG as CODE,
+			PNRCODE$lang$ as LABEL
+		FROM
+			boarding_pass_legs
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getBoardingPassLegsLabel ====== -->
+	
+	<select id="getBoardingPassLegsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			PNRCODE$lang$ as LABEL
+		FROM
+			boarding_pass_legs
+		WHERE
+			ID_BOARDING_PASS_LEG = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getBoardingPassesLookUp ====== -->
+	
+	<select id="getBoardingPassesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_BOARDING_PASS as VALUE,
+			ID_BOARDING_PASS as CODE,
+			RAW_BARCODE$lang$ as LABEL
+		FROM
+			boarding_passes
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getBoardingPassesLabel ====== -->
+	
+	<select id="getBoardingPassesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			RAW_BARCODE$lang$ as LABEL
+		FROM
+			boarding_passes
+		WHERE
+			ID_BOARDING_PASS = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getCamerasLookUp ====== -->
+	
+	<select id="getCamerasLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_CAMERA as VALUE,
+			ID_CAMERA as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			cameras
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getCamerasLabel ====== -->
+	
+	<select id="getCamerasLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			cameras
+		WHERE
+			ID_CAMERA = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getDocumentDataLookUp ====== -->
+	
+	<select id="getDocumentDataLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_DOCUMENT_DATA as VALUE,
+			ID_DOCUMENT_DATA as CODE,
+			DOCUMENT_TYPE$lang$ as LABEL
+		FROM
+			document_data
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getDocumentDataLabel ====== -->
+	
+	<select id="getDocumentDataLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DOCUMENT_TYPE$lang$ as LABEL
+		FROM
+			document_data
+		WHERE
+			ID_DOCUMENT_DATA = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getDocumentsLookUp ====== -->
+	
+	<select id="getDocumentsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_DOCUMENT as VALUE,
+			ID_DOCUMENT as CODE,
+			DOCUMENT_NUMBER$lang$ as LABEL
+		FROM
+			documents
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getDocumentsLabel ====== -->
+	
+	<select id="getDocumentsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DOCUMENT_NUMBER$lang$ as LABEL
+		FROM
+			documents
+		WHERE
+			ID_DOCUMENT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getEquipmentLookUp ====== -->
+	
+	<select id="getEquipmentLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_EQUIPMENT as VALUE,
+			ID_EQUIPMENT as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			equipment
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getEquipmentLabel ====== -->
+	
+	<select id="getEquipmentLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			equipment
+		WHERE
+			ID_EQUIPMENT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getGatesLookUp ====== -->
+	
+	<select id="getGatesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_GATE as VALUE,
+			ID_GATE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			gates
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getGatesLabel ====== -->
+	
+	<select id="getGatesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			gates
+		WHERE
+			ID_GATE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getHistoricalOperationsLookUp ====== -->
+	
+	<select id="getHistoricalOperationsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_HISTORICAL_OPERATION as VALUE,
+			ID_HISTORICAL_OPERATION as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			historical_operations
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getHistoricalOperationsLabel ====== -->
+	
+	<select id="getHistoricalOperationsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			historical_operations
+		WHERE
+			ID_HISTORICAL_OPERATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getIncidentsLookUp ====== -->
+	
+	<select id="getIncidentsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_INCIDENT as VALUE,
+			ID_INCIDENT as CODE,
+			INCIDENT$lang$ as LABEL
+		FROM
+			incidents
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getIncidentsLabel ====== -->
+	
+	<select id="getIncidentsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			INCIDENT$lang$ as LABEL
+		FROM
+			incidents
+		WHERE
+			ID_INCIDENT = #id:BIGINT#
+			
+	</select>
+
+
+	<!-- ====== getInstallationsCountryRestrictionsLookUp ====== -->
+
+	<select id="getInstallationsCountryRestrictionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+
+		SELECT
+			ID_INSTALLATION_COUNTRY_RESTRICTION as VALUE,
+			ID_INSTALLATION_COUNTRY_RESTRICTION as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installations_country_restrictions
+		ORDER BY
+			LABEL
+
+	</select>
+
+	<!-- ====== getInstallationsCountryRestrictionsLabel ====== -->
+
+	<select id="getInstallationsCountryRestrictionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installations_country_restrictions
+		WHERE
+			ID_INSTALLATION_COUNTRY_RESTRICTION = #id:BIGINT#
+
+	</select>
+	
+	
+	<!-- ====== getInstallationStepsLookUp ====== -->
+	
+	<select id="getInstallationStepsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_INSTALLATION_STEP as VALUE,
+			ID_INSTALLATION_STEP as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installation_steps
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getInstallationStepsLabel ====== -->
+	
+	<select id="getInstallationStepsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installation_steps
+		WHERE
+			ID_INSTALLATION_STEP = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getInstallationsLookUp ====== -->
+	
+	<select id="getInstallationsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_INSTALLATION as VALUE,
+			ID_INSTALLATION as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			installations
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getInstallationsLabel ====== -->
+	
+	<select id="getInstallationsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			installations
+		WHERE
+			ID_INSTALLATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getInstallationsUsersLookUp ====== -->
+	
+	<select id="getInstallationsUsersLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_INSTALLATION_USER as VALUE,
+			ID_INSTALLATION_USER as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installations_users
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getInstallationsUsersLabel ====== -->
+	
+	<select id="getInstallationsUsersLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			installations_users
+		WHERE
+			ID_INSTALLATION_USER = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getInstallationsVerificationTypesLookUp ====== -->
+	
+	<select id="getInstallationsVerificationTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_INSTALLATION_VERIFICATION_TYPE as VALUE,
+			ID_INSTALLATION_VERIFICATION_TYPE as CODE,
+			VERIFICATION_CODE$lang$ as LABEL
+		FROM
+			installations_verification_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getInstallationsVerificationTypesLabel ====== -->
+	
+	<select id="getInstallationsVerificationTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			VERIFICATION_CODE$lang$ as LABEL
+		FROM
+			installations_verification_types
+		WHERE
+			ID_INSTALLATION_VERIFICATION_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getKiosksLookUp ====== -->
+	
+	<select id="getKiosksLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_KIOSK as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			kiosks
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getKiosksLabel ====== -->
+	
+	<select id="getKiosksLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			kiosks
+		WHERE
+			ID_KIOSK = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getKiosksGatesConfigurationLookUp ====== -->
+	
+	<select id="getKiosksGatesConfigurationLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_KIOSKS_GATES_CONFIGURATION as VALUE,
+			ID_KIOSKS_GATES_CONFIGURATION as CODE,
+			ID_KIOSKS_GATES_CONFIGURATION$lang$ as LABEL
+		FROM
+			kiosks_gates_configuration
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getKiosksGatesConfigurationLabel ====== -->
+	
+	<select id="getKiosksGatesConfigurationLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_KIOSKS_GATES_CONFIGURATION$lang$ as LABEL
+		FROM
+			kiosks_gates_configuration
+		WHERE
+			ID_KIOSKS_GATES_CONFIGURATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getOperationImagesLookUp ====== -->
+
+	<select id="getOperationImagesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+
+		SELECT
+			ID_OPERATION_IMAGE as VALUE,
+			CODE as CODE,
+			sys_image_types.NAME$lang$ as LABEL
+		FROM
+			operation_images
+		JOIN
+			sys_image_types ON operation_images.ID_IMAGE_TYPE = sys_image_types.ID_IMAGE_TYPE
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getOperationImagesLabel ====== -->
+	
+	<select id="getOperationImagesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			operation_images
+		WHERE
+			ID_OPERATION_IMAGE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getOperationStepsLookUp ====== -->
+	
+	<select id="getOperationStepsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_OPERATION_STEP as VALUE,
+			ID_OPERATION_STEP as CODE,
+			ID_OPERATION_STEP$lang$ as LABEL
+		FROM
+			operation_steps
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getOperationStepsLabel ====== -->
+	
+	<select id="getOperationStepsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_OPERATION_STEP$lang$ as LABEL
+		FROM
+			operation_steps
+		WHERE
+			ID_OPERATION_STEP = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getOperationStepsResultsLookUp ====== -->
+	
+	<select id="getOperationStepsResultsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_OPERATION_STEP_RESULT as VALUE,
+			ID_OPERATION_STEP_RESULT as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			operation_steps_results
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getOperationStepsResultsLabel ====== -->
+	
+	<select id="getOperationStepsResultsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			operation_steps_results
+		WHERE
+			ID_OPERATION_STEP_RESULT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getOperationTicketsLookUp ====== -->
+	
+	<select id="getOperationTicketsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_OPERATION_TICKET as VALUE,
+			ID_OPERATION_TICKET as CODE,
+			ID_OPERATION_TICKET$lang$ as LABEL
+		FROM
+			operation_tickets
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getOperationTicketsLabel ====== -->
+	
+	<select id="getOperationTicketsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_OPERATION_TICKET$lang$ as LABEL
+		FROM
+			operation_tickets
+		WHERE
+			ID_OPERATION_TICKET = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getOperationsLookUp ====== -->
+	
+	<select id="getOperationsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_OPERATION as VALUE,
+			ID_OPERATION as CODE,
+			OPERATION_CODE$lang$ as LABEL
+		FROM
+			operations
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getOperationsLabel ====== -->
+	
+	<select id="getOperationsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			OPERATION_CODE$lang$ as LABEL
+		FROM
+			operations
+		WHERE
+			ID_OPERATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getPersonalDataLookUp ====== -->
+	
+	<select id="getPersonalDataLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_PERSONAL_DATA as VALUE,
+			ID_PERSONAL_DATA as CODE,
+			GIVEN_NAME$lang$ as LABEL
+		FROM
+			personal_data
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getPersonalDataLabel ====== -->
+	
+	<select id="getPersonalDataLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			GIVEN_NAME$lang$ as LABEL
+		FROM
+			personal_data
+		WHERE
+			ID_PERSONAL_DATA = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getQueryAnswersLookUp ====== -->
+	
+	<select id="getQueryAnswersLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_QUERY_ANSWER as VALUE,
+			ID_QUERY_ANSWER as CODE,
+			ID_QUERY_ANSWER$lang$ as LABEL
+		FROM
+			query_answers
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getQueryAnswersLabel ====== -->
+	
+	<select id="getQueryAnswersLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_QUERY_ANSWER$lang$ as LABEL
+		FROM
+			query_answers
+		WHERE
+			ID_QUERY_ANSWER = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysActionsLookUp ====== -->
+	
+	<select id="getSysActionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_ACTION as VALUE,
+			ID_ACTION as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_actions
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysActionsLabel ====== -->
+	
+	<select id="getSysActionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_actions
+		WHERE
+			ID_ACTION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysConfigurationLookUp ====== -->
+	
+	<select id="getSysConfigurationLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_CONFIGURATION as VALUE,
+			ID_CONFIGURATION as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			sys_configuration
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysConfigurationLabel ====== -->
+	
+	<select id="getSysConfigurationLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			sys_configuration
+		WHERE
+			ID_CONFIGURATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysCountriesLookUp ====== -->
+	
+	<select id="getSysCountriesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_COUNTRY as VALUE,
+			NAME as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_countries
+		ORDER BY
+			LABEL
+			
+	</select>
+
+	<!-- ====== getNationalitiesLookUp ==== -->
+
+	<select id="getNationalitiesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+
+		SELECT
+			ID_COUNTRY as VALUE,
+			NAME as CODE,
+			NATIONALITY$lang$ as LABEL
+		FROM
+			sys_countries
+		ORDER BY
+			LABEL
+
+	</select>
+	
+	<!-- ====== getSysCountriesLabel ====== -->
+	
+	<select id="getSysCountriesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_countries
+		WHERE
+			ID_COUNTRY = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysDataSourceTypesLookUp ====== -->
+	
+	<select id="getSysDataSourceTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_DATA_SOURCE_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_data_source_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysDataSourceTypesLabel ====== -->
+	
+	<select id="getSysDataSourceTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_data_source_types
+		WHERE
+			ID_DATA_SOURCE_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysDocumentTypesLookUp ====== -->
+	
+	<select id="getSysDocumentTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_DOCUMENT_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_document_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysDocumentTypesLabel ====== -->
+	
+	<select id="getSysDocumentTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_document_types
+		WHERE
+			ID_DOCUMENT_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysGateAccessTypesLookUp ====== -->
+	
+	<select id="getSysGateAccessTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_GATE_ACCESS_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_gate_access_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysGateAccessTypesLabel ====== -->
+	
+	<select id="getSysGateAccessTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_gate_access_types
+		WHERE
+			ID_GATE_ACCESS_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysImageTypesLookUp ====== -->
+	
+	<select id="getSysImageTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_IMAGE_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_image_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysImageTypesLabel ====== -->
+	
+	<select id="getSysImageTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_image_types
+		WHERE
+			ID_IMAGE_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysLightTypesLookUp ====== -->
+	
+	<select id="getSysLightTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_LIGHT_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_light_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysLightTypesLabel ====== -->
+	
+	<select id="getSysLightTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_light_types
+		WHERE
+			ID_LIGHT_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysOperationStatesLookUp ====== -->
+	
+	<select id="getSysOperationStatesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_OPERATION_STATE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_operation_states
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysOperationStatesLabel ====== -->
+	
+	<select id="getSysOperationStatesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_operation_states
+		WHERE
+			ID_OPERATION_STATE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysPermissionsLookUp ====== -->
+	
+	<select id="getSysPermissionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_PERMISSION as VALUE,
+			PERMISSION as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_permissions
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysPermissionsLabel ====== -->
+	
+	<select id="getSysPermissionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_permissions
+		WHERE
+			ID_PERMISSION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysProjectsLookUp ====== -->
+	
+	<select id="getSysProjectsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_PROJECT as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_projects
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysProjectsLabel ====== -->
+	
+	<select id="getSysProjectsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_projects
+		WHERE
+			ID_PROJECT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysQueriesLookUp ====== -->
+	
+	<select id="getSysQueriesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_QUERY as VALUE,
+			ID_QUERY as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_queries
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysQueriesLabel ====== -->
+	
+	<select id="getSysQueriesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_queries
+		WHERE
+			ID_QUERY = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysRolesLookUp ====== -->
+	
+	<select id="getSysRolesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_ROLE as VALUE,
+			ROLE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_roles
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysRolesLabel ====== -->
+	
+	<select id="getSysRolesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_roles
+		WHERE
+			ID_ROLE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysRolesPermissionsLookUp ====== -->
+	
+	<select id="getSysRolesPermissionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_ROLE_PERMISSION as VALUE,
+			ID_ROLE_PERMISSION as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			sys_roles_permissions
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysRolesPermissionsLabel ====== -->
+	
+	<select id="getSysRolesPermissionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			sys_roles_permissions
+		WHERE
+			ID_ROLE_PERMISSION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysStatesLookUp ====== -->
+	
+	<select id="getSysStatesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_STATE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_states
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysStatesLabel ====== -->
+	
+	<select id="getSysStatesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_states
+		WHERE
+			ID_STATE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysStepTypesLookUp ====== -->
+	
+	<select id="getSysStepTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_STEP_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_step_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysStepTypesLabel ====== -->
+	
+	<select id="getSysStepTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_step_types
+		WHERE
+			ID_STEP_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysSystemsLookUp ====== -->
+	
+	<select id="getSysSystemsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_SYSTEM as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_systems
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysSystemsLabel ====== -->
+	
+	<select id="getSysSystemsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_systems
+		WHERE
+			ID_SYSTEM = #id:BIGINT#
+			
+	</select>
+
+
+	<!-- ====== getSysTextsLookUp ====== -->
+
+	<select id="getSysTextsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+
+		SELECT
+			ID_TEXT as VALUE,
+			CODE as CODE,
+			TEXT$lang$ as LABEL
+		FROM
+			sys_texts
+		ORDER BY
+			LABEL
+
+	</select>
+
+	<!-- ====== getSysTextsLabel ====== -->
+
+	<select id="getSysTextsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+
+		SELECT
+			TEXT$lang$ as LABEL
+		FROM
+			sys_texts
+		WHERE
+			ID_TEXT = #id:BIGINT#
+
+	</select>
+	
+	
+	<!-- ====== getSysVerificationResultActionsLookUp ====== -->
+	
+	<select id="getSysVerificationResultActionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_VERIFICATION_RESULT_ACTION as VALUE,
+			ID_VERIFICATION_RESULT_ACTION as CODE,
+			ID_VERIFICATION_RESULT_ACTION$lang$ as LABEL
+		FROM
+			sys_verification_result_actions
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysVerificationResultActionsLabel ====== -->
+	
+	<select id="getSysVerificationResultActionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ID_VERIFICATION_RESULT_ACTION$lang$ as LABEL
+		FROM
+			sys_verification_result_actions
+		WHERE
+			ID_VERIFICATION_RESULT_ACTION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysVerificationResultsLookUp ====== -->
+	
+	<select id="getSysVerificationResultsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_VERIFICATION_RESULT as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_results
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysVerificationResultsLabel ====== -->
+	
+	<select id="getSysVerificationResultsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_results
+		WHERE
+			ID_VERIFICATION_RESULT = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysVerificationTypesLookUp ====== -->
+	
+	<select id="getSysVerificationTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_VERIFICATION_TYPE as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_types
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysVerificationTypesLabel ====== -->
+	
+	<select id="getSysVerificationTypesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_types
+		WHERE
+			ID_VERIFICATION_TYPE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getSysVerificationTypesGroupsLookUp ====== -->
+	
+	<select id="getSysVerificationTypesGroupsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_VERIFICATION_TYPE_GROUP as VALUE,
+			CODE as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_types_groups
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getSysVerificationTypesGroupsLabel ====== -->
+	
+	<select id="getSysVerificationTypesGroupsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			sys_verification_types_groups
+		WHERE
+			ID_VERIFICATION_TYPE_GROUP = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getUsersLookUp ====== -->
+	
+	<select id="getUsersLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_USER as VALUE,
+			ID_USER as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			users
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getUsersLabel ====== -->
+	
+	<select id="getUsersLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			users
+		WHERE
+			ID_USER = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getUsersCredentialsLookUp ====== -->
+	
+	<select id="getUsersCredentialsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_USER_CREDENTIAL as VALUE,
+			ID_USER_CREDENTIAL as CODE,
+			ACCOUNT$lang$ as LABEL
+		FROM
+			users_credentials
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getUsersCredentialsLabel ====== -->
+	
+	<select id="getUsersCredentialsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			ACCOUNT$lang$ as LABEL
+		FROM
+			users_credentials
+		WHERE
+			ID_USER_CREDENTIAL = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getUsersRolesLookUp ====== -->
+	
+	<select id="getUsersRolesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_USER_ROLE as VALUE,
+			ID_USER_ROLE as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			users_roles
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getUsersRolesLabel ====== -->
+	
+	<select id="getUsersRolesLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			users_roles
+		WHERE
+			ID_USER_ROLE = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getVerificationsLookUp ====== -->
+	
+	<select id="getVerificationsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_VERIFICATION as VALUE,
+			ID_VERIFICATION as CODE,
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			verifications
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getVerificationsLabel ====== -->
+	
+	<select id="getVerificationsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			DESCRIPTION$lang$ as LABEL
+		FROM
+			verifications
+		WHERE
+			ID_VERIFICATION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getWorkflowTransitionsLookUp ====== -->
+	
+	<select id="getWorkflowTransitionsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_WORKFLOW_TRANSITION as VALUE,
+			ID_WORKFLOW_TRANSITION as CODE,
+			INITIAL_STATE$lang$ as LABEL
+		FROM
+			workflow_transitions
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getWorkflowTransitionsLabel ====== -->
+	
+	<select id="getWorkflowTransitionsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			INITIAL_STATE$lang$ as LABEL
+		FROM
+			workflow_transitions
+		WHERE
+			ID_WORKFLOW_TRANSITION = #id:BIGINT#
+			
+	</select>
+	
+	
+	<!-- ====== getWorkflowsLookUp ====== -->
+	
+	<select id="getWorkflowsLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+	
+		SELECT
+			ID_WORKFLOW as VALUE,
+			ID_WORKFLOW as CODE,
+			NAME$lang$ as LABEL
+		FROM
+			workflows
+		ORDER BY
+			LABEL
+			
+	</select>
+	
+	<!-- ====== getWorkflowsLabel ====== -->
+	
+	<select id="getWorkflowsLabel" parameterClass="java.util.Map" resultClass="java.lang.String" >
+	
+		SELECT
+			NAME$lang$ as LABEL
+		FROM
+			workflows
+		WHERE
+			ID_WORKFLOW = #id:BIGINT#
+			
+	</select>
+
+	<!-- ====== getSysSupportedLanguagesTypesLookUp ====== -->
+
+	<select id="getSysSupportedLanguagesTypesLookUp" parameterClass="java.util.Map" resultMap="Abc.Mapping.LookUp.TableMapping" >
+
+		SELECT
+			PARAM_VALUE as VALUE,
+			PARAM_VALUE as CODE,
+			PARAM_VALUE as LABEL
+		FROM
+			sys_configuration
+		WHERE
+			PARAM_NAME='application.supported_languages'
+		ORDER BY
+			LABEL
+
+	</select>
+	
+	
+</sqlMap>
+

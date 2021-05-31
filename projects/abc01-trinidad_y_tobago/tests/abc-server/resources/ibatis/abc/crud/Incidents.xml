@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.Incidents">
+
+
+	<typeAlias alias="Incidents" type="com.inetum.abc.server.model.abc.crud.IncidentsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="IncidentsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.create"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.update"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.modify"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.Incidents.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			incidents
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+		ORDER BY
+			incidents.ID_INCIDENT	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			incidents.ID_INCIDENT
+		FROM
+			incidents
+		ORDER BY
+			incidents.ID_INCIDENT
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="Incidents" resultClass="java.lang.Long">
+
+        SELECT
+            incidents.ID_INCIDENT
+        FROM
+            incidents
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Incidents.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="Incidents" resultClass="java.lang.Long">
+
+        SELECT
+            incidents.ID_INCIDENT
+        FROM
+            incidents
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Incidents.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            incidents.ID_INCIDENT
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="Incidents" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			incidents
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="Incidents" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="Incidents" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			incidents
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="Incidents" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="Incidents" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            incidents
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Incidents.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+		WHERE
+			ID_INCIDENT = #idIncident:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            incidents
+        WHERE
+            ID_INCIDENT = #idIncident:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+		WHERE
+			ID_INCIDENT IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="Incidents" resultMap="Abc.Mapping.Incidents.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.Incidents.Fields" />
+		FROM
+			incidents
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="Incidents" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            incidents
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.Incidents.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="Incidents">
+	
+		INSERT INTO incidents
+			(
+				ID_SYSTEM_ELEMENT,
+				ID_SYSTEM_TYPE,
+				ID_OPERATION,
+				INCIDENT,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idSystemElement:BIGINT#,
+				#idSystemType:BIGINT#,
+				#idOperation:BIGINT#,
+				#incident:VARCHAR#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idIncident">
+			SELECT last_insert_id() AS ID_INCIDENT FROM incidents LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="Incidents">
+	
+		UPDATE incidents
+		SET
+			ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#,
+			ID_SYSTEM_TYPE = #idSystemType:BIGINT#,
+			ID_OPERATION = #idOperation:BIGINT#,
+			INCIDENT = #incident:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_INCIDENT = #idIncident:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="Incidents">
+	
+		UPDATE incidents
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idSystemElement">
+				ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idSystemType">
+				ID_SYSTEM_TYPE = #idSystemType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="incident">
+				INCIDENT = #incident:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_INCIDENT = #idIncident:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE incidents
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idSystemElement">
+                ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idSystemType">
+                ID_SYSTEM_TYPE = #idSystemType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="incident">
+                INCIDENT = #incident:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idIncident">
+                incidents.ID_INCIDENT = #idIncident:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idSystemElement">
+                incidents.ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idSystemType">
+                incidents.ID_SYSTEM_TYPE = #idSystemType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                incidents.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="incident">
+                incidents.INCIDENT = #incident:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(incidents.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM incidents
+		WHERE
+			ID_INCIDENT = #idIncident:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM incidents
+		WHERE
+			ID_INCIDENT IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="Incidents">
+	
+		DELETE FROM incidents
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.Incidents.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM incidents
+		
+	</delete>
+	
+	
+</sqlMap>
+

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.InstallationsCountryRestrictions">
+
+
+	<typeAlias alias="InstallationsCountryRestrictions" type="com.inetum.abc.server.model.abc.crud.InstallationsCountryRestrictionsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="InstallationsCountryRestrictions">
+	
+		<result property="idInstallationCountryRestriction"  column="ID_INSTALLATION_COUNTRY_RESTRICTION"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idInstallation"                    column="ID_INSTALLATION"                      jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idCountry"                         column="ID_COUNTRY"                           jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="allowed"                           column="ALLOWED"                              jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="description"                       column="DESCRIPTION"                          jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		installations_country_restrictions.ID_INSTALLATION_COUNTRY_RESTRICTION,
+		installations_country_restrictions.ID_INSTALLATION,
+		installations_country_restrictions.ID_COUNTRY,
+		installations_country_restrictions.ALLOWED,
+		installations_country_restrictions.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_INSTALLATION_COUNTRY_RESTRICTION,
+		ID_INSTALLATION,
+		ID_COUNTRY,
+		ALLOWED,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idInstallationCountryRestriction">
+			installations_country_restrictions.ID_INSTALLATION_COUNTRY_RESTRICTION = #idInstallationCountryRestriction:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idInstallation">
+			installations_country_restrictions.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idCountry">
+			installations_country_restrictions.ID_COUNTRY = #idCountry:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="allowed">
+			installations_country_restrictions.ALLOWED = #allowed:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			installations_country_restrictions.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idInstallationCountryRestriction">
+			installations_country_restrictions.ID_INSTALLATION_COUNTRY_RESTRICTION = #idInstallationCountryRestriction:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idInstallation">
+			installations_country_restrictions.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idCountry">
+			installations_country_restrictions.ID_COUNTRY = #idCountry:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="allowed">
+			installations_country_restrictions.ALLOWED = #allowed:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			installations_country_restrictions.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

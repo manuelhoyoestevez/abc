@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.ApisTravellers">
+
+
+	<typeAlias alias="ApisTravellers" type="com.inetum.abc.server.model.abc.crud.ApisTravellersDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="ApisTravellers">
+	
+		<result property="idApisTraveller"    column="ID_APIS_TRAVELLER"    jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idApisFlight"       column="ID_APIS_FLIGHT"       jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="srNo"               column="SR_NO"                jdbcType="SMALLINT"   javaType="java.lang.Integer" />
+		<result property="lastName"           column="LAST_NAME"            jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="firstName"          column="FIRST_NAME"           jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="middleName"         column="MIDDLE_NAME"          jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="nationality"        column="NATIONALITY"          jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="sex"                column="SEX"                  jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="type"               column="TYPE"                 jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="passportNumber"     column="PASSPORT_NUMBER"      jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="docType"            column="DOC_TYPE"             jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="countryOfIssue"     column="COUNTRY_OF_ISSUE"     jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="dateOfBirth"        column="DATE_OF_BIRTH"        jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		<result property="dateOfExpiry"       column="DATE_OF_EXPIRY"       jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		<result property="portOfEmbarkation"  column="PORT_OF_EMBARKATION"  jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="portOfDebarkation"  column="PORT_OF_DEBARKATION"  jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="portOfClearance"    column="PORT_OF_CLEARANCE"    jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="postCode"           column="POST_CODE"            jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="address"            column="ADDRESS"              jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="city"               column="CITY"                 jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="state"              column="STATE"                jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="country"            column="COUNTRY"              jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="creationDate"       column="CREATION_DATE"        jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		apis_travellers.ID_APIS_TRAVELLER,
+		apis_travellers.ID_APIS_FLIGHT,
+		apis_travellers.SR_NO,
+		apis_travellers.LAST_NAME,
+		apis_travellers.FIRST_NAME,
+		apis_travellers.MIDDLE_NAME,
+		apis_travellers.NATIONALITY,
+		apis_travellers.SEX,
+		apis_travellers.TYPE,
+		apis_travellers.PASSPORT_NUMBER,
+		apis_travellers.DOC_TYPE,
+		apis_travellers.COUNTRY_OF_ISSUE,
+		apis_travellers.DATE_OF_BIRTH,
+		apis_travellers.DATE_OF_EXPIRY,
+		apis_travellers.PORT_OF_EMBARKATION,
+		apis_travellers.PORT_OF_DEBARKATION,
+		apis_travellers.PORT_OF_CLEARANCE,
+		apis_travellers.POST_CODE,
+		apis_travellers.ADDRESS,
+		apis_travellers.CITY,
+		apis_travellers.STATE,
+		apis_travellers.COUNTRY,
+		apis_travellers.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_APIS_TRAVELLER,
+		ID_APIS_FLIGHT,
+		SR_NO,
+		LAST_NAME,
+		FIRST_NAME,
+		MIDDLE_NAME,
+		NATIONALITY,
+		SEX,
+		TYPE,
+		PASSPORT_NUMBER,
+		DOC_TYPE,
+		COUNTRY_OF_ISSUE,
+		DATE_OF_BIRTH,
+		DATE_OF_EXPIRY,
+		PORT_OF_EMBARKATION,
+		PORT_OF_DEBARKATION,
+		PORT_OF_CLEARANCE,
+		POST_CODE,
+		ADDRESS,
+		CITY,
+		STATE,
+		COUNTRY,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idApisTraveller">
+			apis_travellers.ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idApisFlight">
+			apis_travellers.ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="srNo">
+			apis_travellers.SR_NO = #srNo:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="lastName">
+			apis_travellers.LAST_NAME LIKE concat('%',#lastName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="firstName">
+			apis_travellers.FIRST_NAME LIKE concat('%',#firstName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="middleName">
+			apis_travellers.MIDDLE_NAME LIKE concat('%',#middleName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nationality">
+			apis_travellers.NATIONALITY LIKE concat('%',#nationality:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="sex">
+			apis_travellers.SEX LIKE concat('%',#sex:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="type">
+			apis_travellers.TYPE LIKE concat('%',#type:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="passportNumber">
+			apis_travellers.PASSPORT_NUMBER LIKE concat('%',#passportNumber:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="docType">
+			apis_travellers.DOC_TYPE LIKE concat('%',#docType:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="countryOfIssue">
+			apis_travellers.COUNTRY_OF_ISSUE LIKE concat('%',#countryOfIssue:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="dateOfBirth">
+			DATE(apis_travellers.DATE_OF_BIRTH) = DATE(#dateOfBirth:TIMESTAMP#)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="dateOfExpiry">
+			DATE(apis_travellers.DATE_OF_EXPIRY) = DATE(#dateOfExpiry:TIMESTAMP#)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="portOfEmbarkation">
+			apis_travellers.PORT_OF_EMBARKATION LIKE concat('%',#portOfEmbarkation:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="portOfDebarkation">
+			apis_travellers.PORT_OF_DEBARKATION LIKE concat('%',#portOfDebarkation:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="portOfClearance">
+			apis_travellers.PORT_OF_CLEARANCE LIKE concat('%',#portOfClearance:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="postCode">
+			apis_travellers.POST_CODE LIKE concat('%',#postCode:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="address">
+			apis_travellers.ADDRESS LIKE concat('%',#address:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="city">
+			apis_travellers.CITY LIKE concat('%',#city:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="state">
+			apis_travellers.STATE LIKE concat('%',#state:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="country">
+			apis_travellers.COUNTRY LIKE concat('%',#country:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(apis_travellers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idApisTraveller">
+			apis_travellers.ID_APIS_TRAVELLER = #idApisTraveller:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idApisFlight">
+			apis_travellers.ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="srNo">
+			apis_travellers.SR_NO = #srNo:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="lastName">
+			apis_travellers.LAST_NAME = #lastName:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="firstName">
+			apis_travellers.FIRST_NAME = #firstName:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="middleName">
+			apis_travellers.MIDDLE_NAME = #middleName:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nationality">
+			apis_travellers.NATIONALITY = #nationality:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="sex">
+			apis_travellers.SEX = #sex:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="type">
+			apis_travellers.TYPE = #type:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="passportNumber">
+			apis_travellers.PASSPORT_NUMBER = #passportNumber:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="docType">
+			apis_travellers.DOC_TYPE = #docType:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="countryOfIssue">
+			apis_travellers.COUNTRY_OF_ISSUE = #countryOfIssue:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="dateOfBirth">
+			DATE(apis_travellers.DATE_OF_BIRTH) = DATE(#dateOfBirth:TIMESTAMP#)
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="dateOfExpiry">
+			DATE(apis_travellers.DATE_OF_EXPIRY) = DATE(#dateOfExpiry:TIMESTAMP#)
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="portOfEmbarkation">
+			apis_travellers.PORT_OF_EMBARKATION = #portOfEmbarkation:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="portOfDebarkation">
+			apis_travellers.PORT_OF_DEBARKATION = #portOfDebarkation:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="portOfClearance">
+			apis_travellers.PORT_OF_CLEARANCE = #portOfClearance:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="postCode">
+			apis_travellers.POST_CODE = #postCode:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="address">
+			apis_travellers.ADDRESS = #address:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="city">
+			apis_travellers.CITY = #city:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="state">
+			apis_travellers.STATE = #state:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="country">
+			apis_travellers.COUNTRY = #country:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(apis_travellers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

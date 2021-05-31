@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysLightTypes">
+
+
+	<typeAlias alias="SysLightTypes" type="com.inetum.abc.server.model.abc.crud.SysLightTypesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysLightTypes">
+	
+		<result property="idLightType"  column="ID_LIGHT_TYPE"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="code"         column="CODE"           jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="name"         column="NAME"           jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"  column="DESCRIPTION"    jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_light_types.ID_LIGHT_TYPE,
+		sys_light_types.CODE,
+		sys_light_types.NAME,
+		sys_light_types.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_LIGHT_TYPE,
+		CODE,
+		NAME,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idLightType">
+			sys_light_types.ID_LIGHT_TYPE = #idLightType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code">
+			sys_light_types.CODE LIKE concat('%',#code:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_light_types.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_light_types.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idLightType">
+			sys_light_types.ID_LIGHT_TYPE = #idLightType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code">
+			sys_light_types.CODE = #code:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_light_types.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_light_types.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

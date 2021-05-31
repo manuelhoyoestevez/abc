@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.OperationScaarData">
+
+
+	<typeAlias alias="OperationScaarData" type="com.inetum.abc.server.model.abc.crud.OperationScaarDataDto"/>
+	
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_scaar_data
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+		ORDER BY
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+		FROM
+			operation_scaar_data
+		ORDER BY
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="OperationScaarData" resultClass="java.lang.Long">
+
+        SELECT
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+        FROM
+			operation_scaar_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="OperationScaarData" resultClass="java.lang.Long">
+
+        SELECT
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+        FROM
+			operation_scaar_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+			operation_scaar_data.ID_OPERATION_SCAAR_DATA
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="OperationScaarData" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_scaar_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="OperationScaarData" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="OperationScaarData" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_scaar_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="OperationScaarData" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="OperationScaarData" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+			operation_scaar_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+		WHERE
+			ID_OPERATION_SCAAR_DATA = #idOperationScaarData:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+			operation_scaar_data
+        WHERE
+			ID_OPERATION_SCAAR_DATA = #idOperationScaarData:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+		WHERE
+			ID_OPERATION_SCAAR_DATA IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="OperationScaarData" resultMap="Abc.Mapping.OperationScaarData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationScaarData.Fields" />
+		FROM
+			operation_scaar_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="OperationScaarData" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+			operation_scaar_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="OperationScaarData">
+	
+		INSERT INTO operation_scaar_data
+			(
+				ID_OPERATION,
+				ID_ORDER,
+				EXPECTED_DATE,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idOperation:BIGINT#,
+				#idOrder:VARCHAR#,
+				#expectedDate:VARCHAR#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idOperationScaarData">
+			SELECT last_insert_id() AS ID_OPERATION_SCAAR_DATA FROM operation_scaar_data LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="OperationScaarData">
+	
+		UPDATE operation_scaar_data
+		SET
+			ID_OPERATION = #idOperation:BIGINT#,
+			ID_ORDER = #idOrder:VARCHAR#,
+			EXPECTED_DATE = #expectedDate:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_OPERATION_SCAAR_DATA = #idOperationScaarData:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="OperationScaarData">
+	
+		UPDATE operation_scaar_data
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOrder">
+				ID_ORDER = #idOrder:VARCHAR#
+			</isNotNull>
+
+			<isNotNull prepend="," property="expectedDate">
+				EXPECTED_DATE = #expectedDate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_OPERATION_SCAAR_DATA = #idOperationScaarData:BIGINT#
+			
+	</update>
+
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM operation_scaar_data
+		WHERE
+			ID_OPERATION_SCAAR_DATA = #idOperationScaarData:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM operation_scaar_data
+		WHERE
+			ID_OPERATION_SCAAR_DATA IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="OperationScaarData">
+	
+		DELETE FROM operation_scaar_data
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationScaarData.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM operation_scaar_data
+		
+	</delete>
+	
+	
+</sqlMap>
+

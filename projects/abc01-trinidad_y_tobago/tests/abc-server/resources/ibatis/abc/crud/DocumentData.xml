@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.DocumentData">
+
+
+	<typeAlias alias="DocumentData" type="com.inetum.abc.server.model.abc.crud.DocumentDataDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="DocumentDataCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.create"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.update"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.modify"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.DocumentData.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			document_data
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+		ORDER BY
+			document_data.ID_DOCUMENT_DATA	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			document_data.ID_DOCUMENT_DATA
+		FROM
+			document_data
+		ORDER BY
+			document_data.ID_DOCUMENT_DATA
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="DocumentData" resultClass="java.lang.Long">
+
+        SELECT
+            document_data.ID_DOCUMENT_DATA
+        FROM
+            document_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.DocumentData.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="DocumentData" resultClass="java.lang.Long">
+
+        SELECT
+            document_data.ID_DOCUMENT_DATA
+        FROM
+            document_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.DocumentData.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            document_data.ID_DOCUMENT_DATA
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="DocumentData" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			document_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="DocumentData" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="DocumentData" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			document_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="DocumentData" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="DocumentData" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            document_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.DocumentData.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+		WHERE
+			ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            document_data
+        WHERE
+            ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+		WHERE
+			ID_DOCUMENT_DATA IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="DocumentData" resultMap="Abc.Mapping.DocumentData.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.DocumentData.Fields" />
+		FROM
+			document_data
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="DocumentData" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            document_data
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.DocumentData.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="DocumentData">
+	
+		INSERT INTO document_data
+			(
+				ID_DOCUMENT,
+				ID_DATA_SOURCE_TYPE,
+				DOCUMENT_TYPE,
+				DOCUMENT_SUBTYPE,
+				DOCUMENT_NUMBER,
+				ISSUING_COUNTRY,
+				GIVEN_NAME,
+				LAST_NAME,
+				NATIONALITY,
+				SEX,
+				AGE,
+				BIRTH_DATE,
+				BIRTH_PLACE,
+				ISSUING_DATE,
+				EXPIRY_DATE,
+				PERSONAL_NUMBER,
+				AUTHORITHY,
+				SUPPORT_NUMBER,
+				ADDRESS,
+				PARENTS_NAMES,
+				CITY,
+				POSTAL_CODE,
+				PROVINCE,
+				ESTATE,
+				ADDITIONAL_DATA,
+				MRZ,
+				MRZ_LINE_1,
+				MRZ_LINE_2,
+				MRZ_LINE_3,
+				OPTIONAL_DATA,
+				DOCUMENT_NUMBER_CHECK_DIGIT,
+				BIRTH_DATE_CHECK_DIGIT,
+				EXPIRY_DATE_CHECK_DIGIT,
+				OPTIONAL_DATA_CHECK_DIGIT,
+				OVERALL_CHECK_DIGIT,
+				DOCUMENT_NUMBER_CHECK_DIGIT_EXPECTED,
+				BIRTH_DATE_CHECK_DIGIT_EXPECTED,
+				EXPIRY_DATE_CHECK_DIGIT_EXPECTED,
+				OPTIONAL_DATA_CHECK_DIGIT_EXPECTED,
+				OVERALL_CHECK_DIGIT_EXPECTED,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idDocument:BIGINT#,
+				#idDataSourceType:BIGINT#,
+				#documentType:VARCHAR#,
+				#documentSubtype:VARCHAR#,
+				#documentNumber:VARCHAR#,
+				#issuingCountry:VARCHAR#,
+				#givenName:VARCHAR#,
+				#lastName:VARCHAR#,
+				#nationality:VARCHAR#,
+				#sex:VARCHAR#,
+				#age:VARCHAR#,
+				#birthDate:VARCHAR#,
+				#birthPlace:VARCHAR#,
+				#issuingDate:VARCHAR#,
+				#expiryDate:VARCHAR#,
+				#personalNumber:VARCHAR#,
+				#authorithy:VARCHAR#,
+				#supportNumber:VARCHAR#,
+				#address:VARCHAR#,
+				#parentsNames:VARCHAR#,
+				#city:VARCHAR#,
+				#postalCode:VARCHAR#,
+				#province:VARCHAR#,
+				#estate:VARCHAR#,
+				#additionalData:VARCHAR#,
+				#mrz:VARCHAR#,
+				#mrzLine1:VARCHAR#,
+				#mrzLine2:VARCHAR#,
+				#mrzLine3:VARCHAR#,
+				#optionalData:VARCHAR#,
+				#documentNumberCheckDigit:VARCHAR#,
+				#birthDateCheckDigit:VARCHAR#,
+				#expiryDateCheckDigit:VARCHAR#,
+				#optionalDataCheckDigit:VARCHAR#,
+				#overallCheckDigit:VARCHAR#,
+				#documentNumberCheckDigitExpected:VARCHAR#,
+				#birthDateCheckDigitExpected:VARCHAR#,
+				#expiryDateCheckDigitExpected:VARCHAR#,
+				#optionalDataCheckDigitExpected:VARCHAR#,
+				#overallCheckDigitExpected:VARCHAR#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idDocumentData">
+			SELECT last_insert_id() AS ID_DOCUMENT_DATA FROM document_data LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="DocumentData">
+	
+		UPDATE document_data
+		SET
+			ID_DOCUMENT = #idDocument:BIGINT#,
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#,
+			DOCUMENT_TYPE = #documentType:VARCHAR#,
+			DOCUMENT_SUBTYPE = #documentSubtype:VARCHAR#,
+			DOCUMENT_NUMBER = #documentNumber:VARCHAR#,
+			ISSUING_COUNTRY = #issuingCountry:VARCHAR#,
+			GIVEN_NAME = #givenName:VARCHAR#,
+			LAST_NAME = #lastName:VARCHAR#,
+			NATIONALITY = #nationality:VARCHAR#,
+			SEX = #sex:VARCHAR#,
+			AGE = #age:VARCHAR#,
+			BIRTH_DATE = #birthDate:VARCHAR#,
+			BIRTH_PLACE = #birthPlace:VARCHAR#,
+			ISSUING_DATE = #issuingDate:VARCHAR#,
+			EXPIRY_DATE = #expiryDate:VARCHAR#,
+			PERSONAL_NUMBER = #personalNumber:VARCHAR#,
+			AUTHORITHY = #authorithy:VARCHAR#,
+			SUPPORT_NUMBER = #supportNumber:VARCHAR#,
+			ADDRESS = #address:VARCHAR#,
+			PARENTS_NAMES = #parentsNames:VARCHAR#,
+			CITY = #city:VARCHAR#,
+			POSTAL_CODE = #postalCode:VARCHAR#,
+			PROVINCE = #province:VARCHAR#,
+			ESTATE = #estate:VARCHAR#,
+			ADDITIONAL_DATA = #additionalData:VARCHAR#,
+			MRZ = #mrz:VARCHAR#,
+			MRZ_LINE_1 = #mrzLine1:VARCHAR#,
+			MRZ_LINE_2 = #mrzLine2:VARCHAR#,
+			MRZ_LINE_3 = #mrzLine3:VARCHAR#,
+			OPTIONAL_DATA = #optionalData:VARCHAR#,
+			DOCUMENT_NUMBER_CHECK_DIGIT = #documentNumberCheckDigit:VARCHAR#,
+			BIRTH_DATE_CHECK_DIGIT = #birthDateCheckDigit:VARCHAR#,
+			EXPIRY_DATE_CHECK_DIGIT = #expiryDateCheckDigit:VARCHAR#,
+			OPTIONAL_DATA_CHECK_DIGIT = #optionalDataCheckDigit:VARCHAR#,
+			OVERALL_CHECK_DIGIT = #overallCheckDigit:VARCHAR#,
+			DOCUMENT_NUMBER_CHECK_DIGIT_EXPECTED = #documentNumberCheckDigitExpected:VARCHAR#,
+			BIRTH_DATE_CHECK_DIGIT_EXPECTED = #birthDateCheckDigitExpected:VARCHAR#,
+			EXPIRY_DATE_CHECK_DIGIT_EXPECTED = #expiryDateCheckDigitExpected:VARCHAR#,
+			OPTIONAL_DATA_CHECK_DIGIT_EXPECTED = #optionalDataCheckDigitExpected:VARCHAR#,
+			OVERALL_CHECK_DIGIT_EXPECTED = #overallCheckDigitExpected:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="DocumentData">
+	
+		UPDATE document_data
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idDocument">
+				ID_DOCUMENT = #idDocument:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idDataSourceType">
+				ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentType">
+				DOCUMENT_TYPE = #documentType:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentSubtype">
+				DOCUMENT_SUBTYPE = #documentSubtype:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentNumber">
+				DOCUMENT_NUMBER = #documentNumber:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="issuingCountry">
+				ISSUING_COUNTRY = #issuingCountry:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="givenName">
+				GIVEN_NAME = #givenName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="lastName">
+				LAST_NAME = #lastName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nationality">
+				NATIONALITY = #nationality:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="sex">
+				SEX = #sex:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="age">
+				AGE = #age:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="birthDate">
+				BIRTH_DATE = #birthDate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="birthPlace">
+				BIRTH_PLACE = #birthPlace:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="issuingDate">
+				ISSUING_DATE = #issuingDate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="expiryDate">
+				EXPIRY_DATE = #expiryDate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="personalNumber">
+				PERSONAL_NUMBER = #personalNumber:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="authorithy">
+				AUTHORITHY = #authorithy:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="supportNumber">
+				SUPPORT_NUMBER = #supportNumber:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="address">
+				ADDRESS = #address:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="parentsNames">
+				PARENTS_NAMES = #parentsNames:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="city">
+				CITY = #city:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="postalCode">
+				POSTAL_CODE = #postalCode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="province">
+				PROVINCE = #province:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="estate">
+				ESTATE = #estate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="additionalData">
+				ADDITIONAL_DATA = #additionalData:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="mrz">
+				MRZ = #mrz:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="mrzLine1">
+				MRZ_LINE_1 = #mrzLine1:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="mrzLine2">
+				MRZ_LINE_2 = #mrzLine2:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="mrzLine3">
+				MRZ_LINE_3 = #mrzLine3:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="optionalData">
+				OPTIONAL_DATA = #optionalData:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentNumberCheckDigit">
+				DOCUMENT_NUMBER_CHECK_DIGIT = #documentNumberCheckDigit:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="birthDateCheckDigit">
+				BIRTH_DATE_CHECK_DIGIT = #birthDateCheckDigit:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="expiryDateCheckDigit">
+				EXPIRY_DATE_CHECK_DIGIT = #expiryDateCheckDigit:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="optionalDataCheckDigit">
+				OPTIONAL_DATA_CHECK_DIGIT = #optionalDataCheckDigit:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="overallCheckDigit">
+				OVERALL_CHECK_DIGIT = #overallCheckDigit:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentNumberCheckDigitExpected">
+				DOCUMENT_NUMBER_CHECK_DIGIT_EXPECTED = #documentNumberCheckDigitExpected:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="birthDateCheckDigitExpected">
+				BIRTH_DATE_CHECK_DIGIT_EXPECTED = #birthDateCheckDigitExpected:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="expiryDateCheckDigitExpected">
+				EXPIRY_DATE_CHECK_DIGIT_EXPECTED = #expiryDateCheckDigitExpected:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="optionalDataCheckDigitExpected">
+				OPTIONAL_DATA_CHECK_DIGIT_EXPECTED = #optionalDataCheckDigitExpected:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="overallCheckDigitExpected">
+				OVERALL_CHECK_DIGIT_EXPECTED = #overallCheckDigitExpected:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE document_data
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idDocument">
+                ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idDataSourceType">
+                ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentType">
+                DOCUMENT_TYPE = #documentType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentSubtype">
+                DOCUMENT_SUBTYPE = #documentSubtype:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentNumber">
+                DOCUMENT_NUMBER = #documentNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="issuingCountry">
+                ISSUING_COUNTRY = #issuingCountry:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="givenName">
+                GIVEN_NAME = #givenName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="lastName">
+                LAST_NAME = #lastName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nationality">
+                NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="sex">
+                SEX = #sex:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="age">
+                AGE = #age:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="birthDate">
+                BIRTH_DATE = #birthDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="birthPlace">
+                BIRTH_PLACE = #birthPlace:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="issuingDate">
+                ISSUING_DATE = #issuingDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="expiryDate">
+                EXPIRY_DATE = #expiryDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="personalNumber">
+                PERSONAL_NUMBER = #personalNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="authorithy">
+                AUTHORITHY = #authorithy:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="supportNumber">
+                SUPPORT_NUMBER = #supportNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="address">
+                ADDRESS = #address:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="parentsNames">
+                PARENTS_NAMES = #parentsNames:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="city">
+                CITY = #city:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="postalCode">
+                POSTAL_CODE = #postalCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="province">
+                PROVINCE = #province:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="estate">
+                ESTATE = #estate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="additionalData">
+                ADDITIONAL_DATA = #additionalData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="mrz">
+                MRZ = #mrz:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="mrzLine1">
+                MRZ_LINE_1 = #mrzLine1:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="mrzLine2">
+                MRZ_LINE_2 = #mrzLine2:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="mrzLine3">
+                MRZ_LINE_3 = #mrzLine3:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="optionalData">
+                OPTIONAL_DATA = #optionalData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentNumberCheckDigit">
+                DOCUMENT_NUMBER_CHECK_DIGIT = #documentNumberCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="birthDateCheckDigit">
+                BIRTH_DATE_CHECK_DIGIT = #birthDateCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="expiryDateCheckDigit">
+                EXPIRY_DATE_CHECK_DIGIT = #expiryDateCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="optionalDataCheckDigit">
+                OPTIONAL_DATA_CHECK_DIGIT = #optionalDataCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="overallCheckDigit">
+                OVERALL_CHECK_DIGIT = #overallCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentNumberCheckDigitExpected">
+                DOCUMENT_NUMBER_CHECK_DIGIT_EXPECTED = #documentNumberCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="birthDateCheckDigitExpected">
+                BIRTH_DATE_CHECK_DIGIT_EXPECTED = #birthDateCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="expiryDateCheckDigitExpected">
+                EXPIRY_DATE_CHECK_DIGIT_EXPECTED = #expiryDateCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="optionalDataCheckDigitExpected">
+                OPTIONAL_DATA_CHECK_DIGIT_EXPECTED = #optionalDataCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="overallCheckDigitExpected">
+                OVERALL_CHECK_DIGIT_EXPECTED = #overallCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idDocumentData">
+                document_data.ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDocument">
+                document_data.ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDataSourceType">
+                document_data.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentType">
+                document_data.DOCUMENT_TYPE = #documentType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentSubtype">
+                document_data.DOCUMENT_SUBTYPE = #documentSubtype:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentNumber">
+                document_data.DOCUMENT_NUMBER = #documentNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="issuingCountry">
+                document_data.ISSUING_COUNTRY = #issuingCountry:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="givenName">
+                document_data.GIVEN_NAME = #givenName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="lastName">
+                document_data.LAST_NAME = #lastName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nationality">
+                document_data.NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="sex">
+                document_data.SEX = #sex:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="age">
+                document_data.AGE = #age:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="birthDate">
+                document_data.BIRTH_DATE = #birthDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="birthPlace">
+                document_data.BIRTH_PLACE = #birthPlace:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="issuingDate">
+                document_data.ISSUING_DATE = #issuingDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="expiryDate">
+                document_data.EXPIRY_DATE = #expiryDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="personalNumber">
+                document_data.PERSONAL_NUMBER = #personalNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="authorithy">
+                document_data.AUTHORITHY = #authorithy:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="supportNumber">
+                document_data.SUPPORT_NUMBER = #supportNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="address">
+                document_data.ADDRESS = #address:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="parentsNames">
+                document_data.PARENTS_NAMES = #parentsNames:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="city">
+                document_data.CITY = #city:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="postalCode">
+                document_data.POSTAL_CODE = #postalCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="province">
+                document_data.PROVINCE = #province:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="estate">
+                document_data.ESTATE = #estate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="additionalData">
+                document_data.ADDITIONAL_DATA = #additionalData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="mrz">
+                document_data.MRZ = #mrz:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="mrzLine1">
+                document_data.MRZ_LINE_1 = #mrzLine1:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="mrzLine2">
+                document_data.MRZ_LINE_2 = #mrzLine2:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="mrzLine3">
+                document_data.MRZ_LINE_3 = #mrzLine3:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="optionalData">
+                document_data.OPTIONAL_DATA = #optionalData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentNumberCheckDigit">
+                document_data.DOCUMENT_NUMBER_CHECK_DIGIT = #documentNumberCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="birthDateCheckDigit">
+                document_data.BIRTH_DATE_CHECK_DIGIT = #birthDateCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="expiryDateCheckDigit">
+                document_data.EXPIRY_DATE_CHECK_DIGIT = #expiryDateCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="optionalDataCheckDigit">
+                document_data.OPTIONAL_DATA_CHECK_DIGIT = #optionalDataCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="overallCheckDigit">
+                document_data.OVERALL_CHECK_DIGIT = #overallCheckDigit:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentNumberCheckDigitExpected">
+                document_data.DOCUMENT_NUMBER_CHECK_DIGIT_EXPECTED = #documentNumberCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="birthDateCheckDigitExpected">
+                document_data.BIRTH_DATE_CHECK_DIGIT_EXPECTED = #birthDateCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="expiryDateCheckDigitExpected">
+                document_data.EXPIRY_DATE_CHECK_DIGIT_EXPECTED = #expiryDateCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="optionalDataCheckDigitExpected">
+                document_data.OPTIONAL_DATA_CHECK_DIGIT_EXPECTED = #optionalDataCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="overallCheckDigitExpected">
+                document_data.OVERALL_CHECK_DIGIT_EXPECTED = #overallCheckDigitExpected:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(document_data.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM document_data
+		WHERE
+			ID_DOCUMENT_DATA = #idDocumentData:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM document_data
+		WHERE
+			ID_DOCUMENT_DATA IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="DocumentData">
+	
+		DELETE FROM document_data
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.DocumentData.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM document_data
+		
+	</delete>
+	
+	
+</sqlMap>
+

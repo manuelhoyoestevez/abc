@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.QueryAnswers">
+
+
+	<typeAlias alias="QueryAnswers" type="com.inetum.abc.server.model.abc.crud.QueryAnswersDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="QueryAnswersCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.create"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.update"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.modify"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.QueryAnswers.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			query_answers
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+		ORDER BY
+			query_answers.ID_QUERY_ANSWER	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			query_answers.ID_QUERY_ANSWER
+		FROM
+			query_answers
+		ORDER BY
+			query_answers.ID_QUERY_ANSWER
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="QueryAnswers" resultClass="java.lang.Long">
+
+        SELECT
+            query_answers.ID_QUERY_ANSWER
+        FROM
+            query_answers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="QueryAnswers" resultClass="java.lang.Long">
+
+        SELECT
+            query_answers.ID_QUERY_ANSWER
+        FROM
+            query_answers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            query_answers.ID_QUERY_ANSWER
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="QueryAnswers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			query_answers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="QueryAnswers" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="QueryAnswers" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			query_answers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="QueryAnswers" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="QueryAnswers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            query_answers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+		WHERE
+			ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            query_answers
+        WHERE
+            ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+		WHERE
+			ID_QUERY_ANSWER IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="QueryAnswers" resultMap="Abc.Mapping.QueryAnswers.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.QueryAnswers.Fields" />
+		FROM
+			query_answers
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="QueryAnswers" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            query_answers
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="QueryAnswers">
+	
+		INSERT INTO query_answers
+			(
+				ID_OPERATION,
+				ID_QUERY,
+				ANSWER,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idOperation:BIGINT#,
+				#idQuery:BIGINT#,
+				#answer:BIT#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idQueryAnswer">
+			SELECT last_insert_id() AS ID_QUERY_ANSWER FROM query_answers LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="QueryAnswers">
+	
+		UPDATE query_answers
+		SET
+			ID_OPERATION = #idOperation:BIGINT#,
+			ID_QUERY = #idQuery:BIGINT#,
+			ANSWER = #answer:BIT#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="QueryAnswers">
+	
+		UPDATE query_answers
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idQuery">
+				ID_QUERY = #idQuery:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="answer">
+				ANSWER = #answer:BIT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE query_answers
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idQuery">
+                ID_QUERY = #idQuery:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="answer">
+                ANSWER = #answer:BIT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idQueryAnswer">
+                query_answers.ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                query_answers.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idQuery">
+                query_answers.ID_QUERY = #idQuery:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="answer">
+                query_answers.ANSWER = #answer:BIT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(query_answers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM query_answers
+		WHERE
+			ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM query_answers
+		WHERE
+			ID_QUERY_ANSWER IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="QueryAnswers">
+	
+		DELETE FROM query_answers
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.QueryAnswers.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM query_answers
+		
+	</delete>
+	
+	
+</sqlMap>
+

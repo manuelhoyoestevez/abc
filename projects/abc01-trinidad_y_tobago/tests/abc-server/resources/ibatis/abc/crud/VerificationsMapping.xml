@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.Verifications">
+
+
+	<typeAlias alias="Verifications" type="com.inetum.abc.server.model.abc.crud.VerificationsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="Verifications">
+	
+		<result property="idVerification"        column="ID_VERIFICATION"         jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idOperation"           column="ID_OPERATION"            jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idVerificationType"    column="ID_VERIFICATION_TYPE"    jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idVerificationResult"  column="ID_VERIFICATION_RESULT"  jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="description"           column="DESCRIPTION"             jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="expectedValue"         column="EXPECTED_VALUE"          jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="obtainedValue"         column="OBTAINED_VALUE"          jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="expectedThreshold"     column="EXPECTED_THRESHOLD"      jdbcType="DECIMAL"    javaType="java.lang.Double" />
+		<result property="obtainedThreshold"     column="OBTAINED_THRESHOLD"      jdbcType="DECIMAL"    javaType="java.lang.Double" />
+		<result property="idReferenceImage"      column="ID_REFERENCE_IMAGE"      jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idObtainedImage"       column="ID_OBTAINED_IMAGE"       jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="x"                     column="X"                       jdbcType="INTEGER"    javaType="java.lang.Integer" />
+		<result property="y"                     column="Y"                       jdbcType="INTEGER"    javaType="java.lang.Integer" />
+		<result property="width"                 column="WIDTH"                   jdbcType="INTEGER"    javaType="java.lang.Integer" />
+		<result property="height"                column="HEIGHT"                  jdbcType="INTEGER"    javaType="java.lang.Integer" />
+		<result property="verificationTime"      column="VERIFICATION_TIME"       jdbcType="DECIMAL"    javaType="java.lang.Double" />
+		<result property="verificationError"     column="VERIFICATION_ERROR"      jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="creationDate"          column="CREATION_DATE"           jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		verifications.ID_VERIFICATION,
+		verifications.ID_OPERATION,
+		verifications.ID_VERIFICATION_TYPE,
+		verifications.ID_VERIFICATION_RESULT,
+		verifications.DESCRIPTION,
+		verifications.EXPECTED_VALUE,
+		verifications.OBTAINED_VALUE,
+		verifications.EXPECTED_THRESHOLD,
+		verifications.OBTAINED_THRESHOLD,
+		verifications.ID_REFERENCE_IMAGE,
+		verifications.ID_OBTAINED_IMAGE,
+		verifications.X,
+		verifications.Y,
+		verifications.WIDTH,
+		verifications.HEIGHT,
+		verifications.VERIFICATION_TIME,
+		verifications.VERIFICATION_ERROR,
+		verifications.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_VERIFICATION,
+		ID_OPERATION,
+		ID_VERIFICATION_TYPE,
+		ID_VERIFICATION_RESULT,
+		DESCRIPTION,
+		EXPECTED_VALUE,
+		OBTAINED_VALUE,
+		EXPECTED_THRESHOLD,
+		OBTAINED_THRESHOLD,
+		ID_REFERENCE_IMAGE,
+		ID_OBTAINED_IMAGE,
+		X,
+		Y,
+		WIDTH,
+		HEIGHT,
+		VERIFICATION_TIME,
+		VERIFICATION_ERROR,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idVerification">
+			verifications.ID_VERIFICATION = #idVerification:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idOperation">
+			verifications.ID_OPERATION = #idOperation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idVerificationType">
+			verifications.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idVerificationResult">
+			verifications.ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			verifications.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="expectedValue">
+			verifications.EXPECTED_VALUE LIKE concat('%',#expectedValue:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="obtainedValue">
+			verifications.OBTAINED_VALUE LIKE concat('%',#obtainedValue:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="expectedThreshold">
+			verifications.EXPECTED_THRESHOLD = #expectedThreshold:DECIMAL#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="obtainedThreshold">
+			verifications.OBTAINED_THRESHOLD = #obtainedThreshold:DECIMAL#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idReferenceImage">
+			verifications.ID_REFERENCE_IMAGE = #idReferenceImage:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idObtainedImage">
+			verifications.ID_OBTAINED_IMAGE = #idObtainedImage:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="x">
+			verifications.X = #x:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="y">
+			verifications.Y = #y:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="width">
+			verifications.WIDTH = #width:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="height">
+			verifications.HEIGHT = #height:INTEGER#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="verificationTime">
+			verifications.VERIFICATION_TIME = #verificationTime:DECIMAL#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="verificationError">
+			verifications.VERIFICATION_ERROR LIKE concat('%',#verificationError:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(verifications.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idVerification">
+			verifications.ID_VERIFICATION = #idVerification:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idOperation">
+			verifications.ID_OPERATION = #idOperation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idVerificationType">
+			verifications.ID_VERIFICATION_TYPE = #idVerificationType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idVerificationResult">
+			verifications.ID_VERIFICATION_RESULT = #idVerificationResult:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			verifications.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="expectedValue">
+			verifications.EXPECTED_VALUE = #expectedValue:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="obtainedValue">
+			verifications.OBTAINED_VALUE = #obtainedValue:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="expectedThreshold">
+			verifications.EXPECTED_THRESHOLD = #expectedThreshold:DECIMAL#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="obtainedThreshold">
+			verifications.OBTAINED_THRESHOLD = #obtainedThreshold:DECIMAL#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idReferenceImage">
+			verifications.ID_REFERENCE_IMAGE = #idReferenceImage:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idObtainedImage">
+			verifications.ID_OBTAINED_IMAGE = #idObtainedImage:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="x">
+			verifications.X = #x:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="y">
+			verifications.Y = #y:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="width">
+			verifications.WIDTH = #width:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="height">
+			verifications.HEIGHT = #height:INTEGER#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="verificationTime">
+			verifications.VERIFICATION_TIME = #verificationTime:DECIMAL#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="verificationError">
+			verifications.VERIFICATION_ERROR = #verificationError:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(verifications.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

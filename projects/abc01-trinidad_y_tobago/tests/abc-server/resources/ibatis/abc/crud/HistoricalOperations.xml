@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.HistoricalOperations">
+
+
+	<typeAlias alias="HistoricalOperations" type="com.inetum.abc.server.model.abc.crud.HistoricalOperationsDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="HistoricalOperationsCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.create"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.update"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.modify"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.HistoricalOperations.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_operations
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+		ORDER BY
+			historical_operations.ID_HISTORICAL_OPERATION	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			historical_operations.ID_HISTORICAL_OPERATION
+		FROM
+			historical_operations
+		ORDER BY
+			historical_operations.ID_HISTORICAL_OPERATION
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="HistoricalOperations" resultClass="java.lang.Long">
+
+        SELECT
+            historical_operations.ID_HISTORICAL_OPERATION
+        FROM
+            historical_operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="HistoricalOperations" resultClass="java.lang.Long">
+
+        SELECT
+            historical_operations.ID_HISTORICAL_OPERATION
+        FROM
+            historical_operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            historical_operations.ID_HISTORICAL_OPERATION
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="HistoricalOperations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="HistoricalOperations" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="HistoricalOperations" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			historical_operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="HistoricalOperations" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="HistoricalOperations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            historical_operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+		WHERE
+			ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            historical_operations
+        WHERE
+            ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+		WHERE
+			ID_HISTORICAL_OPERATION IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="HistoricalOperations" resultMap="Abc.Mapping.HistoricalOperations.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.HistoricalOperations.Fields" />
+		FROM
+			historical_operations
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="HistoricalOperations" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            historical_operations
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="HistoricalOperations">
+	
+		INSERT INTO historical_operations
+			(
+				ID_SOURCE,
+				ID_OPERATION,
+				ID_INITIAL_STATE,
+				ID_FINAL_STATE,
+				EVENT,
+				CREATION_DATE,
+				DESCRIPTION,
+				DATA,
+				OBSERVATIONS
+			)
+		VALUES
+			(
+				#idSource:BIGINT#,
+				#idOperation:BIGINT#,
+				#idInitialState:BIGINT#,
+				#idFinalState:BIGINT#,
+				#event:VARCHAR#,
+				#creationDate:TIMESTAMP#,
+				#description:VARCHAR#,
+				#data:VARCHAR#,
+				#observations:LONGVARCHAR#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idHistoricalOperation">
+			SELECT last_insert_id() AS ID_HISTORICAL_OPERATION FROM historical_operations LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="HistoricalOperations">
+	
+		UPDATE historical_operations
+		SET
+			ID_SOURCE = #idSource:BIGINT#,
+			ID_OPERATION = #idOperation:BIGINT#,
+			ID_INITIAL_STATE = #idInitialState:BIGINT#,
+			ID_FINAL_STATE = #idFinalState:BIGINT#,
+			EVENT = #event:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#,
+			DESCRIPTION = #description:VARCHAR#,
+			DATA = #data:VARCHAR#,
+			OBSERVATIONS = #observations:LONGVARCHAR#
+		WHERE
+			ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="HistoricalOperations">
+	
+		UPDATE historical_operations
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idSource">
+				ID_SOURCE = #idSource:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idInitialState">
+				ID_INITIAL_STATE = #idInitialState:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idFinalState">
+				ID_FINAL_STATE = #idFinalState:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="event">
+				EVENT = #event:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="data">
+				DATA = #data:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="observations">
+				OBSERVATIONS = #observations:LONGVARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE historical_operations
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idSource">
+                ID_SOURCE = #idSource:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idInitialState">
+                ID_INITIAL_STATE = #idInitialState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idFinalState">
+                ID_FINAL_STATE = #idFinalState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="event">
+                EVENT = #event:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="data">
+                DATA = #data:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="observations">
+                OBSERVATIONS = #observations:LONGVARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idHistoricalOperation">
+                historical_operations.ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idSource">
+                historical_operations.ID_SOURCE = #idSource:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                historical_operations.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idInitialState">
+                historical_operations.ID_INITIAL_STATE = #idInitialState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idFinalState">
+                historical_operations.ID_FINAL_STATE = #idFinalState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="event">
+                historical_operations.EVENT = #event:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(historical_operations.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                historical_operations.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="data">
+                historical_operations.DATA = #data:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="observations">
+                historical_operations.OBSERVATIONS = #observations:LONGVARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM historical_operations
+		WHERE
+			ID_HISTORICAL_OPERATION = #idHistoricalOperation:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM historical_operations
+		WHERE
+			ID_HISTORICAL_OPERATION IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="HistoricalOperations">
+	
+		DELETE FROM historical_operations
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.HistoricalOperations.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM historical_operations
+		
+	</delete>
+	
+	
+</sqlMap>
+

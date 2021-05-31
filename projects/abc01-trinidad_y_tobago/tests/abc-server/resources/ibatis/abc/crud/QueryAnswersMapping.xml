@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.QueryAnswers">
+
+
+	<typeAlias alias="QueryAnswers" type="com.inetum.abc.server.model.abc.crud.QueryAnswersDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="QueryAnswers">
+	
+		<result property="idQueryAnswer"  column="ID_QUERY_ANSWER"  jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idOperation"    column="ID_OPERATION"     jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idQuery"        column="ID_QUERY"         jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="answer"         column="ANSWER"           jdbcType="BIT"        javaType="java.lang.Boolean" />
+		<result property="creationDate"   column="CREATION_DATE"    jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		query_answers.ID_QUERY_ANSWER,
+		query_answers.ID_OPERATION,
+		query_answers.ID_QUERY,
+		query_answers.ANSWER,
+		query_answers.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_QUERY_ANSWER,
+		ID_OPERATION,
+		ID_QUERY,
+		ANSWER,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idQueryAnswer">
+			query_answers.ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idOperation">
+			query_answers.ID_OPERATION = #idOperation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idQuery">
+			query_answers.ID_QUERY = #idQuery:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="answer">
+			query_answers.ANSWER = #answer:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(query_answers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idQueryAnswer">
+			query_answers.ID_QUERY_ANSWER = #idQueryAnswer:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idOperation">
+			query_answers.ID_OPERATION = #idOperation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idQuery">
+			query_answers.ID_QUERY = #idQuery:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="answer">
+			query_answers.ANSWER = #answer:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(query_answers.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

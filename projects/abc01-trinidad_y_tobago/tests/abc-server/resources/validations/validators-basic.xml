@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<validators>
+
+
+    <validator name="required"
+    	 class-name="com.validations.validators.RequiredValidator"
+    		message="required" />
+    
+    		
+    <validator name="boolean"
+    	 class-name="com.validations.validators.BooleanValidator"
+    		message="invalid_boolean" />
+    
+    
+    <validator name="integer"
+    	 class-name="com.validations.validators.IntegerRangeValidator"
+   	 		message="invalid_integer">
+    
+    	<param name="min" value="" />
+    	<param name="max" value="" />
+    
+    </validator>
+
+
+	<validator name="unsigned"
+			   class-name="com.validations.validators.IntegerRangeValidator"
+			   message="invalid_unsigned">
+
+		<param name="min" value="0" />
+		<param name="max" value=""  />
+
+	</validator>
+
+
+	<validator name="long"
+			   class-name="com.validations.validators.LongRangeValidator"
+			   message="invalid_long">
+
+		<param name="min" value="" />
+		<param name="max" value="" />
+
+	</validator>
+
+
+	<validator name="ulong"
+			   class-name="com.validations.validators.LongRangeValidator"
+			   message="invalid_unsigned_long">
+
+		<param name="min" value="0" />
+		<param name="max" value="" />
+
+	</validator>
+    
+    
+    <validator name="decimal"
+    	 class-name="com.validations.validators.DoubleRangeValidator"
+    		message="invalid_decimal">
+    
+    	<param name="min" value="" />
+    	<param name="max" value="" />
+    
+    </validator>
+    
+    
+    <validator name="length"
+    	 class-name="com.validations.validators.LengthRangeValidator"
+    		message="invalid_length">
+    
+    	<param name="min" value="0" />
+    	<param name="max" value="" />
+    
+    </validator>
+    
+    
+    <validator name="date"
+    	 class-name="com.validations.validators.DateValidator"
+    		message="invalid_date">
+    
+    	<param name="format" value="dd/MM/yyyy" />
+    
+    </validator>
+    
+    
+    <validator name="digit"
+    	 class-name="com.validations.validators.RegexValidator"
+    		message="invalid_number">
+    
+    	<param name="expression" value="^[0-9]+$" />
+    
+    </validator>
+    
+    
+    <validator name="email"
+    	 class-name="com.validations.validators.RegexValidator"
+    		message="invalid_email">
+    
+    	<param name="expression" value="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" />
+    
+    </validator>
+    
+    
+    <validator name="phone"
+    	 class-name="com.validations.validators.RegexValidator"
+    		message="invalid_phone">
+    
+    	<!-- <param name="expression" value="^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$" /> -->
+    	<!-- <param name="expression" value="^[+-]?\d+(\.\d+)?$" /> -->
+    	
+    	<param name="expression" value="^\d+$" />
+    
+    </validator>
+    
+    
+    <validator name="url"
+    	 class-name="com.validations.validators.RegexValidator"
+    		message="invalid_url">
+    
+    	<!-- http(s) ftp(s) -->
+    	<param name="expression" value="^((ht|f)tp(s?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$" />
+    
+    </validator>
+
+
+	<validator name="country"
+			   class-name="com.validations.validators.IntegerRangeValidator"
+			   message="invalid_country">
+
+		<param name="min" value="0" />
+		<param name="max" value="253" />
+
+	</validator>
+
+
+	<validator name="sex"
+			   class-name="com.validations.validators.EnumValidator"
+			   message="invalid_sex">
+
+		<param name="values" value="M, F" />
+
+	</validator>
+
+
+	<validator name="language"
+			   class-name="com.validations.validators.EnumValidator"
+			   message="invalid_language">
+
+		<!-- param name="values" value="en, es, fr" /-->
+		<param name="values" value="en, es" />
+
+	</validator>
+
+
+	<validator name="image_format"
+			   class-name="com.validations.validators.EnumValidator"
+			   message="invalid_image_format">
+
+		<param name="values" value="jpg, png" />
+
+	</validator>
+
+
+	<!-- 		-->
+	<!-- Custom -->
+	<!-- 		-->
+
+	<!--
+	<validator name="states_codes"
+			   class-name="com.validations.validators.EnumValidator"
+			   message="invalid_state_code">
+
+		<param name="values" value="UNDEFINED, READY, MAINTENANCE, LOCKED, OPEN, CLOSED, DAMAGED, NO_COMMUNICATIONS, WORKING" />
+
+	</validator>
+	-->
+
+
+</validators>
+

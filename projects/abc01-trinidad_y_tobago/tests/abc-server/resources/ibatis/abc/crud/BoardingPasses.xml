@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.BoardingPasses">
+
+
+	<typeAlias alias="BoardingPasses" type="com.inetum.abc.server.model.abc.crud.BoardingPassesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="BoardingPassesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.create"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.update"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.modify"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.BoardingPasses.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			boarding_passes
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+		ORDER BY
+			boarding_passes.ID_BOARDING_PASS	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			boarding_passes.ID_BOARDING_PASS
+		FROM
+			boarding_passes
+		ORDER BY
+			boarding_passes.ID_BOARDING_PASS
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="BoardingPasses" resultClass="java.lang.Long">
+
+        SELECT
+            boarding_passes.ID_BOARDING_PASS
+        FROM
+            boarding_passes
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="BoardingPasses" resultClass="java.lang.Long">
+
+        SELECT
+            boarding_passes.ID_BOARDING_PASS
+        FROM
+            boarding_passes
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            boarding_passes.ID_BOARDING_PASS
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="BoardingPasses" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			boarding_passes
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="BoardingPasses" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="BoardingPasses" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			boarding_passes
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="BoardingPasses" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="BoardingPasses" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            boarding_passes
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+		WHERE
+			ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            boarding_passes
+        WHERE
+            ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+		WHERE
+			ID_BOARDING_PASS IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="BoardingPasses" resultMap="Abc.Mapping.BoardingPasses.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.BoardingPasses.Fields" />
+		FROM
+			boarding_passes
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="BoardingPasses" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            boarding_passes
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="BoardingPasses">
+	
+		INSERT INTO boarding_passes
+			(
+				ID_OPERATION,
+				RAW_BARCODE,
+				FORMAT_CODE,
+				LEGS_ENCODED,
+				PASSENGER_NAME,
+				ELECTRONIC_TICKET_INDICATOR,
+				PASSENGER_DESCRIPTION,
+				CHECK_IN_SOURCE,
+				BOARDING_PASS_ISSUANCE,
+				ISSUE_DATE,
+				DOCUMENT_TYPE,
+				AIRLINE_DESIGNATOR,
+				BAG_PLATE_NUMBER,
+				BAG_PLATE_NUMBER_NC_FIRST,
+				BAG_PLATE_NUMBER_NC_SECOND,
+				SECURITY_TYPE,
+				SECURITY_DATA,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idOperation:BIGINT#,
+				#rawBarcode:VARCHAR#,
+				#formatCode:VARCHAR#,
+				#legsEncoded:VARCHAR#,
+				#passengerName:VARCHAR#,
+				#electronicTicketIndicator:VARCHAR#,
+				#passengerDescription:VARCHAR#,
+				#checkInSource:VARCHAR#,
+				#boardingPassIssuance:VARCHAR#,
+				#issueDate:VARCHAR#,
+				#documentType:VARCHAR#,
+				#airlineDesignator:VARCHAR#,
+				#bagPlateNumber:VARCHAR#,
+				#bagPlateNumberNcFirst:VARCHAR#,
+				#bagPlateNumberNcSecond:VARCHAR#,
+				#securityType:VARCHAR#,
+				#securityData:VARCHAR#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idBoardingPass">
+			SELECT last_insert_id() AS ID_BOARDING_PASS FROM boarding_passes LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="BoardingPasses">
+	
+		UPDATE boarding_passes
+		SET
+			ID_OPERATION = #idOperation:BIGINT#,
+			RAW_BARCODE = #rawBarcode:VARCHAR#,
+			FORMAT_CODE = #formatCode:VARCHAR#,
+			LEGS_ENCODED = #legsEncoded:VARCHAR#,
+			PASSENGER_NAME = #passengerName:VARCHAR#,
+			ELECTRONIC_TICKET_INDICATOR = #electronicTicketIndicator:VARCHAR#,
+			PASSENGER_DESCRIPTION = #passengerDescription:VARCHAR#,
+			CHECK_IN_SOURCE = #checkInSource:VARCHAR#,
+			BOARDING_PASS_ISSUANCE = #boardingPassIssuance:VARCHAR#,
+			ISSUE_DATE = #issueDate:VARCHAR#,
+			DOCUMENT_TYPE = #documentType:VARCHAR#,
+			AIRLINE_DESIGNATOR = #airlineDesignator:VARCHAR#,
+			BAG_PLATE_NUMBER = #bagPlateNumber:VARCHAR#,
+			BAG_PLATE_NUMBER_NC_FIRST = #bagPlateNumberNcFirst:VARCHAR#,
+			BAG_PLATE_NUMBER_NC_SECOND = #bagPlateNumberNcSecond:VARCHAR#,
+			SECURITY_TYPE = #securityType:VARCHAR#,
+			SECURITY_DATA = #securityData:VARCHAR#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="BoardingPasses">
+	
+		UPDATE boarding_passes
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="rawBarcode">
+				RAW_BARCODE = #rawBarcode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="formatCode">
+				FORMAT_CODE = #formatCode:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="legsEncoded">
+				LEGS_ENCODED = #legsEncoded:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="passengerName">
+				PASSENGER_NAME = #passengerName:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="electronicTicketIndicator">
+				ELECTRONIC_TICKET_INDICATOR = #electronicTicketIndicator:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="passengerDescription">
+				PASSENGER_DESCRIPTION = #passengerDescription:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="checkInSource">
+				CHECK_IN_SOURCE = #checkInSource:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="boardingPassIssuance">
+				BOARDING_PASS_ISSUANCE = #boardingPassIssuance:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="issueDate">
+				ISSUE_DATE = #issueDate:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="documentType">
+				DOCUMENT_TYPE = #documentType:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="airlineDesignator">
+				AIRLINE_DESIGNATOR = #airlineDesignator:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="bagPlateNumber">
+				BAG_PLATE_NUMBER = #bagPlateNumber:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="bagPlateNumberNcFirst">
+				BAG_PLATE_NUMBER_NC_FIRST = #bagPlateNumberNcFirst:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="bagPlateNumberNcSecond">
+				BAG_PLATE_NUMBER_NC_SECOND = #bagPlateNumberNcSecond:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="securityType">
+				SECURITY_TYPE = #securityType:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="securityData">
+				SECURITY_DATA = #securityData:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE boarding_passes
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="rawBarcode">
+                RAW_BARCODE = #rawBarcode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="formatCode">
+                FORMAT_CODE = #formatCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="legsEncoded">
+                LEGS_ENCODED = #legsEncoded:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="passengerName">
+                PASSENGER_NAME = #passengerName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="electronicTicketIndicator">
+                ELECTRONIC_TICKET_INDICATOR = #electronicTicketIndicator:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="passengerDescription">
+                PASSENGER_DESCRIPTION = #passengerDescription:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="checkInSource">
+                CHECK_IN_SOURCE = #checkInSource:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="boardingPassIssuance">
+                BOARDING_PASS_ISSUANCE = #boardingPassIssuance:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="issueDate">
+                ISSUE_DATE = #issueDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="documentType">
+                DOCUMENT_TYPE = #documentType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="airlineDesignator">
+                AIRLINE_DESIGNATOR = #airlineDesignator:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="bagPlateNumber">
+                BAG_PLATE_NUMBER = #bagPlateNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="bagPlateNumberNcFirst">
+                BAG_PLATE_NUMBER_NC_FIRST = #bagPlateNumberNcFirst:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="bagPlateNumberNcSecond">
+                BAG_PLATE_NUMBER_NC_SECOND = #bagPlateNumberNcSecond:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="securityType">
+                SECURITY_TYPE = #securityType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="securityData">
+                SECURITY_DATA = #securityData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idBoardingPass">
+                boarding_passes.ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                boarding_passes.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="rawBarcode">
+                boarding_passes.RAW_BARCODE = #rawBarcode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="formatCode">
+                boarding_passes.FORMAT_CODE = #formatCode:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="legsEncoded">
+                boarding_passes.LEGS_ENCODED = #legsEncoded:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="passengerName">
+                boarding_passes.PASSENGER_NAME = #passengerName:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="electronicTicketIndicator">
+                boarding_passes.ELECTRONIC_TICKET_INDICATOR = #electronicTicketIndicator:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="passengerDescription">
+                boarding_passes.PASSENGER_DESCRIPTION = #passengerDescription:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="checkInSource">
+                boarding_passes.CHECK_IN_SOURCE = #checkInSource:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="boardingPassIssuance">
+                boarding_passes.BOARDING_PASS_ISSUANCE = #boardingPassIssuance:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="issueDate">
+                boarding_passes.ISSUE_DATE = #issueDate:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="documentType">
+                boarding_passes.DOCUMENT_TYPE = #documentType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="airlineDesignator">
+                boarding_passes.AIRLINE_DESIGNATOR = #airlineDesignator:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="bagPlateNumber">
+                boarding_passes.BAG_PLATE_NUMBER = #bagPlateNumber:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="bagPlateNumberNcFirst">
+                boarding_passes.BAG_PLATE_NUMBER_NC_FIRST = #bagPlateNumberNcFirst:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="bagPlateNumberNcSecond">
+                boarding_passes.BAG_PLATE_NUMBER_NC_SECOND = #bagPlateNumberNcSecond:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="securityType">
+                boarding_passes.SECURITY_TYPE = #securityType:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="securityData">
+                boarding_passes.SECURITY_DATA = #securityData:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(boarding_passes.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM boarding_passes
+		WHERE
+			ID_BOARDING_PASS = #idBoardingPass:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM boarding_passes
+		WHERE
+			ID_BOARDING_PASS IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="BoardingPasses">
+	
+		DELETE FROM boarding_passes
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.BoardingPasses.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM boarding_passes
+		
+	</delete>
+	
+	
+</sqlMap>
+

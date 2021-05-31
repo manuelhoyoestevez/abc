@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.ApisFlights">
+
+
+	<typeAlias alias="ApisFlights" type="com.inetum.abc.server.model.abc.crud.ApisFlightsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="ApisFlights">
+	
+		<result property="idApisFlight"             column="ID_APIS_FLIGHT"              jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="rpName"                   column="RP_NAME"                     jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="rpFax"                    column="RP_FAX"                      jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="rpPhone"                  column="RP_PHONE"                    jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="flightId"                 column="FLIGHT_ID"                   jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="owner"                    column="OWNER"                       jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="callSign"                 column="CALL_SIGN"                   jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="vesselRegistration"       column="VESSEL_REGISTRATION"         jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="flagCode"                 column="FLAG_CODE"                   jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="carrierName"              column="CARRIER_NAME"                jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="type"                     column="TYPE"                        jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="crewCountActual"          column="CREW_COUNT_ACTUAL"           jdbcType="SMALLINT"   javaType="java.lang.Integer" />
+		<result property="crewCountShouldBe"        column="CREW_COUNT_SHOULD_BE"        jdbcType="SMALLINT"   javaType="java.lang.Integer" />
+		<result property="travellersCountActual"    column="TRAVELLERS_COUNT_ACTUAL"     jdbcType="SMALLINT"   javaType="java.lang.Integer" />
+		<result property="travellersCountShouldBe"  column="TRAVELLERS_COUNT_SHOULD_BE"  jdbcType="SMALLINT"   javaType="java.lang.Integer" />
+		<result property="arrivalDate"              column="ARRIVAL_DATE"                jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		<result property="arrivalPort"              column="ARRIVAL_PORT"                jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="departureDate"            column="DEPARTURE_DATE"              jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		<result property="departurePort"            column="DEPARTURE_PORT"              jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="creationDate"             column="CREATION_DATE"               jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		apis_flights.ID_APIS_FLIGHT,
+		apis_flights.RP_NAME,
+		apis_flights.RP_FAX,
+		apis_flights.RP_PHONE,
+		apis_flights.FLIGHT_ID,
+		apis_flights.OWNER,
+		apis_flights.CALL_SIGN,
+		apis_flights.VESSEL_REGISTRATION,
+		apis_flights.FLAG_CODE,
+		apis_flights.CARRIER_NAME,
+		apis_flights.TYPE,
+		apis_flights.CREW_COUNT_ACTUAL,
+		apis_flights.CREW_COUNT_SHOULD_BE,
+		apis_flights.TRAVELLERS_COUNT_ACTUAL,
+		apis_flights.TRAVELLERS_COUNT_SHOULD_BE,
+		apis_flights.ARRIVAL_DATE,
+		apis_flights.ARRIVAL_PORT,
+		apis_flights.DEPARTURE_DATE,
+		apis_flights.DEPARTURE_PORT,
+		apis_flights.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_APIS_FLIGHT,
+		RP_NAME,
+		RP_FAX,
+		RP_PHONE,
+		FLIGHT_ID,
+		OWNER,
+		CALL_SIGN,
+		VESSEL_REGISTRATION,
+		FLAG_CODE,
+		CARRIER_NAME,
+		TYPE,
+		CREW_COUNT_ACTUAL,
+		CREW_COUNT_SHOULD_BE,
+		TRAVELLERS_COUNT_ACTUAL,
+		TRAVELLERS_COUNT_SHOULD_BE,
+		ARRIVAL_DATE,
+		ARRIVAL_PORT,
+		DEPARTURE_DATE,
+		DEPARTURE_PORT,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idApisFlight">
+			apis_flights.ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="rpName">
+			apis_flights.RP_NAME LIKE concat('%',#rpName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="rpFax">
+			apis_flights.RP_FAX LIKE concat('%',#rpFax:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="rpPhone">
+			apis_flights.RP_PHONE LIKE concat('%',#rpPhone:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="flightId">
+			apis_flights.FLIGHT_ID LIKE concat('%',#flightId:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="owner">
+			apis_flights.OWNER LIKE concat('%',#owner:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="callSign">
+			apis_flights.CALL_SIGN LIKE concat('%',#callSign:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="vesselRegistration">
+			apis_flights.VESSEL_REGISTRATION LIKE concat('%',#vesselRegistration:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="flagCode">
+			apis_flights.FLAG_CODE LIKE concat('%',#flagCode:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="carrierName">
+			apis_flights.CARRIER_NAME LIKE concat('%',#carrierName:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="type">
+			apis_flights.TYPE LIKE concat('%',#type:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="crewCountActual">
+			apis_flights.CREW_COUNT_ACTUAL = #crewCountActual:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="crewCountShouldBe">
+			apis_flights.CREW_COUNT_SHOULD_BE = #crewCountShouldBe:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="travellersCountActual">
+			apis_flights.TRAVELLERS_COUNT_ACTUAL = #travellersCountActual:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="travellersCountShouldBe">
+			apis_flights.TRAVELLERS_COUNT_SHOULD_BE = #travellersCountShouldBe:SMALLINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="arrivalDate">
+			DATE(apis_flights.ARRIVAL_DATE) = DATE(#arrivalDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="arrivalPort">
+			apis_flights.ARRIVAL_PORT LIKE concat('%',#arrivalPort:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="departureDate">
+			DATE(apis_flights.DEPARTURE_DATE) = DATE(#departureDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="departurePort">
+			apis_flights.DEPARTURE_PORT LIKE concat('%',#departurePort:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(apis_flights.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idApisFlight">
+			apis_flights.ID_APIS_FLIGHT = #idApisFlight:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="rpName">
+			apis_flights.RP_NAME = #rpName:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="rpFax">
+			apis_flights.RP_FAX = #rpFax:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="rpPhone">
+			apis_flights.RP_PHONE = #rpPhone:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="flightId">
+			apis_flights.FLIGHT_ID = #flightId:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="owner">
+			apis_flights.OWNER = #owner:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="callSign">
+			apis_flights.CALL_SIGN = #callSign:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="vesselRegistration">
+			apis_flights.VESSEL_REGISTRATION = #vesselRegistration:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="flagCode">
+			apis_flights.FLAG_CODE = #flagCode:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="carrierName">
+			apis_flights.CARRIER_NAME = #carrierName:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="type">
+			apis_flights.TYPE = #type:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="crewCountActual">
+			apis_flights.CREW_COUNT_ACTUAL = #crewCountActual:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="crewCountShouldBe">
+			apis_flights.CREW_COUNT_SHOULD_BE = #crewCountShouldBe:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="travellersCountActual">
+			apis_flights.TRAVELLERS_COUNT_ACTUAL = #travellersCountActual:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="travellersCountShouldBe">
+			apis_flights.TRAVELLERS_COUNT_SHOULD_BE = #travellersCountShouldBe:SMALLINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="arrivalDate">
+			DATE(apis_flights.ARRIVAL_DATE) = DATE(#arrivalDate:TIMESTAMP#)
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="arrivalPort">
+			apis_flights.ARRIVAL_PORT = #arrivalPort:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="departureDate">
+			DATE(apis_flights.DEPARTURE_DATE) = DATE(#departureDate:TIMESTAMP#)
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="departurePort">
+			apis_flights.DEPARTURE_PORT = #departurePort:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(apis_flights.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

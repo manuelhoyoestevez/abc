@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.ComponentsVersion">
+
+    <typeAlias alias="ComponentsVersion" type="com.inetum.abc.server.model.abc.crud.ComponentsVersionDto"/>
+
+    <!-- ====== countAll ====== -->
+
+    <select id="countAll" resultClass="java.lang.Integer">
+
+        SELECT
+        COUNT(*)
+        FROM
+        components_version
+
+    </select>
+
+
+    <!-- ====== getAll ====== -->
+
+    <select id="getAll" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        Components_Version
+        ORDER BY
+        components_version.ID_COMPONENT
+
+    </select>
+
+
+    <!-- ====== getAllIds ====== -->
+
+    <select id="getAllIds" resultClass="java.lang.Long">
+
+        SELECT
+        components_version.ID_COMPONENT
+        FROM
+        Components_Version
+        ORDER BY
+        components_version.ID_COMPONENT
+
+    </select>
+
+
+    <!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="ComponentsVersion" resultClass="java.lang.Long">
+
+        SELECT
+        components_version.ID_COMPONENT
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+    <!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="ComponentsVersion" resultClass="java.lang.Long">
+
+        SELECT
+        components_version.ID_COMPONENT
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+        components_version.ID_COMPONENT
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+
+    <!-- ====== countFind ====== -->
+
+    <select id="countFind" parameterClass="ComponentsVersion" resultClass="java.lang.Integer">
+
+        SELECT
+        COUNT(*)
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.FindFilter" />
+        </dynamic>
+
+    </select>
+
+
+    <!-- ====== find ====== -->
+
+    <select id="find" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.FindFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+
+    <!-- ====== countList ====== -->
+
+    <select id="countList" parameterClass="ComponentsVersion" resultClass="java.lang.Integer">
+
+        SELECT
+        COUNT(*)
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+    <!-- ====== getList ====== -->
+
+    <select id="getList" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+
+    <!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="ComponentsVersion" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+
+    <!-- ====== getById ====== -->
+
+    <select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_COMPONENT = #idComponent:BIGINT#
+
+    </select>
+
+
+    <!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+        COUNT(*)
+        FROM
+        components_version
+        WHERE
+        ID_COMPONENT = #idComponent:BIGINT#
+
+    </select>
+
+
+    <!-- ====== getInIds ====== -->
+
+    <select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_COMPONENT IN ($ids$)
+
+    </select>
+
+
+    <!-- ====== get ====== -->
+
+    <select id="get" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+    <!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="ComponentsVersion" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+        components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+    <!-- ====== create ====== -->
+
+    <insert id="create" parameterClass="ComponentsVersion">
+
+        INSERT INTO components_version
+        (
+        ID_COMPONENT,
+        ID_INSTALLATION,
+        ID_KIOSK,
+        ID_GATE,
+        ID_SYSTEM,
+        PATH_LOG,
+        LEVEL_LOG,
+        VERSION_SW,
+        VERSION_HW,
+        HW_ASSOCIATED
+        )
+        VALUES
+        (
+        #idComponent:LONG#,
+        #idInstallation:LONG#,
+        #idKiosk:LONG#,
+        #idGate:LONG#,
+        #idSystem:LONG#,
+        #pathLog:VARCHAR#,
+        #levelLog:VARCHAR#,
+        #versionSw:VARCHAR#,
+        #versionHw:VARCHAR#,
+        #hwAssociated:VARCHAR#
+        )
+
+        <selectKey resultClass="java.lang.Long" keyProperty="idComponent">
+            SELECT last_insert_id() AS ID_COMPONENT FROM components_version LIMIT 1
+        </selectKey>
+
+    </insert>
+
+
+    <!-- ====== update ====== -->
+
+    <update id="update" parameterClass="ComponentsVersion">
+
+        UPDATE components_version
+        SET
+        ID_INSTALLATION = #idInstallation:LONG#,
+        ID_KIOSK = #idKiosk:LONG#,
+        ID_GATE = #idGate:LONG#,
+        ID_SYSTEM = #idSystem:LONG#,
+        PATH_LOG = #pathLog:VARCHAR#,
+        LEVEL_LOG = #levelLog:VARCHAR#,
+        VERSION_SW = #versionSw:VARCHAR#,
+        VERSION_HW = #versionHw:VARCHAR#,
+        HW_ASSOCIATED = #hwAssociated:VARCHAR#
+        WHERE
+        ID_COMPONENT = #idComponent:BIGINT#
+
+    </update>
+
+
+    <!-- ====== modify ====== -->
+
+    <update id="modify" parameterClass="ComponentsVersion">
+
+        UPDATE components_version
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idInstallation">
+                ID_INSTALLATION = #idInstallation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idKiosk">
+                ID_KIOSK = #idKiosk:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idGate">
+                ID_GATE = #idGate:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idSystem">
+                ID_SYSTEM = #idSystem:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="pathLog">
+                PATH_LOG = #pathLog:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="levelLog">
+                LEVEL_LOG = #levelLog:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="versionSw">
+                VERSION_SW = #versionSw:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="versionHw">
+                VERSION_HW = #versionHw:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="hwAssociated">
+                HW_ASSOCIATED = #hwAssociated:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        WHERE
+        ID_COMPONENT = #idComponent:BIGINT#
+
+    </update>
+
+    <!-- ====== deleteById ====== -->
+
+    <delete id="deleteById" parameterClass="java.lang.Long">
+
+        DELETE FROM components_version
+        WHERE
+        ID_COMPONENT = #idComponent:BIGINT#
+
+    </delete>
+
+
+    <!-- ====== deleteInIds ====== -->
+
+    <delete id="deleteInIds" parameterClass="java.lang.String">
+
+        DELETE FROM components_version
+        WHERE
+        ID_COMPONENT IN ($ids$)
+
+    </delete>
+
+
+    <!-- ====== deleteByAny ====== -->
+
+    <delete id="deleteByAny" parameterClass="ComponentsVersion">
+
+        DELETE FROM components_version
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.ComponentsVersion.EqualFilter" />
+        </dynamic>
+
+    </delete>
+
+
+    <!-- ====== deleteAll ====== -->
+
+    <delete id="deleteAll">
+
+        DELETE FROM components_version
+
+    </delete>
+
+    <!-- getComponentsByInstallation -->
+
+    <select id="getComponentsByInstallation" parameterClass="java.lang.String" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_INSTALLATION = #idInstallation:BIGINT#
+
+    </select>
+
+    <select id="getComponentsByFilterKiosk" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_INSTALLATION = #idInstallation:BIGINT#
+        AND ID_KIOSK = #idKiosk:BIGINT#
+        AND ID_SYSTEM =  #idSystem:BIGINT#
+        AND ID_GATE IS NULL
+
+    </select>
+
+    <select id="getComponentsByFilterGate" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_INSTALLATION = #idInstallation:BIGINT#
+        AND ID_GATE = #idGate:BIGINT#
+        AND ID_SYSTEM =  #idSystem:BIGINT#
+        AND ID_KIOSK IS NULL
+
+    </select>
+
+    <select id="getComponentsByFilterNoInstallation" parameterClass="ComponentsVersion" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_INSTALLATION IS NULL
+        AND ID_GATE IS NULL
+        AND ID_KIOSK IS NULL
+        AND ID_SYSTEM = #idSystem:BIGINT#
+
+    </select>
+
+    <update id="truncateComponentsVersion" parameterClass="ComponentsVersion" >
+
+        TRUNCATE COMPONENTS_VERSION;
+
+    </update>
+
+    <select id="getComponentsWithNoInstallation" parameterClass="java.lang.String" resultMap="Abc.Mapping.ComponentsVersion.TableMapping">
+
+        SELECT
+        <include refid="Abc.Mapping.ComponentsVersion.Fields" />
+        FROM
+        components_version
+        WHERE
+        ID_INSTALLATION is null
+
+    </select>
+
+</sqlMap>
+

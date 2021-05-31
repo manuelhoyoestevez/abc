@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.UsersRoles">
+
+
+	<typeAlias alias="UsersRoles" type="com.inetum.abc.server.model.abc.crud.UsersRolesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="UsersRoles">
+	
+		<result property="idUserRole"   column="ID_USER_ROLE"  jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idUser"       column="ID_USER"       jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idRole"       column="ID_ROLE"       jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="description"  column="DESCRIPTION"   jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		users_roles.ID_USER_ROLE,
+		users_roles.ID_USER,
+		users_roles.ID_ROLE,
+		users_roles.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_USER_ROLE,
+		ID_USER,
+		ID_ROLE,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idUserRole">
+			users_roles.ID_USER_ROLE = #idUserRole:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idUser">
+			users_roles.ID_USER = #idUser:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idRole">
+			users_roles.ID_ROLE = #idRole:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			users_roles.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idUserRole">
+			users_roles.ID_USER_ROLE = #idUserRole:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idUser">
+			users_roles.ID_USER = #idUser:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idRole">
+			users_roles.ID_ROLE = #idRole:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			users_roles.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

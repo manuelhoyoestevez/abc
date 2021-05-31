@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.KiosksGatesConfiguration">
+
+
+	<typeAlias alias="KiosksGatesConfiguration" type="com.inetum.abc.server.model.abc.crud.KiosksGatesConfigurationDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="KiosksGatesConfiguration">
+	
+		<result property="idKiosksGatesConfiguration"  column="ID_KIOSKS_GATES_CONFIGURATION"  jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idInstallation"              column="ID_INSTALLATION"                jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idKiosk"                     column="ID_KIOSK"                       jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idGate1"                     column="ID_GATE_1"                      jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idGate1AccessType"           column="ID_GATE_1_ACCESS_TYPE"          jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idGate2"                     column="ID_GATE_2"                      jdbcType="BIGINT"  javaType="java.lang.Long" />
+		<result property="idGate2AccessType"           column="ID_GATE_2_ACCESS_TYPE"          jdbcType="BIGINT"  javaType="java.lang.Long" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		kiosks_gates_configuration.ID_KIOSKS_GATES_CONFIGURATION,
+		kiosks_gates_configuration.ID_INSTALLATION,
+		kiosks_gates_configuration.ID_KIOSK,
+		kiosks_gates_configuration.ID_GATE_1,
+		kiosks_gates_configuration.ID_GATE_1_ACCESS_TYPE,
+		kiosks_gates_configuration.ID_GATE_2,
+		kiosks_gates_configuration.ID_GATE_2_ACCESS_TYPE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_KIOSKS_GATES_CONFIGURATION,
+		ID_INSTALLATION,
+		ID_KIOSK,
+		ID_GATE_1,
+		ID_GATE_1_ACCESS_TYPE,
+		ID_GATE_2,
+		ID_GATE_2_ACCESS_TYPE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idKiosksGatesConfiguration">
+			kiosks_gates_configuration.ID_KIOSKS_GATES_CONFIGURATION = #idKiosksGatesConfiguration:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idInstallation">
+			kiosks_gates_configuration.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idKiosk">
+			kiosks_gates_configuration.ID_KIOSK = #idKiosk:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idGate1">
+			kiosks_gates_configuration.ID_GATE_1 = #idGate1:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idGate1AccessType">
+			kiosks_gates_configuration.ID_GATE_1_ACCESS_TYPE = #idGate1AccessType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idGate2">
+			kiosks_gates_configuration.ID_GATE_2 = #idGate2:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idGate2AccessType">
+			kiosks_gates_configuration.ID_GATE_2_ACCESS_TYPE = #idGate2AccessType:BIGINT#
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idKiosksGatesConfiguration">
+			kiosks_gates_configuration.ID_KIOSKS_GATES_CONFIGURATION = #idKiosksGatesConfiguration:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idInstallation">
+			kiosks_gates_configuration.ID_INSTALLATION = #idInstallation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idKiosk">
+			kiosks_gates_configuration.ID_KIOSK = #idKiosk:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idGate1">
+			kiosks_gates_configuration.ID_GATE_1 = #idGate1:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idGate1AccessType">
+			kiosks_gates_configuration.ID_GATE_1_ACCESS_TYPE = #idGate1AccessType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idGate2">
+			kiosks_gates_configuration.ID_GATE_2 = #idGate2:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idGate2AccessType">
+			kiosks_gates_configuration.ID_GATE_2_ACCESS_TYPE = #idGate2AccessType:BIGINT#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

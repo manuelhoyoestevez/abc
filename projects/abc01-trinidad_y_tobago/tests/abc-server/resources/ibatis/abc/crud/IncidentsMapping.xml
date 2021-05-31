@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.Incidents">
+
+
+	<typeAlias alias="Incidents" type="com.inetum.abc.server.model.abc.crud.IncidentsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="Incidents">
+	
+		<result property="idIncident"       column="ID_INCIDENT"        jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idSystemElement"  column="ID_SYSTEM_ELEMENT"  jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idSystemType"     column="ID_SYSTEM_TYPE"     jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="idOperation"      column="ID_OPERATION"       jdbcType="BIGINT"     javaType="java.lang.Long" />
+		<result property="incident"         column="INCIDENT"           jdbcType="VARCHAR"    javaType="java.lang.String" />
+		<result property="creationDate"     column="CREATION_DATE"      jdbcType="TIMESTAMP"  javaType="java.util.Date" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		incidents.ID_INCIDENT,
+		incidents.ID_SYSTEM_ELEMENT,
+		incidents.ID_SYSTEM_TYPE,
+		incidents.ID_OPERATION,
+		incidents.INCIDENT,
+		incidents.CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_INCIDENT,
+		ID_SYSTEM_ELEMENT,
+		ID_SYSTEM_TYPE,
+		ID_OPERATION,
+		INCIDENT,
+		CREATION_DATE
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idIncident">
+			incidents.ID_INCIDENT = #idIncident:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idSystemElement">
+			incidents.ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idSystemType">
+			incidents.ID_SYSTEM_TYPE = #idSystemType:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idOperation">
+			incidents.ID_OPERATION = #idOperation:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="incident">
+			incidents.INCIDENT LIKE concat('%',#incident:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="creationDate">
+			DATE(incidents.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idIncident">
+			incidents.ID_INCIDENT = #idIncident:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idSystemElement">
+			incidents.ID_SYSTEM_ELEMENT = #idSystemElement:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idSystemType">
+			incidents.ID_SYSTEM_TYPE = #idSystemType:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idOperation">
+			incidents.ID_OPERATION = #idOperation:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="incident">
+			incidents.INCIDENT = #incident:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="creationDate">
+			DATE(incidents.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

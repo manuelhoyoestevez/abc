@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysQueries">
+
+
+	<typeAlias alias="SysQueries" type="com.inetum.abc.server.model.abc.crud.SysQueriesDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysQueries">
+	
+		<result property="idQuery"      column="ID_QUERY"     jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="label"        column="LABEL"        jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="alert"        column="ALERT"        jdbcType="BIT"      javaType="java.lang.Boolean" />
+		<result property="name"         column="NAME"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="nameEs"       column="NAME_ES"      jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"  column="DESCRIPTION"  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_queries.ID_QUERY,
+		sys_queries.LABEL,
+		sys_queries.ALERT,
+		sys_queries.NAME,
+		sys_queries.NAME_ES,
+		sys_queries.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_QUERY,
+		LABEL,
+		ALERT,
+		NAME,
+		NAME_ES,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idQuery">
+			sys_queries.ID_QUERY = #idQuery:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="label">
+			sys_queries.LABEL = #label:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="alert">
+			sys_queries.ALERT = #alert:BIT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_queries.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="nameEs">
+			sys_queries.NAME_ES LIKE concat('%',#nameEs:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_queries.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idQuery">
+			sys_queries.ID_QUERY = #idQuery:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="label">
+			sys_queries.LABEL = #label:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="alert">
+			sys_queries.ALERT = #alert:BIT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_queries.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="nameEs">
+			sys_queries.NAME_ES = #nameEs:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_queries.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

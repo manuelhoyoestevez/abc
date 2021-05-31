@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysStates">
+
+
+	<typeAlias alias="SysStates" type="com.inetum.abc.server.model.abc.crud.SysStatesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysStatesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysStates.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_states
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+		ORDER BY
+			sys_states.ID_STATE	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_states.ID_STATE
+		FROM
+			sys_states
+		ORDER BY
+			sys_states.ID_STATE
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysStates" resultClass="java.lang.Long">
+
+        SELECT
+            sys_states.ID_STATE
+        FROM
+            sys_states
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysStates.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysStates" resultClass="java.lang.Long">
+
+        SELECT
+            sys_states.ID_STATE
+        FROM
+            sys_states
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysStates.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_states.ID_STATE
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysStates" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_states
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysStates" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysStates" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_states
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysStates" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysStates" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_states
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysStates.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+		WHERE
+			ID_STATE = #idState:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_states
+        WHERE
+            ID_STATE = #idState:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+		WHERE
+			ID_STATE IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysStates" resultMap="Abc.Mapping.SysStates.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysStates.Fields" />
+		FROM
+			sys_states
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysStates" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_states
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysStates.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysStates">
+	
+		INSERT INTO sys_states
+			(
+				ID_STATE,
+				CODE,
+				NAME,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idState:BIGINT#,
+				#code:VARCHAR#,
+				#name:VARCHAR#,
+				#description:VARCHAR#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysStates">
+	
+		UPDATE sys_states
+		SET
+			ID_STATE = #idState:BIGINT#,
+			CODE = #code:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_STATE = #idState:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysStates">
+	
+		UPDATE sys_states
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idState">
+				ID_STATE = #idState:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code">
+				CODE = #code:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_STATE = #idState:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_states
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idState">
+                ID_STATE = #idState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code">
+                CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idState">
+                sys_states.ID_STATE = #idState:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code">
+                sys_states.CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                sys_states.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                sys_states.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_states
+		WHERE
+			ID_STATE = #idState:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_states
+		WHERE
+			ID_STATE IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysStates">
+	
+		DELETE FROM sys_states
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysStates.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_states
+		
+	</delete>
+
+	<update id="updateSysStates" parameterClass="com.inetum.abc.server.rest.manager.catalogs.CatalogParams" >
+
+		UPDATE sys_states
+		SET
+		NAME$language$ = #traduction:VARCHAR#
+		WHERE
+		ID_STATE = #code:VARCHAR#
+
+
+	</update>
+	
+	
+</sqlMap>
+

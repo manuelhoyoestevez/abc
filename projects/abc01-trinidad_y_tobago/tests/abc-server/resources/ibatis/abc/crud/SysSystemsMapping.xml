@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.Mapping.SysSystems">
+
+
+	<typeAlias alias="SysSystems" type="com.inetum.abc.server.model.abc.crud.SysSystemsDto"/>
+	
+	
+	<!-- ===== TableMapping ===== -->
+	
+	<resultMap id="TableMapping" class="SysSystems">
+	
+		<result property="idSystem"     column="ID_SYSTEM"    jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="idProject"    column="ID_PROJECT"   jdbcType="BIGINT"   javaType="java.lang.Long" />
+		<result property="code"         column="CODE"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="name"         column="NAME"         jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result property="description"  column="DESCRIPTION"  jdbcType="VARCHAR"  javaType="java.lang.String" />
+		
+	</resultMap>
+
+	
+	<!-- ===== Columns ===== -->
+	
+	<sql id="Columns">
+	
+		sys_systems.ID_SYSTEM,
+		sys_systems.ID_PROJECT,
+		sys_systems.CODE,
+		sys_systems.NAME,
+		sys_systems.DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Fields ===== -->
+	
+	<sql id="Fields">
+	
+		ID_SYSTEM,
+		ID_PROJECT,
+		CODE,
+		NAME,
+		DESCRIPTION
+		
+	</sql>
+	
+	
+	<!-- ===== Find Filter ===== -->
+
+	<sql id="FindFilter">
+	
+		<isNotEmpty prepend="AND" property="idSystem">
+			sys_systems.ID_SYSTEM = #idSystem:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="idProject">
+			sys_systems.ID_PROJECT = #idProject:BIGINT#
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="code">
+			sys_systems.CODE LIKE concat('%',#code:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="name">
+			sys_systems.NAME LIKE concat('%',#name:VARCHAR#,'%')
+		</isNotEmpty>
+		
+		<isNotEmpty prepend="AND" property="description">
+			sys_systems.DESCRIPTION LIKE concat('%',#description:VARCHAR#,'%')
+		</isNotEmpty>
+		
+	</sql>
+	
+	
+	<!-- ===== Equal Filter ===== -->
+
+	<sql id="EqualFilter">
+	
+		<isNotNull prepend="AND" property="idSystem">
+			sys_systems.ID_SYSTEM = #idSystem:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="idProject">
+			sys_systems.ID_PROJECT = #idProject:BIGINT#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="code">
+			sys_systems.CODE = #code:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="name">
+			sys_systems.NAME = #name:VARCHAR#
+		</isNotNull>
+		
+		<isNotNull prepend="AND" property="description">
+			sys_systems.DESCRIPTION = #description:VARCHAR#
+		</isNotNull>
+		
+	</sql>
+	
+	
+</sqlMap>
+

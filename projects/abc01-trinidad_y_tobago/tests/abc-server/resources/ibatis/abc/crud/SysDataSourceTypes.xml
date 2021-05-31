@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysDataSourceTypes">
+
+
+	<typeAlias alias="SysDataSourceTypes" type="com.inetum.abc.server.model.abc.crud.SysDataSourceTypesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysDataSourceTypesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysDataSourceTypes.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_data_source_types
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+		ORDER BY
+			sys_data_source_types.ID_DATA_SOURCE_TYPE	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_data_source_types.ID_DATA_SOURCE_TYPE
+		FROM
+			sys_data_source_types
+		ORDER BY
+			sys_data_source_types.ID_DATA_SOURCE_TYPE
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysDataSourceTypes" resultClass="java.lang.Long">
+
+        SELECT
+            sys_data_source_types.ID_DATA_SOURCE_TYPE
+        FROM
+            sys_data_source_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysDataSourceTypes" resultClass="java.lang.Long">
+
+        SELECT
+            sys_data_source_types.ID_DATA_SOURCE_TYPE
+        FROM
+            sys_data_source_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_data_source_types.ID_DATA_SOURCE_TYPE
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysDataSourceTypes" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_data_source_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysDataSourceTypes" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysDataSourceTypes" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_data_source_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysDataSourceTypes" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysDataSourceTypes" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_data_source_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+		WHERE
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_data_source_types
+        WHERE
+            ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+		WHERE
+			ID_DATA_SOURCE_TYPE IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysDataSourceTypes" resultMap="Abc.Mapping.SysDataSourceTypes.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysDataSourceTypes.Fields" />
+		FROM
+			sys_data_source_types
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysDataSourceTypes" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_data_source_types
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysDataSourceTypes">
+	
+		INSERT INTO sys_data_source_types
+			(
+				ID_DATA_SOURCE_TYPE,
+				CODE,
+				NAME,
+				DESCRIPTION
+			)
+		VALUES
+			(
+				#idDataSourceType:BIGINT#,
+				#code:VARCHAR#,
+				#name:VARCHAR#,
+				#description:VARCHAR#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysDataSourceTypes">
+	
+		UPDATE sys_data_source_types
+		SET
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#,
+			CODE = #code:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			DESCRIPTION = #description:VARCHAR#
+		WHERE
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			
+	</update>
+
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysDataSourceTypes">
+	
+		UPDATE sys_data_source_types
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idDataSourceType">
+				ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code">
+				CODE = #code:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="description">
+				DESCRIPTION = #description:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_data_source_types
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idDataSourceType">
+                ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code">
+                CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="description">
+                DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idDataSourceType">
+                sys_data_source_types.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code">
+                sys_data_source_types.CODE = #code:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                sys_data_source_types.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="description">
+                sys_data_source_types.DESCRIPTION = #description:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_data_source_types
+		WHERE
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_data_source_types
+		WHERE
+			ID_DATA_SOURCE_TYPE IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysDataSourceTypes">
+	
+		DELETE FROM sys_data_source_types
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysDataSourceTypes.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_data_source_types
+		
+	</delete>
+
+	<!-- ====== updateSysDataSourceTypesLookUp ====== -->
+
+	<update id="updateDataSource" parameterClass="com.inetum.abc.server.rest.manager.catalogs.CatalogParams" >
+
+		UPDATE sys_data_source_types
+		SET
+		NAME$language$ = #traduction:VARCHAR#
+		WHERE
+		ID_DATA_SOURCE_TYPE = #code:VARCHAR#
+
+
+	</update>
+	
+	
+</sqlMap>
+

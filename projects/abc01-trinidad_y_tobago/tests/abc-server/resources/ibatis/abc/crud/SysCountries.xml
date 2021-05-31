@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.SysCountries">
+
+
+	<typeAlias alias="SysCountries" type="com.inetum.abc.server.model.abc.crud.SysCountriesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="SysCountriesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.create"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.update"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.modify"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.SysCountries.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_countries
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+		ORDER BY
+			sys_countries.ID_COUNTRY	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			sys_countries.ID_COUNTRY
+		FROM
+			sys_countries
+		ORDER BY
+			sys_countries.ID_COUNTRY
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="SysCountries" resultClass="java.lang.Long">
+
+        SELECT
+            sys_countries.ID_COUNTRY
+        FROM
+            sys_countries
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysCountries.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="SysCountries" resultClass="java.lang.Long">
+
+        SELECT
+            sys_countries.ID_COUNTRY
+        FROM
+            sys_countries
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysCountries.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            sys_countries.ID_COUNTRY
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="SysCountries" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_countries
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="SysCountries" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="SysCountries" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			sys_countries
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="SysCountries" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="SysCountries" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_countries
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysCountries.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+		WHERE
+			ID_COUNTRY = #idCountry:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            sys_countries
+        WHERE
+            ID_COUNTRY = #idCountry:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+		WHERE
+			ID_COUNTRY IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="SysCountries" resultMap="Abc.Mapping.SysCountries.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.SysCountries.Fields" />
+		FROM
+			sys_countries
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="SysCountries" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            sys_countries
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.SysCountries.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="SysCountries">
+	
+		INSERT INTO sys_countries
+			(
+				ID_COUNTRY,
+				ISO_CODE,
+				CODE_3C,
+				CODE_2C,
+				NAME,
+				NATIONALITY,
+				NAME_ES,
+				NATIONALITY_ES,
+				NAME_FR,
+				NATIONALITY_FR
+			)
+		VALUES
+			(
+				#idCountry:BIGINT#,
+				#isoCode:SMALLINT#,
+				#code3c:VARCHAR#,
+				#code2c:VARCHAR#,
+				#name:VARCHAR#,
+				#nationality:VARCHAR#,
+				#nameEs:VARCHAR#,
+				#nationalityEs:VARCHAR#,
+				#nameFr:VARCHAR#,
+				#nationalityFr:VARCHAR#
+			)
+			
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="SysCountries">
+	
+		UPDATE sys_countries
+		SET
+			ID_COUNTRY = #idCountry:BIGINT#,
+			ISO_CODE = #isoCode:SMALLINT#,
+			CODE_3C = #code3c:VARCHAR#,
+			CODE_2C = #code2c:VARCHAR#,
+			NAME = #name:VARCHAR#,
+			NATIONALITY = #nationality:VARCHAR#,
+			NAME_ES = #nameEs:VARCHAR#,
+			NATIONALITY_ES = #nationalityEs:VARCHAR#,
+			NAME_FR = #nameFr:VARCHAR#,
+			NATIONALITY_FR = #nationalityFr:VARCHAR#
+		WHERE
+			ID_COUNTRY = #idCountry:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="SysCountries">
+	
+		UPDATE sys_countries
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idCountry">
+				ID_COUNTRY = #idCountry:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="isoCode">
+				ISO_CODE = #isoCode:SMALLINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code3c">
+				CODE_3C = #code3c:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="code2c">
+				CODE_2C = #code2c:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nationality">
+				NATIONALITY = #nationality:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nameEs">
+				NAME_ES = #nameEs:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nationalityEs">
+				NATIONALITY_ES = #nationalityEs:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nameFr">
+				NAME_FR = #nameFr:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="nationalityFr">
+				NATIONALITY_FR = #nationalityFr:VARCHAR#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_COUNTRY = #idCountry:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE sys_countries
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idCountry">
+                ID_COUNTRY = #idCountry:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="isoCode">
+                ISO_CODE = #isoCode:SMALLINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code3c">
+                CODE_3C = #code3c:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="code2c">
+                CODE_2C = #code2c:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nationality">
+                NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nameEs">
+                NAME_ES = #nameEs:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nationalityEs">
+                NATIONALITY_ES = #nationalityEs:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nameFr">
+                NAME_FR = #nameFr:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="nationalityFr">
+                NATIONALITY_FR = #nationalityFr:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idCountry">
+                sys_countries.ID_COUNTRY = #idCountry:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="isoCode">
+                sys_countries.ISO_CODE = #isoCode:SMALLINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code3c">
+                sys_countries.CODE_3C = #code3c:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="code2c">
+                sys_countries.CODE_2C = #code2c:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                sys_countries.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nationality">
+                sys_countries.NATIONALITY = #nationality:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nameEs">
+                sys_countries.NAME_ES = #nameEs:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nationalityEs">
+                sys_countries.NATIONALITY_ES = #nationalityEs:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nameFr">
+                sys_countries.NAME_FR = #nameFr:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="nationalityFr">
+                sys_countries.NATIONALITY_FR = #nationalityFr:VARCHAR#
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM sys_countries
+		WHERE
+			ID_COUNTRY = #idCountry:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM sys_countries
+		WHERE
+			ID_COUNTRY IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="SysCountries">
+	
+		DELETE FROM sys_countries
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.SysCountries.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM sys_countries
+		
+	</delete>
+	
+	
+</sqlMap>
+

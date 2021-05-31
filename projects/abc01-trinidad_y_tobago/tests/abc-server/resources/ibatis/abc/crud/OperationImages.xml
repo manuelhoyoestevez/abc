@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+				"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.OperationImages">
+
+
+	<typeAlias alias="OperationImages" type="com.inetum.abc.server.model.abc.crud.OperationImagesDto"/>
+	
+	
+ 	<!-- Dynamic Table (LRU) -->
+	<!--
+	<cacheModel id="OperationImagesCache" type="LRU">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.create"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.update"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.modify"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.deleteById"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.deleteInIds"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.deleteByAny"/>
+		<flushOnExecute statement="Abc.CRUD.OperationImages.deleteAll"/>
+		<property name="size" value="1000" />
+	</cacheModel>
+	-->
+
+	
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_images
+			
+	</select>
+	
+	
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+		ORDER BY
+			operation_images.ID_OPERATION_IMAGE	
+			
+	</select>
+	
+	
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+	
+		SELECT
+			operation_images.ID_OPERATION_IMAGE
+		FROM
+			operation_images
+		ORDER BY
+			operation_images.ID_OPERATION_IMAGE
+			
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+    <select id="getId" parameterClass="OperationImages" resultClass="java.lang.Long">
+
+        SELECT
+            operation_images.ID_OPERATION_IMAGE
+        FROM
+            operation_images
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationImages.EqualFilter" />
+        </dynamic>
+
+    </select>
+
+
+	<!-- ====== getIds ====== -->
+
+    <select id="getIds" parameterClass="OperationImages" resultClass="java.lang.Long">
+
+        SELECT
+            operation_images.ID_OPERATION_IMAGE
+        FROM
+            operation_images
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationImages.EqualFilter" />
+        </dynamic>
+
+        ORDER BY
+            operation_images.ID_OPERATION_IMAGE
+
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+
+	
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="OperationImages" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_images
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.FindFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="OperationImages" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.FindFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+	
+	
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="OperationImages" resultClass="java.lang.Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM
+			operation_images
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.EqualFilter" />
+		</dynamic>
+		
+	</select>
+	
+	
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="OperationImages" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.EqualFilter" />
+		</dynamic>
+		
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+		
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+    <select id="getMapList" parameterClass="OperationImages" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            operation_images
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationImages.EqualFilter" />
+        </dynamic>
+
+        <include refid="Abc.Includes.ORDER_BY" />
+        <include refid="Abc.Includes.PAGINATE" />
+
+    </select>
+	
+	
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+		WHERE
+			ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+			 
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+    <select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+        SELECT
+            COUNT(*)
+        FROM
+            operation_images
+        WHERE
+            ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+
+    </select>
+	
+	
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+		WHERE
+			ID_OPERATION_IMAGE IN ($ids$)
+			
+	</select>
+	
+	
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="OperationImages" resultMap="Abc.Mapping.OperationImages.TableMapping">
+	
+		SELECT
+			<include refid="Abc.Mapping.OperationImages.Fields" />
+		FROM
+			operation_images
+			
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.EqualFilter" />
+		</dynamic>
+		
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+    <select id="getMap" parameterClass="OperationImages" resultClass="java.util.LinkedHashMap">
+
+        SELECT
+
+        <iterate property="customColumns" conjunction=",">
+            $customColumns[]$
+        </iterate>
+
+        FROM
+            operation_images
+
+        <dynamic prepend="WHERE">
+            <include refid="Abc.Mapping.OperationImages.EqualFilter" />
+        </dynamic>
+
+    </select>
+	
+	
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="OperationImages">
+	
+		INSERT INTO operation_images
+			(
+				ID_OPERATION,
+				ID_DOCUMENT,
+				ID_DATA_SOURCE_TYPE,
+				ID_IMAGE_TYPE,
+				ID_LIGHT_TYPE,
+				NAME,
+				IMAGE,
+				IMAGE_FORMAT_TYPE,
+				DPI,
+				SPOOF_STATUS,
+				PAGE_NUMBER,
+				CREATION_DATE
+			)
+		VALUES
+			(
+				#idOperation:BIGINT#,
+				#idDocument:BIGINT#,
+				#idDataSourceType:BIGINT#,
+				#idImageType:BIGINT#,
+				#idLightType:BIGINT#,
+				#name:VARCHAR#,
+				#image:LONGVARBINARY#,
+				#imageFormatType:VARCHAR#,
+				#dpi:INTEGER#,
+				#spoofStatus:INTEGER#,
+				#pageNumber:INTEGER#,
+				#creationDate:TIMESTAMP#
+			)
+			
+		<selectKey resultClass="java.lang.Long" keyProperty="idOperationImage">
+			SELECT last_insert_id() AS ID_OPERATION_IMAGE FROM operation_images LIMIT 1
+		</selectKey>
+		
+	</insert>
+	
+	
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="OperationImages">
+	
+		UPDATE operation_images
+		SET
+			ID_OPERATION = #idOperation:BIGINT#,
+			ID_DOCUMENT = #idDocument:BIGINT#,
+			ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#,
+			ID_IMAGE_TYPE = #idImageType:BIGINT#,
+			ID_LIGHT_TYPE = #idLightType:BIGINT#,
+			NAME = #name:VARCHAR#,
+			IMAGE = #image:LONGVARBINARY#,
+			IMAGE_FORMAT_TYPE = #imageFormatType:VARCHAR#,
+			DPI = #dpi:INTEGER#,
+			SPOOF_STATUS = #spoofStatus:INTEGER#,
+			PAGE_NUMBER = #pageNumber:INTEGER#,
+			CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+			ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+			
+	</update>
+	
+	
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="OperationImages">
+	
+		UPDATE operation_images
+		
+		<dynamic prepend="SET">
+		
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idDocument">
+				ID_DOCUMENT = #idDocument:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idDataSourceType">
+				ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idImageType">
+				ID_IMAGE_TYPE = #idImageType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="idLightType">
+				ID_LIGHT_TYPE = #idLightType:BIGINT#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="name">
+				NAME = #name:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="image">
+				IMAGE = #image:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="imageFormatType">
+				IMAGE_FORMAT_TYPE = #imageFormatType:VARCHAR#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="dpi">
+				DPI = #dpi:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="spoofStatus">
+				SPOOF_STATUS = #spoofStatus:INTEGER#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="pageNumber">
+				PAGE_NUMBER = #pageNumber:INTEGER#
+			</isNotNull>
+			
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+			
+		</dynamic>
+		
+		WHERE
+			ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+			
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+    <!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE operation_images
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idDocument">
+                ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idDataSourceType">
+                ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idImageType">
+                ID_IMAGE_TYPE = #idImageType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idLightType">
+                ID_LIGHT_TYPE = #idLightType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="image">
+                IMAGE = #image:LONGVARBINARY#
+            </isNotNull>
+
+            <isNotNull prepend="," property="dpi">
+                DPI = #dpi:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="," property="pageNumber">
+                PAGE_NUMBER = #pageNumber:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idOperationImage">
+                operation_images.ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                operation_images.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDocument">
+                operation_images.ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDataSourceType">
+                operation_images.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idImageType">
+                operation_images.ID_IMAGE_TYPE = #idImageType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idLightType">
+                operation_images.ID_LIGHT_TYPE = #idLightType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                operation_images.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="dpi">
+                operation_images.DPI = #dpi:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="pageNumber">
+                operation_images.PAGE_NUMBER = #pageNumber:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(operation_images.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+	
+	
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+	
+		DELETE FROM operation_images
+		WHERE
+			ID_OPERATION_IMAGE = #idOperationImage:BIGINT#
+			
+	</delete>
+	
+	
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+	
+		DELETE FROM operation_images
+		WHERE
+			ID_OPERATION_IMAGE IN ($ids$)
+		
+	</delete>
+	
+	
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="OperationImages">
+	
+		DELETE FROM operation_images
+		
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImages.EqualFilter" />
+		</dynamic>
+		
+	</delete>
+	
+	
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+	
+		DELETE FROM operation_images
+		
+	</delete>
+	
+	
+</sqlMap>
+

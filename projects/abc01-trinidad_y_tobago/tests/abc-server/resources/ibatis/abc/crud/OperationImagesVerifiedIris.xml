@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE sqlMap
+		PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+		"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="Abc.CRUD.OperationImagesVerifiedIris">
+
+
+	<typeAlias alias="OperationImagesVerifiedIris" type="com.inetum.abc.server.model.abc.crud.OperationImagesIrisVerifiedDto"/>
+
+	<!-- ====== countAll ====== -->
+
+	<select id="countAll" resultClass="java.lang.Integer">
+
+		SELECT
+		COUNT(*)
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+	</select>
+
+
+	<!-- ====== getAll ====== -->
+
+	<select id="getAll" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+		ORDER BY
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+
+	</select>
+
+
+	<!-- ====== getAllIds ====== -->
+
+	<select id="getAllIds" resultClass="java.lang.Long">
+
+		SELECT
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+		ORDER BY
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+
+	</select>
+
+
+	<!-- ====== getId ====== -->
+
+	<select id="getId" parameterClass="OperationImagesVerifiedIris" resultClass="java.lang.Long">
+
+		SELECT
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+	</select>
+
+
+	<!-- ====== getIds ====== -->
+
+	<select id="getIds" parameterClass="OperationImagesVerifiedIris" resultClass="java.lang.Long">
+
+		SELECT
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+		ORDER BY
+		operation_images_verified_iris.ID_OPERATION_IMAGE_VERIFIED_IRIS
+
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+
+	<!-- ====== countFind ====== -->
+
+	<select id="countFind" parameterClass="OperationImagesVerifiedIris" resultClass="java.lang.Integer">
+
+		SELECT
+		COUNT(*)
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.FindFilter" />
+		</dynamic>
+
+	</select>
+
+
+	<!-- ====== find ====== -->
+
+	<select id="find" parameterClass="OperationImagesVerifiedIris" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesVerifiedIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.FindFilter" />
+		</dynamic>
+
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+
+	<!-- ====== countList ====== -->
+
+	<select id="countList" parameterClass="OperationImagesVerifiedIris" resultClass="java.lang.Integer">
+
+		SELECT
+		COUNT(*)
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+	</select>
+
+
+	<!-- ====== getList ====== -->
+
+	<select id="getList" parameterClass="OperationImagesVerifiedIris" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesVerifiedIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+
+	<!-- ====== getMapList ====== -->
+
+	<select id="getMapList" parameterClass="OperationImagesVerifiedIris" resultClass="java.util.LinkedHashMap">
+
+		SELECT
+
+		<iterate property="customColumns" conjunction=",">
+			$customColumns[]$
+		</iterate>
+
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+		<include refid="Abc.Includes.ORDER_BY" />
+		<include refid="Abc.Includes.PAGINATE" />
+
+	</select>
+
+
+	<!-- ====== getById ====== -->
+
+	<select id="getById" parameterClass="java.lang.Long" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesVerifiedIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS = #idOperationImageVerifiedIris:BIGINT#
+
+	</select>
+
+
+	<!-- ====== existsById ====== -->
+
+	<select id="existsById" parameterClass="java.lang.Long" resultClass="java.lang.Integer">
+
+		SELECT
+		COUNT(*)
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS = #idOperationImageVerifiedIris:BIGINT#
+
+	</select>
+
+
+	<!-- ====== getInIds ====== -->
+
+	<select id="getInIds" parameterClass="java.lang.String" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesVerifiedIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS IN ($ids$)
+
+	</select>
+
+
+	<!-- ====== get ====== -->
+
+	<select id="get" parameterClass="OperationImagesVerifiedIris" resultMap="Abc.Mapping.OperationImagesVerifiedIris.TableMapping">
+
+		SELECT
+		<include refid="Abc.Mapping.OperationImagesVerifiedIris.Fields" />
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+	</select>
+
+
+	<!-- ====== getMap ====== -->
+
+	<select id="getMap" parameterClass="OperationImagesVerifiedIris" resultClass="java.util.LinkedHashMap">
+
+		SELECT
+
+		<iterate property="customColumns" conjunction=",">
+			$customColumns[]$
+		</iterate>
+
+		FROM
+		OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+	</select>
+
+
+	<!-- ====== create ====== -->
+
+	<insert id="create" parameterClass="OperationImagesVerifiedIris">
+
+		INSERT INTO OPERATION_IMAGES_VERIFIED_IRIS
+		(
+		ID_OPERATION,
+		DATA_REFERENCE,
+		TEMPLATE_REFERENCE,
+		POSITION_REFERENCE,
+		DATA_VERIFIED,
+		TEMPLATE_VERIFIED,
+		POSITION_VERIFIED,
+		CAPTURED_ELAPSED_TIME,
+		SPOOF_STATUS,
+		SCORE,
+		THRESHOLD,
+		MATCH_RESULT,
+		VERIFYING_TIME,
+		PROCESSING_TIME,
+		CAPTURING_TIME,
+		CREATION_DATE
+		)
+		VALUES
+		(
+		#idOperation:BIGINT#,
+		#dataReference:LONGVARBINARY#,
+		#templateReference:LONGVARBINARY#,
+		#positionReference:BIGINT#,
+		#dataVerified:LONGVARBINARY#,
+		#templateVerified:LONGVARBINARY#,
+		#positionVerified:BIGINT#,
+		#capturedElapsedTime:DOUBLE#,
+		#spoofStatus:INTEGER#,
+		#score:VARCHAR#,
+		#threshold:DOUBLE#,
+		#matchResult:INTEGER#,
+		#verifyingTime:DOUBLE#,
+		#processingTime:DOUBLE#,
+		#capturingTime:DOUBLE#,
+		#creationDate:TIMESTAMP#
+		)
+
+		<selectKey resultClass="java.lang.Long" keyProperty="idOperationImageVerifiedIris">
+			SELECT last_insert_id() AS ID_OPERATION_IMAGE_VERIFIED_IRIS FROM OPERATION_IMAGES_VERIFIED_IRIS LIMIT 1
+		</selectKey>
+
+	</insert>
+
+
+	<!-- ====== update ====== -->
+
+	<update id="update" parameterClass="OperationImagesVerifiedIris">
+
+		UPDATE OPERATION_IMAGES_VERIFIED_IRIS
+		SET
+		ID_OPERATION = #idOperation:BIGINT#,
+		DATA_REFERENCE = #dataReference:LONGVARBINARY#,
+		TEMPLATE_REFERENCE = #templateReference:LONGVARBINARY#,
+		POSITION_REFERENCE = #positionReference:INTEGER#,
+		DATA_VERIFIED = #dataVerified:LONGVARBINARY#,
+		TEMPLATE_VERIFIED = #templateVerified:LONGVARBINARY#,
+		POSITION_VERIFIED = #positionVerified:INTEGER#,
+		CAPTURED_ELAPSED_TIME = #capturedElapsedTime:DOUBLE#,
+		SPOOF_STATUS = #spoofStatus:INTEGER#,
+		SCORE = #score:VARCHAR#,
+		THRESHOLD = #threshold:DOUBLE#,
+		MATCH_RESULT = #matchResult:INTEGER#,
+		VERIFYING_TIME = #verifyingTime:DOUBLE#,
+		PROCESSING_TIME = #processingTime:DOUBLE#,
+		CAPTURING_TIME = #capturingTime:DOUBLE#,
+		CREATION_DATE = #creationDate:TIMESTAMP#
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS = #idOperationImageVerifiedIris:BIGINT#
+
+	</update>
+
+
+	<!-- ====== modify ====== -->
+
+	<update id="modify" parameterClass="OperationImagesVerifiedIris">
+
+		UPDATE OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="SET">
+
+			<isNotNull prepend="," property="idOperation">
+				ID_OPERATION = #idOperation:BIGINT#
+			</isNotNull>
+
+			<isNotNull prepend="," property="dataReference">
+				DATA_REFERENCE = #dataReference:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="templateReference">
+				TEMPLATE_REFERENCE = #templateReference:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="positionReference">
+				POSITION_REFERENCE = #positionReference:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="dataVerified">
+				DATA_VERIFIED = #dataVerified:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="templateVerified">
+				TEMPLATE_VERIFIED = #templateVerified:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="positionVerified">
+				POSITION_VERIFIED = #positionVerified:LONGVARBINARY#
+			</isNotNull>
+
+			<isNotNull prepend="," property="capturedElapsedTime">
+				CAPTURED_ELAPSED_TIME = #capturedElapsedTime:DOUBLE#
+			</isNotNull>
+
+			<isNotNull prepend="," property="spoofStatus">
+				SPOOF_STATUS = #spoofStatus:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="score">
+				SCORE = #score:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="threshold">
+				THRESHOLD = #threshold:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="matchResult">
+				MATCH_RESULT = #matchResult:INTEGER#
+			</isNotNull>
+
+			<isNotNull prepend="," property="verifyingTime">
+				VERIFYING_TIME = #verifyingTime:DOUBLE#
+			</isNotNull>
+
+			<isNotNull prepend="," property="processingTime">
+				PROCESSING_TIME = #processingTime:DOUBLE#
+			</isNotNull>
+
+			<isNotNull prepend="," property="capturingTime">
+				CAPTURING_TIME = #capturingTime:DOUBLE#
+			</isNotNull>
+
+			<isNotNull prepend="," property="creationDate">
+				CREATION_DATE = #creationDate:TIMESTAMP#
+			</isNotNull>
+
+		</dynamic>
+
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS = #idOperationImageVerifiedIris:BIGINT#
+
+	</update>
+
+
+	<!-- ====== modifyByAny ====== -->
+
+	<!-- map("target", "filter")
+
+    <update id="modifyByAny" parameterClass="java.util.Map">
+
+        UPDATE operation_images_iris
+
+        <dynamic prepend="SET">
+
+            <isNotNull prepend="," property="idOperation">
+                ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idDocument">
+                ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idDataSourceType">
+                ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idImageType">
+                ID_IMAGE_TYPE = #idImageType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="idLightType">
+                ID_LIGHT_TYPE = #idLightType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="," property="name">
+                NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="," property="image">
+                IMAGE = #image:LONGVARBINARY#
+            </isNotNull>
+
+            <isNotNull prepend="," property="dpi">
+                DPI = #dpi:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="," property="pageNumber">
+                PAGE_NUMBER = #pageNumber:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="," property="creationDate">
+                CREATION_DATE = #creationDate:TIMESTAMP#
+            </isNotNull>
+
+        </dynamic>
+
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="idOperationImage">
+                operation_images_iris.ID_OPERATION_IMAGE_IRIS = #idOperationImage:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idOperation">
+                operation_images_iris.ID_OPERATION = #idOperation:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDocument">
+                operation_images_iris.ID_DOCUMENT = #idDocument:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idDataSourceType">
+                operation_images_iris.ID_DATA_SOURCE_TYPE = #idDataSourceType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idImageType">
+                operation_images_iris.ID_IMAGE_TYPE = #idImageType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="idLightType">
+                operation_images_iris.ID_LIGHT_TYPE = #idLightType:BIGINT#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="name">
+                operation_images_iris.NAME = #name:VARCHAR#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="dpi">
+                operation_images_iris.DPI = #dpi:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="pageNumber">
+                operation_images_iris.PAGE_NUMBER = #pageNumber:INTEGER#
+            </isNotNull>
+
+            <isNotNull prepend="AND" property="creationDate">
+                DATE(operation_images_iris.CREATION_DATE) = DATE(#creationDate:TIMESTAMP#)
+            </isNotNull>
+
+        </dynamic>
+
+    </update>
+    -->
+
+
+	<!-- ====== deleteById ====== -->
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+
+		DELETE FROM OPERATION_IMAGES_VERIFIED_IRIS
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS = #idOperationImageVerifiedIris:BIGINT#
+
+	</delete>
+
+
+	<!-- ====== deleteInIds ====== -->
+
+	<delete id="deleteInIds" parameterClass="java.lang.String">
+
+		DELETE FROM OPERATION_IMAGES_VERIFIED_IRIS
+		WHERE
+		ID_OPERATION_IMAGE_VERIFIED_IRIS IN ($ids$)
+
+	</delete>
+
+
+	<!-- ====== deleteByAny ====== -->
+
+	<delete id="deleteByAny" parameterClass="OperationImagesVerifiedIris">
+
+		DELETE FROM OPERATION_IMAGES_VERIFIED_IRIS
+
+		<dynamic prepend="WHERE">
+			<include refid="Abc.Mapping.OperationImagesVerifiedIris.EqualFilter" />
+		</dynamic>
+
+	</delete>
+
+
+	<!-- ====== deleteAll ====== -->
+
+	<delete id="deleteAll">
+
+		DELETE FROM OPERATION_IMAGES_VERIFIED_IRIS
+
+	</delete>
+
+
+</sqlMap>
+

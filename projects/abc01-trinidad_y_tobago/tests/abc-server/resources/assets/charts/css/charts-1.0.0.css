@@ -1,0 +1,87 @@
+
+html
+{
+	/* scroll de la izquierda siempre visible */
+	overflow: -moz-scrollbars-vertical;
+	overflow-y: scroll;
+}
+
+body
+{
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+
+    /*
+	background-color: #EFEFEF;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	color: #333333;
+	*/
+	/*text-align: center;*/
+	/*font-family: Gill Sans MT, Arial;*/
+	/*font-size: 100%;*/
+	/*display: none;*/
+}
+
+
+.charts-filters
+{
+    margin: 10px;
+}
+
+.charts-layout-table
+{
+    margin: 10px;
+}
+
+.charts-layout-cell
+{
+    margin: 5px;
+    /*width: 400px;
+    height: 300px;*/
+    border: 1px solid #ccc;
+}
+
+.charts-table-headerRow
+{
+    font-size: 13px;
+    font-weight: bold;
+    height: 30px;
+    width: 50%;
+    //cursor: hand;
+}
+
+.charts-table-tableRow
+{
+    font-size: 10px;
+}
+
+.charts-table-oddTableRow
+{
+    font-size: 10px;
+}
+
+.charts-table-selectedTableRow
+{
+}
+
+.charts-table-hoverTableRow
+{
+}
+
+.charts-table-headerCell
+{
+}
+
+.charts-table-tableCell
+{
+}
+
+.charts-table-rowNumberCell
+{
+}
+
