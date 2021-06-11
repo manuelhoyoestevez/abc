@@ -4,3 +4,6 @@
 [submodule "repos/context"]
 	path = repos/context
 	url = ssh://git@cis.core-ibl-inetum.services:7999/mic/java_context.git
+[submodule "repos/abc-server"]
+	path = repos/abc-server
+	url = ssh://git@cis.core-ibl-inetum.services:7999/mic/java_abc_server.git

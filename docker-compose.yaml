@@ -20,9 +20,9 @@ services:
     container_name: "abc-mysql"
     environment:
       - SERVICE_NAME=abc-mysql
-      - MYSQL_DATABASE=abc1
-      - MYSQL_USER=abc1
-      - MYSQL_PASSWORD=abc1
+      - MYSQL_DATABASE=abc
+      - MYSQL_USER=abc
+      - MYSQL_PASSWORD=abc
       - MYSQL_ROOT_PASSWORD=6aEGPf%2@4saAe*4h++94
 #    volumes:
 #      - ./symfony/current.sql:/docker-entrypoint-initdb.d/model.sql:ro
